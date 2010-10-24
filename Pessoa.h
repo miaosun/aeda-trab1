@@ -8,6 +8,7 @@
 #define EA_6CFBB159_8536_48f1_9FA4_EEC365A4F94E__INCLUDED_
 
 #include <string>
+#include <sstream>
 using namespace std;
 
 class Pessoa
@@ -17,12 +18,12 @@ public:
 	Pessoa();
 	virtual ~Pessoa();
 
-	Pessoa(string nome, string dataNascimento);
+	Pessoa(string nome, string dataNascimento, string tipo);
 	string getName();
 	string getDataNascimento();
 	virtual string imprime();
 	string getTipo();
-	void setTipo();
+	void setTipo(string tipo);
 
 private:
 	string nome;

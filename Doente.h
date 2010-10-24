@@ -17,7 +17,7 @@ public:
 	Doente();
 	virtual ~Doente();
 
-	Doente(string nome, string dataNascimento, string morada);
+	Doente(string nome, string dataNascimento, string tipo, string morada);
 	string imprime();
 	string getMorada();
 

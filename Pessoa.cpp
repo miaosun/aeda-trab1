@@ -19,37 +19,40 @@ Pessoa::~Pessoa(){
 
 
 
+Pessoa::Pessoa(string nome, string dataNascimento, string tipo){
 
-
-Pessoa::Pessoa(string nome, string dataNascimento){
-
+	this->nome = nome;
+	this->dataNascimento = dataNascimento;
+	this->tipo = tipo;
 }
 
 
 string Pessoa::getName(){
 
-	return  NULL;
+	return  this->nome;
 }
 
 
 string Pessoa::getDataNascimento(){
 
-	return  NULL;
+	return  this->dataNascimento;
 }
 
 
 string Pessoa::imprime(){
 
-	return  NULL;
+	stringstream ss;
+	ss<<"Nome: "<<this->nome<<"\nData de Nascimento: "<<this->dataNascimento<<"\nTipo: "<<tipo<<endl;
+	return ss.str();
 }
 
 
 string Pessoa::getTipo(){
 
-	return  NULL;
+	return  this->tipo;
 }
 
 
-void Pessoa::setTipo(){
-
+void Pessoa::setTipo(string tipo){
+	this->tipo = tipo;
 }

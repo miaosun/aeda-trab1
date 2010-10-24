@@ -22,23 +22,28 @@ Exame::~Exame(){
 
 
 
-Exame::Exame(string data, string hora, string sala){
-
+Exame::Exame(string data, string hora, string sala):Marcacao(data, hora)
+{
+	this->sala = sala;
 }
 
 
 string Exame::getSala(){
 
-	return  NULL;
+	return this->sala;
 }
 
 
 void Exame::setSala(){
 
+	this->sala = sala;
 }
 
 
 string Exame::imprime(){
 
-	return  NULL;
+	stringstream ss;
+	ss<<"Exame:\n";
+	ss<<"\\t"<<Marcacao::imprime()<<"Sala: "<<sala<<endl;
+	return ss.str();
 }
