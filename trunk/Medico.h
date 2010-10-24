@@ -20,11 +20,14 @@ public:
 	Funcionario *m_Funcionario;
 	Doente *m_Doente;
 
-	Medico(string nome, string dataNascimento, string especialidade, string horario, double vencimento);
+	Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento);
 	string imprime();
 	string getEspecialidade();
+	void setEspecialidade(string especialidade);
 	string getHorario();
+	void setHorario(string horario);
 	double getVencimento();
+	void setVencimento(double vencimento);
 
 private:
 	string especialidade;

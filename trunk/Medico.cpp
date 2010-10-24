@@ -21,30 +21,49 @@ Medico::~Medico(){
 
 
 
-Medico::Medico(string nome, string dataNascimento, string especialidade, string horario, double vencimento){
-
+Medico::Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento):Pessoa(nome, dataNascimento, tipo)
+{
+	this->especialidade = especialidade;
+	this->horario = horario;
+	this->vencimento = vencimento;
 }
 
 
 string Medico::imprime(){
 
-	return  NULL;
+	stringstream ss;
+	ss<<"Medico:\n";
+	ss<<"\\t"<<Pessoa::imprime()<<"Especialidade: "<<this->especialidade<<"\nHorario: "<<this->horario<<"\nVencimento: "<<vencimento<<endl;
+	return ss.str();
 }
 
 
 string Medico::getEspecialidade(){
 
-	return  NULL;
+	return this->especialidade;
 }
 
+void Medico::setEspecialidade(string especialidade)
+{
+	this->especialidade = especialidade;
+}
 
 string Medico::getHorario(){
 
-	return  NULL;
+	return this->horario;
 }
 
+void Medico::setHorario(string horario)
+{
+	this->horario = horario;
+}
 
 double Medico::getVencimento(){
 
-	return 0;
+	return this->vencimento;
+}
+
+void Medico::setVencimento(double vencimento)
+{
+	this->vencimento = vencimento;
 }

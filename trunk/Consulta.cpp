@@ -22,12 +22,16 @@ Consulta::~Consulta(){
 
 
 
-Consulta::Consulta(string data, string hora){
+Consulta::Consulta(string data, string hora):Marcacao(data, hora)
+{
 
 }
 
 
 string Consulta::imprime(){
 
-	return  NULL;
+	stringstream ss;
+	ss<<"Consulta:\n";
+	ss<<"\\t"<<Marcacao::imprime();
+	return ss.str();
 }

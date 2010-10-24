@@ -22,18 +22,22 @@ Doente::~Doente(){
 
 
 
-Doente::Doente(string nome, string dataNascimento, string morada){
-
+Doente::Doente(string nome, string dataNascimento, string tipo, string morada):Pessoa(nome, dataNascimento, tipo)
+{
+	this->morada = morada;
 }
 
 
 string Doente::imprime(){
 
-	return  NULL;
+	stringstream ss;
+	ss<<"Doente:\n";
+	ss<<"\\t"<<Pessoa::imprime()<<"Morada: "<<this->morada<<endl;
+	return ss.str();
 }
 
 
 string Doente::getMorada(){
 
-	return  NULL;
+	return this->morada;
 }

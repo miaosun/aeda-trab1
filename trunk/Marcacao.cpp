@@ -24,32 +24,37 @@ Marcacao::~Marcacao(){
 
 Marcacao::Marcacao(string data, string hora){
 
+	this->data = data;
+	this->hora = hora;
 }
 
 
 string Marcacao::imprime(){
 
-	return  NULL;
+	stringstream ss;
+	ss<<"Data: "<<data<<"\nHora: "<<hora<<endl;
+	return ss.str();
 }
 
 
 string Marcacao::getData(){
 
-	return  NULL;
+	return  this->data;
 }
 
 
-void Marcacao::setData(){
-
+void Marcacao::setData(string data){
+	this->data = data;
 }
 
 
 string Marcacao::getHora(){
 
-	return  NULL;
+	return  this->hora;
 }
 
 
-void Marcacao::setHora(){
+void Marcacao::setHora(string hora){
 
+	this->hora = hora;
 }

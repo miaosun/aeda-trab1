@@ -23,9 +23,9 @@ public:
 	Marcacao(string data, string hora);
 	virtual string imprime();
 	string getData();
-	void setData();
+	void setData(string data);
 	string getHora();
-	void setHora();
+	void setHora(string hora);
 
 private:
 	string data;
