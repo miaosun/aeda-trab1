@@ -23,16 +23,24 @@ Manutencao::Manutencao(){
 
 void Manutencao::addPessoa(Pessoa * p){
 
+	this->pessoas.push_back(p);
 }
 
 
-void Manutencao::removePessoa(){
+void Manutencao::removePessoa(string nome){
 
+	vector<Pessoa *>::iterator it;
+	for(it=pessoas.begin(); it!=pessoas.end(); it++)
+	{
+		if((*it)->getName() == nome)
+			pessoas.erase(it);
+	}
 }
 
 
 void Manutencao::addMarcacao(Marcacao * mar){
 
+	this->marcacoes.push_back(mar);
 }
 
 

@@ -26,10 +26,12 @@ public:
 	void setData(string data);
 	string getHora();
 	void setHora(string hora);
+	int getId() const;
 
 private:
 	string data;
 	string hora;
+	int id;
 
 };
 #endif // !defined(EA_6D34D39A_7937_43d1_9953_2455A3DEDC2B__INCLUDED_)

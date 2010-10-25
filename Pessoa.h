@@ -7,6 +7,8 @@
 #if !defined(EA_6CFBB159_8536_48f1_9FA4_EEC365A4F94E__INCLUDED_)
 #define EA_6CFBB159_8536_48f1_9FA4_EEC365A4F94E__INCLUDED_
 
+#include "funcoes.h"
+
 #include <string>
 #include <sstream>
 using namespace std;
