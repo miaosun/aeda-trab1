@@ -58,3 +58,8 @@ void Marcacao::setHora(string hora){
 
 	this->hora = hora;
 }
+
+int Marcacao::getId() const
+{
+	return this->id;
+}

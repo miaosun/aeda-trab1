@@ -23,7 +23,7 @@ public:
 
 	Manutencao();
 	void addPessoa(Pessoa * p);
-	void removePessoa();
+	void removePessoa(string nome);
 	void addMarcacao(Marcacao * mar);
 	void removeMarcacao();
 	string imprime();
