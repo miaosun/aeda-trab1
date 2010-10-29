@@ -21,7 +21,7 @@ public:
 	Doente *m_Doente;
 
 	Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento);
-	string imprime();
+	vector<string> imprime();
 	string getEspecialidade();
 	void setEspecialidade(string especialidade);
 	string getHorario();

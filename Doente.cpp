@@ -28,12 +28,21 @@ Doente::Doente(string nome, string dataNascimento, string tipo, string morada):P
 }
 
 
-string Doente::imprime(){
+vector<string> Doente::imprime(){
 
-	stringstream ss;
+	/*stringstream ss;
 	ss<<"Doente:\n";
 	ss<<"\\t"<<Pessoa::imprime()<<"Morada: "<<this->morada<<endl;
-	return ss.str();
+	return ss.str();*/
+
+	stringstream s;
+	vector<string> v;
+	v=Pessoa::imprime();
+
+	s<<"Morada: "<<this->morada;
+	v.push_back(s.str());
+
+	return v;
 }
 
 

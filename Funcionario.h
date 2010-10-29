@@ -18,7 +18,7 @@ public:
 	virtual ~Funcionario();
 
 	Funcionario(string nome, string dataNascimento, string tipo, string cargo, double vencimento);
-	string imprime();
+	vector<string> imprime();
 	string getCargo();
 	double getVencimento();
 

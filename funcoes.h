@@ -7,7 +7,7 @@
 #ifndef FUNCOES_H_
 #define FUNCOES_H_
 
-#include "excepcoes.h"
+#include "Excecoes.h"
 
 #include <vector>
 #include <string>
@@ -32,7 +32,7 @@ vector<string> split(char delim, string s)
 	}
 	return result;
 }
-
+/*
 int intinput()
 {
     stringstream entrada;
@@ -43,11 +43,37 @@ int intinput()
     entrada>>saida;
     if(entrada.eofbit||entrada.failbit)
     {
-        throw IntInput();
+        //throw IntInput();
         return -1;
     }
     else
         return saida;
+
+	cin>>op;
+	if(!isdigit(op))
+		throw notIntInput(op);
+	else
+		return op;
+
+}*/
+
+int intinput()
+{
+    stringstream entrada;
+    string sintinput;
+    int saida=0;
+    getline(cin, sintinput);
+    entrada<<sintinput;
+    entrada>>saida;
+    while(entrada.fail())
+    {
+        cout<<"O que era pedido era um numero! Tente novamente: ";
+        getline(cin, sintinput);
+		entrada.str(sintinput);
+		entrada.clear();
+		entrada>>saida;
+    }
+    return saida;
 }
 
 

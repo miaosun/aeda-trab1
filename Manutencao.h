@@ -22,17 +22,24 @@ public:
 	Marcacao *m_Marcacao;
 
 	Manutencao();
-	void addPessoa(Pessoa * p);
-	void removePessoa(string nome);
+	//void addPessoa(Pessoa p);
+	void removePessoa(int id);
 	void addMarcacao(Marcacao * mar);
 	void removeMarcacao();
 	string imprime();
 	void load();
 	void save();
+	int numPessoas();
+	void welcome();
+	void showMenu(string titulo, vector<string> opcoes);
+	void menuPrincipal();
+	void menuPessoas();
+	void menuMarcacoes();
+	void addPessoa();
 
 private:
-	vector<Pessoa *> pessoas;
-	vector<Marcacao *> marcacoes;
+	vector<Pessoa> pessoas;
+	vector<Marcacao> marcacoes;
 
 };
 #endif // !defined(EA_E50CBA57_B50B_40dd_A248_770E2B968F60__INCLUDED_)
