@@ -7,9 +7,8 @@
 #if !defined(EA_6CFBB159_8536_48f1_9FA4_EEC365A4F94E__INCLUDED_)
 #define EA_6CFBB159_8536_48f1_9FA4_EEC365A4F94E__INCLUDED_
 
-#include "funcoes.h"
-
 #include <string>
+#include <vector>
 #include <sstream>
 using namespace std;
 
@@ -22,15 +21,18 @@ public:
 
 	Pessoa(string nome, string dataNascimento, string tipo);
 	string getName();
+	void setName(string nome);
 	string getDataNascimento();
-	virtual string imprime();
+	void setDataNascimento(string dataNascimento);
+	int getId();
+	virtual vector<string> imprime();
 	string getTipo();
 	void setTipo(string tipo);
 
 private:
 	string nome;
 	string dataNascimento;
-	static int id;
+	int id;
 	string tipo;
 
 };

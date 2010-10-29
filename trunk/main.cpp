@@ -5,12 +5,12 @@
  *      Author: Answer
  */
 
-#include "Geral.h"
+#include "Manutencao.h"
 
 int main()
 {
-	Geral g;
-	g.welcome();
-	g.menuPrincipal();
+	Manutencao m;
+	m.welcome();
+	m.menuPrincipal();
 	return 0;
 }

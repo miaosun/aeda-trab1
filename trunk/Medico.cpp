@@ -29,12 +29,26 @@ Medico::Medico(string nome, string dataNascimento, string tipo, string especiali
 }
 
 
-string Medico::imprime(){
-
+vector<string> Medico::imprime(){
+/*
 	stringstream ss;
 	ss<<"Medico:\n";
 	ss<<"\\t"<<Pessoa::imprime()<<"Especialidade: "<<this->especialidade<<"\nHorario: "<<this->horario<<"\nVencimento: "<<vencimento<<endl;
-	return ss.str();
+	return ss.str();*/
+
+	stringstream s;
+	vector<string> v;
+	v=Pessoa::imprime();
+
+	s<<"Especialidade: "<<this->especialidade;
+	v.push_back(s.str());
+
+	s<<"Horario: "<<this->horario;
+	v.push_back(s.str());
+
+	s<<"Vencimento: "<<this->vencimento;
+	v.push_back(s.str());
+	return v;
 }
 
 
