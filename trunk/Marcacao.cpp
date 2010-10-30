@@ -22,10 +22,11 @@ Marcacao::~Marcacao(){
 
 
 
-Marcacao::Marcacao(string data, string hora){
+Marcacao::Marcacao(string data, string hora, string tipo){
 
 	this->data = data;
 	this->hora = hora;
+	this->tipo = tipo;
 }
 
 

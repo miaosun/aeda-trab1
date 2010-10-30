@@ -22,7 +22,7 @@ Exame::~Exame(){
 
 
 
-Exame::Exame(string data, string hora, string sala):Marcacao(data, hora)
+Exame::Exame(string data, string hora, string tipo, string sala):Marcacao(data, hora, tipo)
 {
 	this->sala = sala;
 }
