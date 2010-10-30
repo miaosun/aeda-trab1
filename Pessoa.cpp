@@ -86,3 +86,8 @@ string Pessoa::getTipo(){
 void Pessoa::setTipo(string tipo){
 	this->tipo = tipo;
 }
+
+void Pessoa::toList()
+{
+
+}

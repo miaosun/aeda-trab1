@@ -27,8 +27,6 @@ void inserirTipo()
 }
 
 
-
-
 Manutencao::Manutencao(){
 
 }
@@ -263,9 +261,9 @@ void Manutencao::menuPessoas()
 		case 1:
 			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
-			showMenu("Nova Pessoa", pessoas.back().imprime());//mostra equipa
+			showMenu("Nova Pessoa", pessoas.back().imprime());
 			system("pause");
-			menuPessoas();//volta ao menu Pessoas
+			menuPessoas();
 			break;
 	/*	case 2://ver detalhes Pessoas
 			//listaEqs();
@@ -405,7 +403,7 @@ void Manutencao::menuMarcacoes()
 			addMarcacao();
 			showMenu("Nova Marcacao", marcacoes.back().imprime());
 			system("pause");
-			menuPessoas();
+			menuMarcacoes();
 			break;
 
 
@@ -427,7 +425,7 @@ void Manutencao::menuMarcacoes()
 		addMarcacao();
 		showMenu("Nova Marcacao", marcacoes.back().imprime());
 		system("pause");
-		menuPessoas();
+		menuMarcacoes();
 		break;
 
 
@@ -519,7 +517,8 @@ void Manutencao::addMarcacao()
 		getline(cin, data);
 		cout<<"Hora da Consulta: ";
 		getline(cin, hora);
-		marcacoes.push_back(Consulta(data, hora, tipo));
+		Consulta * c = new Consulta(data, hora, tipo);
+		marcacoes.push_back(*c);
 	}
 	else if(tipo=="Exame")
 	{
@@ -529,11 +528,30 @@ void Manutencao::addMarcacao()
 		getline(cin, hora);
 		cout<<"Sala do Exame: ";
 		getline(cin, sala);
-		marcacoes.push_back(Exame(data, hora, tipo, sala));
+		Exame * e = new Exame(data, hora, tipo, sala);
+		marcacoes.push_back(*e);
 	}
 	else
 	{
 		cout<<"Tipo nao e valido, tenta novamente!\n";
 		addMarcacao();
 	}
+}
+
+void Manutencao::listaPessoas()
+{
+	system("cls");
+	cout<<"  --Pessoas no sistema--"<<endl<<endl;
+	vector<Pessoa>::iterator it;
+	for(it=pessoas.begin(); it!=pessoas.end(); it++)
+	{
+		if((*it).getTipo()=="Medico")
+		{
+			//para implementar
+		}
+	}
+
+	//para implementar
+
+	cout<<endl;
 }

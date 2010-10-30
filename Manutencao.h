@@ -35,6 +35,8 @@ public:
 	void menuPrincipal();
 	void menuPessoas();
 	void menuMarcacoes();
+	void listaPessoas();
+	void listaMarcacoes();
 
 
 private:
