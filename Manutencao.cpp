@@ -10,6 +10,8 @@
 #include "funcoes.h"
 #include <iostream>
 #include <stdlib.h>
+#include "Consulta.h"
+#include "Exame.h"
 using namespace std;
 
 Manutencao::~Manutencao(){
@@ -31,14 +33,6 @@ Manutencao::Manutencao(){
 
 }
 
-/*
-void Manutencao::addPessoa(Pessoa * p){
-
-
-	this->pessoas.push_back(p);
-}*/
-
-
 /*void Manutencao::removePessoa(int id){
 
 	vector<Pessoa>::iterator it;
@@ -47,14 +41,42 @@ void Manutencao::addPessoa(Pessoa * p){
 		if((*it)->getId() == id)
 			pessoas.erase(it);
 	}
+}*/
+
+
+void Manutencao::addMarcacao()
+{
+
+	stringstream s;
+	vector<string> v;
+	string tipo, data, hora, sala;
+	cout<<"Tipo de Marcacao(Consulta ou Exame): ";
+	getline(cin, tipo);
+	if(tipo=="Consulta")
+	{
+		cout<<"Data da Consulta: ";
+		getline(cin, data);
+		cout<<"Hora da COnsulta: ";
+		getline(cin, hora);
+		marcacoes.push_back(Consulta(data, hora, tipo));
+	}
+	else if(tipo=="Exame")
+	{
+		cout<<"Data do Exame: ";
+		getline(cin, data);
+		cout<<"Hora do Exame: ";
+		getline(cin, hora);
+		cout<<"Sala do Exame: ";
+		getline(cin, sala);
+		marcacoes.push_back(Exame(data, hora, tipo, sala));
+	}
+	else
+	{
+		cout<<"Tipo nao e valido, tenta novamente!\n";
+		addMarcacao();
+	}
 }
 
-
-void Manutencao::addMarcacao(Marcacao * mar){
-
-	this->marcacoes.push_back(mar);
-}
-*/
 
 void Manutencao::removeMarcacao(){
 
@@ -245,13 +267,12 @@ void Manutencao::menuPrincipal()
 void Manutencao::menuPessoas()
 {
 	int op;
-	Manutencao m;
 	vector<string> opcoes;
 	string filename;
 	opcoes.push_back("Escolha uma das seguintes opcoes:");
 	opcoes.push_back("");
 	opcoes.push_back("1 - Nova Pessoa");//opcao 1
-	if(m.numPessoas()!=0)
+	if(numPessoas()!=0)
 	{
 		opcoes.push_back("2 - Ver detalhes de uma Pessoa");//opcao 2
 		opcoes.push_back("3 - Editar uma Pessoa");//opcao 3
@@ -268,7 +289,7 @@ void Manutencao::menuPessoas()
 	cout<<"    Opcao: ";
 	op=intinput();
 	system("cls");
-	if(m.numPessoas()>0)
+	if(numPessoas()>0)
 	{
 		switch(op)
 		{
@@ -326,7 +347,6 @@ void Manutencao::menuPessoas()
 			break;
 		case 5://importar equipas
 			clear();
-			cout<<"   --Importar Equipas--"<<endl<<endl;
 			cout<<"Nome do ficheiro: ";
 			getline(cin, filename);
 			loadEqs(filename);
@@ -382,8 +402,38 @@ void Manutencao::menuPessoas()
 }
 
 
-void Manutencao::menuMarcacoes(){
+void Manutencao::menuMarcacoes()
+{
 
+	int op;
+	vector<string> opcoes;
+	string filename;
+	opcoes.push_back("Escolha uma das seguintes opcoes:");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Nova Consulta");//opcao 1
+	if(marcacoes.size()!=0)
+	{
+		opcoes.push_back("2 - Ver detalhes de uma Consulta");//opcao 2
+		opcoes.push_back("3 - Editar uma Consulta");//opcao 3
+		opcoes.push_back("4 - Apagar uma Consulta");//opcao 4
+		opcoes.push_back("5 - Importar Consulta dum ficheiro");//opcao 5
+		opcoes.push_back("6 - Exportar Consulta para ficheiro");//opcao 6
+	}
+	else
+		opcoes.push_back("2 - Importar Consulta do ficheiro");
+	opcoes.push_back("");
+	opcoes.push_back("0 - Voltar atras");
+
+	showMenu("Gestao de Consulta", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+	system("cls");
+
+	if(marcacoes.size()>0)
+	{
+		switch(op):
+
+	}
 }
 
 void Manutencao::addPessoa()
@@ -412,7 +462,7 @@ void Manutencao::addPessoa()
 		cin>>venc;
 		pessoas.push_back(Medico(nome,dataNas,tipo, esp, hor,venc));
 	}
-	if (tipo=="Doente")
+	else if (tipo=="Doente")
 	{
 		cout<<"Nome da Pessoa: ";
 		getline(cin, nome);
@@ -422,7 +472,7 @@ void Manutencao::addPessoa()
 		getline(cin, mor);
 		pessoas.push_back(Doente(nome, dataNas, tipo, mor));
 	}
-	if (tipo=="Funcionario")
+	else if (tipo=="Funcionario")
 	{
 		cout<<"Nome da Pessoa: ";
 		getline(cin, nome);

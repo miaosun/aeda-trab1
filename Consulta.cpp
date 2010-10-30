@@ -22,7 +22,7 @@ Consulta::~Consulta(){
 
 
 
-Consulta::Consulta(string data, string hora):Marcacao(data, hora)
+Consulta::Consulta(string data, string hora, string tipo):Marcacao(data, hora, tipo)
 {
 
 }

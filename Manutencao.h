@@ -22,9 +22,9 @@ public:
 	Marcacao *m_Marcacao;
 
 	Manutencao();
-	//void addPessoa(Pessoa p);
 	void removePessoa(int id);
-	void addMarcacao(Marcacao * mar);
+	void addPessoa();
+	void addMarcacao();
 	void removeMarcacao();
 	string imprime();
 	void load();
@@ -35,7 +35,7 @@ public:
 	void menuPrincipal();
 	void menuPessoas();
 	void menuMarcacoes();
-	void addPessoa();
+
 
 private:
 	vector<Pessoa> pessoas;

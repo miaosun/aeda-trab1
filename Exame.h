@@ -17,7 +17,7 @@ public:
 	Exame();
 	virtual ~Exame();
 
-	Exame(string data, string hora, string sala);
+	Exame(string data, string hora, string sala, string tipo);
 	string getSala();
 	void setSala();
 	string imprime();

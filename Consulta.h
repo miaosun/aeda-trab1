@@ -17,7 +17,7 @@ public:
 	Consulta();
 	virtual ~Consulta();
 
-	Consulta(string data, string hora);
+	Consulta(string data, string hora, string tipo);
 	string imprime();
 
 };
