@@ -37,16 +37,16 @@ vector<string> Marcacao::imprime(){
 	return ss.str();*/
 
 	vector<string> v;
-	stringstream s;
+	stringstream s1,s2,s3;
 
-	s<<this->tipo<<":\n";
-	v.push_back(s.str());
+	s1<<this->tipo<<":";
+	v.push_back(s1.str());
 
-	s<<"\tData: "<<this->data;
-	v.push_back(s.str());
+	s2<<"   Data: "<<this->data;
+	v.push_back(s2.str());
 
-	s<<"\tHora: "<<this->hora;
-	v.push_back(s.str());
+	s3<<"   Hora: "<<this->hora;
+	v.push_back(s3.str());
 
 	return v;
 }
