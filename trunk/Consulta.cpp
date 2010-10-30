@@ -28,10 +28,16 @@ Consulta::Consulta(string data, string hora, string tipo):Marcacao(data, hora, t
 }
 
 
-string Consulta::imprime(){
-
+vector<string> Consulta::imprime(){
+/*
 	stringstream ss;
 	ss<<"Consulta:\n";
 	ss<<"\\t"<<Marcacao::imprime();
-	return ss.str();
+	return ss.str();*/
+
+	vector<string> v;
+
+	v=Marcacao::imprime();
+
+	return v;
 }

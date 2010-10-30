@@ -22,7 +22,7 @@ public:
 	Medico *m_Medico;
 
 	Marcacao(string data, string hora, string tipo);
-	virtual string imprime();
+	virtual vector<string> imprime();
 	string getData();
 	void setData(string data);
 	string getHora();

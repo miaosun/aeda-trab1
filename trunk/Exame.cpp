@@ -40,10 +40,20 @@ void Exame::setSala(){
 }
 
 
-string Exame::imprime(){
-
+vector<string> Exame::imprime(){
+/*
 	stringstream ss;
 	ss<<"Exame:\n";
 	ss<<"\\t"<<Marcacao::imprime()<<"Sala: "<<sala<<endl;
-	return ss.str();
+	return ss.str();*/
+
+	vector<string> v;
+	stringstream s;
+
+	v=Marcacao::imprime();
+
+	s<<"\tSala: "<<this->sala;
+	v.push_back(s.str());
+
+	return v;
 }

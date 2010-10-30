@@ -18,7 +18,7 @@ public:
 	virtual ~Consulta();
 
 	Consulta(string data, string hora, string tipo);
-	string imprime();
+	vector<string> imprime();
 
 };
 #endif // !defined(EA_58523BA4_83E1_4418_9232_D55F12BD24FC__INCLUDED_)
