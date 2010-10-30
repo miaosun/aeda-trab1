@@ -44,39 +44,6 @@ Manutencao::Manutencao(){
 }*/
 
 
-void Manutencao::addMarcacao()
-{
-
-	stringstream s;
-	vector<string> v;
-	string tipo, data, hora, sala;
-	cout<<"Tipo de Marcacao(Consulta ou Exame): ";
-	getline(cin, tipo);
-	if(tipo=="Consulta")
-	{
-		cout<<"Data da Consulta: ";
-		getline(cin, data);
-		cout<<"Hora da COnsulta: ";
-		getline(cin, hora);
-		marcacoes.push_back(Consulta(data, hora, tipo));
-	}
-	else if(tipo=="Exame")
-	{
-		cout<<"Data do Exame: ";
-		getline(cin, data);
-		cout<<"Hora do Exame: ";
-		getline(cin, hora);
-		cout<<"Sala do Exame: ";
-		getline(cin, sala);
-		marcacoes.push_back(Exame(data, hora, tipo, sala));
-	}
-	else
-	{
-		cout<<"Tipo nao e valido, tenta novamente!\n";
-		addMarcacao();
-	}
-}
-
 
 void Manutencao::removeMarcacao(){
 
@@ -410,30 +377,70 @@ void Manutencao::menuMarcacoes()
 	string filename;
 	opcoes.push_back("Escolha uma das seguintes opcoes:");
 	opcoes.push_back("");
-	opcoes.push_back("1 - Nova Consulta");//opcao 1
+	opcoes.push_back("1 - Nova Marcacao");//opcao 1
 	if(marcacoes.size()!=0)
 	{
 		opcoes.push_back("2 - Ver detalhes de uma Consulta");//opcao 2
-		opcoes.push_back("3 - Editar uma Consulta");//opcao 3
-		opcoes.push_back("4 - Apagar uma Consulta");//opcao 4
-		opcoes.push_back("5 - Importar Consulta dum ficheiro");//opcao 5
-		opcoes.push_back("6 - Exportar Consulta para ficheiro");//opcao 6
+		opcoes.push_back("3 - Editar uma Marcacao");//opcao 3
+		opcoes.push_back("4 - Apagar uma Marcacao");//opcao 4
+		opcoes.push_back("5 - Importar Marcacao dum ficheiro");//opcao 5
+		opcoes.push_back("6 - Exportar Marcacao para ficheiro");//opcao 6
 	}
 	else
-		opcoes.push_back("2 - Importar Consulta do ficheiro");
+		opcoes.push_back("2 - Importar Marcacao do ficheiro");
 	opcoes.push_back("");
 	opcoes.push_back("0 - Voltar atras");
 
-	showMenu("Gestao de Consulta", opcoes);
+	showMenu("Gestao de Marcacao", opcoes);
 	cout<<"    Opcao: ";
 	op=intinput();
 	system("cls");
 
 	if(marcacoes.size()>0)
 	{
-		switch(op):
+		switch(op)
+		{
+		case 1:
+			cout<<"   --Adicionar Marcacao--"<<endl<<endl;
+			addMarcacao();
+			showMenu("Nova Marcacao", marcacoes.back().imprime());
+			system("pause");
+			menuPessoas();
+			break;
 
+
+
+		case 0://voltar ao menu anterior
+			break;
+		default:
+			cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
+			system("pause");
+			menuMarcacoes();
+		}
 	}
+	else
+	{
+		switch(op)
+		{
+		case 1:
+		cout<<"   --Adicionar Marcacao--"<<endl<<endl;
+		addMarcacao();
+		showMenu("Nova Marcacao", marcacoes.back().imprime());
+		system("pause");
+		menuPessoas();
+		break;
+
+
+
+	case 0://voltar ao menu anterior
+		break;
+	default:
+		cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
+		system("pause");
+		menuMarcacoes();
+		}
+	}
+
 }
 
 void Manutencao::addPessoa()
@@ -460,7 +467,8 @@ void Manutencao::addPessoa()
 		getline(cin, hor);
 		cout<<"Vencimento: ";
 		cin>>venc;
-		pessoas.push_back(Medico(nome,dataNas,tipo, esp, hor,venc));
+		Medico * m = new Medico(nome, dataNas, tipo, esp, hor, venc);
+		pessoas.push_back(*m);
 	}
 	else if (tipo=="Doente")
 	{
@@ -470,7 +478,8 @@ void Manutencao::addPessoa()
 		getline(cin, dataNas);
 		cout<<"Morada: ";
 		getline(cin, mor);
-		pessoas.push_back(Doente(nome, dataNas, tipo, mor));
+		Doente * d = new Doente(nome, dataNas, tipo, mor);
+		pessoas.push_back(*d);
 	}
 	else if (tipo=="Funcionario")
 	{
@@ -482,7 +491,8 @@ void Manutencao::addPessoa()
 		getline(cin, car);
 		cout<<"Vencimento: ";
 		cin>>venc;
-		pessoas.push_back(Funcionario(nome, dataNas, tipo, car, venc));
+		Funcionario * f = new Funcionario(nome, dataNas, tipo, car, venc);
+		pessoas.push_back(*f);
 	}
 	else
 	{
@@ -493,4 +503,37 @@ void Manutencao::addPessoa()
 	}
 
 	cout<<endl;
+}
+
+void Manutencao::addMarcacao()
+{
+
+	stringstream s;
+	vector<string> v;
+	string tipo, data, hora, sala;
+	cout<<"Tipo de Marcacao(Consulta ou Exame): ";
+	getline(cin, tipo);
+	if(tipo=="Consulta")
+	{
+		cout<<"Data da Consulta: ";
+		getline(cin, data);
+		cout<<"Hora da Consulta: ";
+		getline(cin, hora);
+		marcacoes.push_back(Consulta(data, hora, tipo));
+	}
+	else if(tipo=="Exame")
+	{
+		cout<<"Data do Exame: ";
+		getline(cin, data);
+		cout<<"Hora do Exame: ";
+		getline(cin, hora);
+		cout<<"Sala do Exame: ";
+		getline(cin, sala);
+		marcacoes.push_back(Exame(data, hora, tipo, sala));
+	}
+	else
+	{
+		cout<<"Tipo nao e valido, tenta novamente!\n";
+		addMarcacao();
+	}
 }

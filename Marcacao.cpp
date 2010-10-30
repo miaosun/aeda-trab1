@@ -30,11 +30,25 @@ Marcacao::Marcacao(string data, string hora, string tipo){
 }
 
 
-string Marcacao::imprime(){
+vector<string> Marcacao::imprime(){
 
-	stringstream ss;
+	/*stringstream ss;
 	ss<<"Data: "<<data<<"\nHora: "<<hora<<endl;
-	return ss.str();
+	return ss.str();*/
+
+	vector<string> v;
+	stringstream s;
+
+	s<<this->tipo<<":\n";
+	v.push_back(s.str());
+
+	s<<"\tData: "<<this->data;
+	v.push_back(s.str());
+
+	s<<"\tHora: "<<this->hora;
+	v.push_back(s.str());
+
+	return v;
 }
 
 

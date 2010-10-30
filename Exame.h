@@ -20,7 +20,7 @@ public:
 	Exame(string data, string hora, string sala, string tipo);
 	string getSala();
 	void setSala();
-	string imprime();
+	vector<string> imprime();
 
 private:
 	string sala;
