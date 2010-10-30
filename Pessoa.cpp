@@ -61,16 +61,16 @@ vector<string> Pessoa::imprime(){
 	vector<string> v;
 	stringstream s1, s2, s3, s4;
 
-	s1<<"ID: "<<this->id;
+	s1<<this->tipo<<":";
 	v.push_back(s1.str());
 
-	s2<<"Nome: "<<this->nome;
+	s2<<"   ID: "<<this->id;
 	v.push_back(s2.str());
 
-	s3<<"Data de Nascimento: "<<this->dataNascimento;
+	s3<<"   Nome: "<<this->nome;
 	v.push_back(s3.str());
 
-	s4<<"Tipo: "<<this->tipo;
+	s4<<"   Data de Nascimento: "<<this->dataNascimento;
 	v.push_back(s4.str());
 
 	return v;

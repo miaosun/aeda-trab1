@@ -52,7 +52,7 @@ vector<string> Exame::imprime(){
 
 	v=Marcacao::imprime();
 
-	s<<"\tSala: "<<this->sala;
+	s<<"   Sala: "<<this->sala;
 	v.push_back(s.str());
 
 	return v;

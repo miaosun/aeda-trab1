@@ -39,7 +39,7 @@ vector<string> Doente::imprime(){
 	vector<string> v;
 	v=Pessoa::imprime();
 
-	s<<"Morada: "<<this->morada;
+	s<<"   Morada: "<<this->morada;
 	v.push_back(s.str());
 
 	return v;

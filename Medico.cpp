@@ -40,13 +40,13 @@ vector<string> Medico::imprime(){
 	vector<string> v;
 	v=Pessoa::imprime();
 
-	s<<"Especialidade: "<<this->especialidade;
+	s<<"   Especialidade: "<<this->especialidade;
 	v.push_back(s.str());
 
-	s<<"Horario: "<<this->horario;
+	s<<"   Horario: "<<this->horario;
 	v.push_back(s.str());
 
-	s<<"Vencimento: "<<this->vencimento;
+	s<<"   Vencimento: "<<this->vencimento;
 	v.push_back(s.str());
 	return v;
 }

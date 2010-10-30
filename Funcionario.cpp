@@ -40,10 +40,10 @@ vector<string> Funcionario::imprime(){
 	vector<string> v;
 	v=Pessoa::imprime();
 
-	s<<"Cargo: "<<this->cargo;
+	s<<"   Cargo: "<<this->cargo;
 	v.push_back(s.str());
 
-	s<<"Vencimento: "<<this->vencimento;
+	s<<"   Vencimento: "<<this->vencimento;
 	v.push_back(s.str());
 	return v;
 }
