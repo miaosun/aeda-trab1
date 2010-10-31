@@ -30,6 +30,11 @@ public:
 	void setTipo(string tipo);
 	string toList();
 	virtual vector<string> editPessoa();
+	virtual void setEspecialidade(string especialidade) = 0;
+	virtual void setHorario(string hora) = 0;
+	virtual void setVencimento(double venc) = 0;
+	virtual void setMorada(string morada) = 0;
+	virtual void setCargo(string cargo) = 0;
 
 private:
 	string nome;

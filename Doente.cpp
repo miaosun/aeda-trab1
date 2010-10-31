@@ -20,8 +20,6 @@ Doente::~Doente(){
 
 
 
-
-
 Doente::Doente(string nome, string dataNascimento, string tipo, string morada):Pessoa(nome, dataNascimento, tipo)
 {
 	this->morada = morada;
@@ -62,3 +60,8 @@ void Doente::setMorada(string morada)
 {
 	this->morada = morada;
 }
+
+void Doente::setEspecialidade(string especialidade){}
+void Doente::setVencimento(double venc){}
+void Doente::setHorario(string horario){}
+void Doente::setCargo(string cargo){}

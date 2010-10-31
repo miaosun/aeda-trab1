@@ -77,6 +77,9 @@ void Medico::setVencimento(double vencimento)
 	this->vencimento = vencimento;
 }
 
+void Medico::setMorada(string morada){}
+void Medico::setCargo(string cargo){}
+
 vector<string> Medico::editPessoa()
 {
 	vector<string> opcoes;
