@@ -99,3 +99,19 @@ string Pessoa::toList()
 
     return s.str();
 }
+
+vector<string> Pessoa::editPessoa()
+{
+	vector<string> opcoes;
+	stringstream ss1,ss2,ss3;
+	opcoes.push_back("Escolha o que editar:");
+	opcoes.push_back("");
+	ss1<<"1 - Editar Nome: "<<this->nome;
+	opcoes.push_back(ss1.str());
+	ss2<<"2 - Editar Data de Nascimento: "<<this->dataNascimento;
+	opcoes.push_back(ss2.str());
+	ss3<<"3 - Editar Tipo: "<<this->tipo;
+	opcoes.push_back(ss3.str());
+
+	return opcoes;
+}

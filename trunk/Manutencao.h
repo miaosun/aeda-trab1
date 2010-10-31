@@ -37,6 +37,7 @@ public:
 	void menuMarcacoes();
 	void listaPessoas();
 	void listaMarcacoes();
+	void editPessoas(Pessoa *p);
 
 
 private:

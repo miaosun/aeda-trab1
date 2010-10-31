@@ -55,3 +55,16 @@ double Funcionario::getVencimento(){
 	return this->vencimento;
 }
 
+vector<string> Funcionario::editPessoa()
+{
+	vector<string> opcoes;
+	opcoes = Pessoa::editPessoa();
+	stringstream ss1,ss2;
+
+	ss1<<"4 - Editar Cargo: "<<this->cargo;
+	opcoes.push_back(ss1.str());
+	ss2<<"5 - Editar Vencimento: "<<this->vencimento;
+	opcoes.push_back(ss2.str());
+
+	return opcoes;
+}

@@ -45,3 +45,15 @@ string Doente::getMorada(){
 
 	return this->morada;
 }
+
+vector<string> Doente::editPessoa()
+{
+	vector<string> opcoes;
+	stringstream ss;
+	opcoes = Pessoa::editPessoa();
+
+	ss<<"4 - Editar Morada: "<<this->morada;
+	opcoes.push_back(ss.str());
+
+	return opcoes;
+}

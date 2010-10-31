@@ -230,6 +230,7 @@ void Manutencao::menuPrincipal()
 void Manutencao::menuPessoas()
 {
 	int op;
+	Pessoa *p;
 	vector<string> opcoes;
 	string filename;
 	opcoes.push_back("Escolha uma das seguintes opcoes:");
@@ -280,21 +281,18 @@ void Manutencao::menuPessoas()
 			system("pause");
 			menuPessoas();//volta ao menu equipas
 			break;
-		/*case 3://editar equipa
-			listaEqs();
-			cout<<endl<<"Introduza o ID da Equipa que pretende editar: ";
+		case 3://editar equipa
+			listaPessoas();
+			cout<<endl<<"Introduza o ID da Pessoa que pretende editar: ";
 			id=intinput();
-			ind_eq=findIndEq(id);
-			while(ind_eq==-1)
-			{
-				cout<<"A equipa que inseriu nao existe! Tente novamente: ";
-				id=intinput();
-				ind_eq=findIndEq(id);
-			}
-			editEquipa(&equipas.at(ind_eq));
-			menuEquipas();
+			for(unsigned int i=0; i<pessoas.size(); i++)
+				if(id == pessoas[i]->getId())
+					p = pessoas[i];
+
+			editPessoas(p);
+			menuPessoas();
 			break;
-		case 4://apagar equipa
+		/*case 4://apagar equipa
 			listaEqs();
 			cout<<endl<<"Introduza o ID da Equipa que pretende apagar: ";
 			id=intinput();
@@ -576,4 +574,73 @@ void Manutencao::listaPessoas()
 	}
 
 	cout<<endl;
+}
+
+void Manutencao::editPessoas(Pessoa *p)
+{
+	vector<string> opcoes;
+	string nome, dataNas, tipo, esp, hor, morada, cargo;
+	double venc;
+	stringstream ss;
+	int op;
+
+	opcoes = p->editPessoa();
+	for(unsigned int i=0; i<opcoes.size(); i++)
+	{
+		ss<<opcoes[i]<<endl;
+	}
+	opcoes.push_back("");
+	opcoes.push_back("0 - Voltar atras");
+
+	showMenu("Editar Pessoa", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+
+	switch(op)
+	{
+	case 1:
+		system("cls");
+		cout<<"   --Editar Medico--"<<endl<<endl;
+		cout<<"Nome de Medico: "<<p->getName()<<endl;
+		cout<<"Novo nome de Medico: ";
+		getline(cin, nome);
+		p->setName(nome);
+		editPessoas(p);
+		break;
+	case 2:
+		cout<<"Novo Data de Nascimento de Medico: ";
+		getline(cin, dataNas);
+		p->setDataNascimento(dataNas);
+		editPessoas(p);
+		break;
+	case 3:
+		cout<<"Novo Tipo da Medico: ";
+		getline(cin, tipo);
+		p->setTipo(tipo);
+		editPessoas(p);
+		break;
+	/*
+	case 4:
+		cout<<"Novo Especialidade de Medico: ";
+		getline(cin, esp);
+	    p.setEspecialidade(esp);
+	    editPessoas(p);
+		break;
+	case 5:
+		cout<<"Novo Horario de Medico: ";
+		getline(cin, hor);
+		p.setHorario(hor);
+		editPessoas(p);
+		break;
+	case 6:
+		cout<<"Novo Vencimento de Medico: ";
+		cin>>venc;
+		p.setVencimento(venc);
+		editPessoas(p);
+		break;*/
+	case 0:
+		break;
+	default:
+		editPessoas(p);
+	}
 }

@@ -29,6 +29,7 @@ public:
 	string getTipo();
 	void setTipo(string tipo);
 	string toList();
+	virtual vector<string> editPessoa();
 
 private:
 	string nome;

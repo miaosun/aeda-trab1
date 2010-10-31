@@ -76,3 +76,19 @@ void Medico::setVencimento(double vencimento)
 {
 	this->vencimento = vencimento;
 }
+
+vector<string> Medico::editPessoa()
+{
+	vector<string> opcoes;
+	opcoes = Pessoa::editPessoa();
+	stringstream ss1,ss2,ss3;
+
+	ss1<<"4 - Editar Especialidade: "<<this->especialidade;
+	opcoes.push_back(ss1.str());
+	ss2<<"5 - Editar Horario: "<<this->horario;
+	opcoes.push_back(ss2.str());
+	ss3<<"6 - Editar Vencimento: "<<this->vencimento;
+	opcoes.push_back(ss3.str());
+
+	return opcoes;
+}
