@@ -50,3 +50,12 @@ string Doente::getMorada(){
 
 	return this->morada;
 }
+
+string Doente::toList()
+{
+	stringstream s(Pessoa::toList());
+
+	s<<" | "<<this->morada;
+
+	return s.str();
+}

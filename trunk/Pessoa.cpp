@@ -87,7 +87,13 @@ void Pessoa::setTipo(string tipo){
 	this->tipo = tipo;
 }
 
-void Pessoa::toList()
+string Pessoa::toList()
 {
+    ostringstream s;
+    s<<"|";
+    if (id<10)
+        s<<" ";
+	s<<this->id<<"| "<<this->dataNascimento<<" | "<<this->tipo;
 
+    return s.str();
 }

@@ -36,15 +36,15 @@ vector<string> Funcionario::imprime(){
 	ss<<"\\t"<<Pessoa::imprime()<<"\nCargo: "<<cargo<<"\nVencimento: "<<vencimento<<endl;
 	return ss.str();*/
 
-	stringstream s;
+	stringstream s1,s2;
 	vector<string> v;
 	v=Pessoa::imprime();
 
-	s<<"   Cargo: "<<this->cargo;
-	v.push_back(s.str());
+	s1<<"   Cargo: "<<this->cargo;
+	v.push_back(s1.str());
 
-	s<<"   Vencimento: "<<this->vencimento;
-	v.push_back(s.str());
+	s2<<"   Vencimento: "<<this->vencimento;
+	v.push_back(s2.str());
 	return v;
 }
 
@@ -58,4 +58,13 @@ string Funcionario::getCargo(){
 double Funcionario::getVencimento(){
 
 	return this->vencimento;
+}
+
+string Funcionario::toList()
+{
+	stringstream s(Pessoa::toList());
+
+	s<<" | "<<this->cargo<<" | "<<this->vencimento;
+
+	return s.str();
 }

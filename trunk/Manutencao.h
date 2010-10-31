@@ -40,8 +40,8 @@ public:
 
 
 private:
-	vector<Pessoa> pessoas;
-	vector<Marcacao> marcacoes;
+	vector<Pessoa *> pessoas;
+	vector<Marcacao *> marcacoes;
 
 };
 #endif // !defined(EA_E50CBA57_B50B_40dd_A248_770E2B968F60__INCLUDED_)

@@ -28,7 +28,7 @@ public:
 	virtual vector<string> imprime();
 	string getTipo();
 	void setTipo(string tipo);
-	void toList();
+	virtual string toList();
 
 private:
 	string nome;
