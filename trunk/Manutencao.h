@@ -27,8 +27,8 @@ public:
 	void addMarcacao();
 	void removeMarcacao();
 	string imprime();
-	void load();
-	void save();
+	void loadPessoas(string filename);
+	void savePessoas(string filename);
 	int numPessoas();
 	void welcome();
 	void showMenu(string titulo, vector<string> opcoes);

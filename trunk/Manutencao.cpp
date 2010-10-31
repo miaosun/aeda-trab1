@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include "Consulta.h"
 #include "Exame.h"
+
+#include <fstream>
 using namespace std;
 
 Manutencao::~Manutencao(){
@@ -45,13 +47,74 @@ string Manutencao::imprime(){
 }
 
 
-void Manutencao::load(){
-
+void Manutencao::loadPessoas(string filename)
+{/*
+	stringstream s;
+	unsigned int size;
+	string linha;
+	vector<string> aux, j;
+	ifstream f (filename.c_str());
+	if(f.is_open())
+	{
+		getline(f, linha);
+		s<<linha;
+		s>>size;//primeira linha com numero de equipas
+		if(s.fail())
+		{
+			cout<<"Ficheiro nao esta no formato exigido!";
+			system("pause");
+		}
+		else
+		{
+			if(size>0)
+			{
+				for(unsigned int i=0; i<size; i++)
+				{
+					getline(f, linha);
+					equipas.push_back(Equipa::Equipa(linha));
+				}
+				cout<<endl<<endl<<"Equipas importadas com sucesso!"<<endl<<endl;
+			}
+		}
+		f.close();
+	}
+	else
+	{
+		cout<<"Nao foi possivel abrir o ficheiro "<<filename<<"!"<<endl<<endl;
+	}
+*/
 }
 
 
-void Manutencao::save(){
+void Manutencao::savePessoas(string filename)
+{
+	vector<Pessoa *>::iterator it;
 
+	ofstream myfile (filename.c_str());
+	if(myfile.is_open())
+	{
+		myfile<<pessoas.size()<<endl<<endl;
+		myfile<<"Medico:\n";
+		for(it=pessoas.begin(); it!=pessoas.end(); it++)
+			if((*it)->getTipo()=="Medico")
+				myfile<<(*it)->toString()<<endl;
+		myfile<<"\nDoente:\n";
+		for(it=pessoas.begin(); it!=pessoas.end(); it++)
+			if((*it)->getTipo()=="Doente")
+				myfile<<(*it)->toString()<<endl;
+		myfile<<"\nFuncionario:\n";
+		for(it=pessoas.begin(); it!=pessoas.end(); it++)
+			if((*it)->getTipo()=="Funcionario")
+				myfile<<(*it)->toString()<<endl;
+
+		myfile.close();
+		cout<<endl<<endl<<"Equipas exportadas com sucesso!"<<endl;
+	}
+	else
+	{
+		cout<<"Nao foi possivel abrir o ficheiro!"<<endl<<endl;
+		system("pause");
+	}
 }
 
 int Manutencao::numPessoas()
@@ -303,23 +366,23 @@ void Manutencao::menuPessoas()
 			removePessoa(id);
 			menuPessoas();
 			break;
-		/*case 5://importar equipas
-			clear();
+		case 5://importar equipas
+			system("cls");
 			cout<<"Nome do ficheiro: ";
 			getline(cin, filename);
-			loadEqs(filename);
+			loadPessoas(filename);
 			system("pause");
-			menuEquipas();
+			menuPessoas();
 			break;
 		case 6://exportar equipas
-			clear();
-			cout<<"   --Exportar Equipas--"<<endl<<endl;
+			system("cls");
+			cout<<"   --Exportar Pessoas--"<<endl<<endl;
 			cout<<"Nome do ficheiro para onde vai exportar: ";
 			getline(cin, filename);
-			saveEqs(filename, toExportEqs());
+			savePessoas(filename);
 			system("pause");
-			menuEquipas();
-			break;*/
+			menuPessoas();
+			break;
 		case 0://voltar ao menu anterior
 			//saveEqs("equipas.dll", equipas);
 			break;

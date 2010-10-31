@@ -61,6 +61,13 @@ void Doente::setMorada(string morada)
 	this->morada = morada;
 }
 
+string Doente::toString()
+{
+	stringstream ss;
+	ss<<Pessoa::toString()<<this->morada<<"|";
+	return ss.str();
+}
+
 //funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Doente::setEspecialidade(string especialidade){}
 void Doente::setVencimento(double venc){}

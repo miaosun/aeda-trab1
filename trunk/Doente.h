@@ -22,6 +22,7 @@ public:
 	string getMorada();
 	void setMorada(string morada);
 	vector<string> editPessoa();
+	string toString();
 
 	//funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 	void setEspecialidade(string especialidade);

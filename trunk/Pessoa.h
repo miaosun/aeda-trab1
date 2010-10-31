@@ -26,6 +26,7 @@ public:
 	void setDataNascimento(string dataNascimento);
 	int getId();
 	virtual vector<string> imprime();
+	virtual string toString();
 	string getTipo();
 	void setTipo(string tipo);
 	string toList();
