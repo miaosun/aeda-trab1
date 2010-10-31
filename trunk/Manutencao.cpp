@@ -555,6 +555,7 @@ void Manutencao::listaPessoas()
 		it++;
 	}
 	cout<<"\nDoente: "<<endl;
+	it=pessoas.begin();
 	while(it!=pessoas.end())
 	{
 		if((*it)->getTipo() == "Doente")
@@ -564,9 +565,10 @@ void Manutencao::listaPessoas()
 		it++;
 	}
 	cout<<"\nFuncionario: "<<endl;
+	it=pessoas.begin();
 	while(it!=pessoas.end())
 	{
-		if((*it)->getTipo() == "Doente")
+		if((*it)->getTipo() == "Funcionario")
 		{
 			cout<<"\t"<<(*it)->toList()<<endl;
 		}
