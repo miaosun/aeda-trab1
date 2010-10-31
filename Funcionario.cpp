@@ -62,9 +62,9 @@ double Funcionario::getVencimento(){
 
 string Funcionario::toList()
 {
-	stringstream s(Pessoa::toList());
+	stringstream s;
 
-	s<<" | "<<this->cargo<<" | "<<this->vencimento;
+	s<<Pessoa::toList()<<" | "<<this->cargo<<" | "<<this->vencimento;
 
 	return s.str();
 }

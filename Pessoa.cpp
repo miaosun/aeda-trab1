@@ -93,7 +93,7 @@ string Pessoa::toList()
     s<<"|";
     if (id<10)
         s<<" ";
-	s<<this->id<<"| "<<this->dataNascimento<<" | "<<this->tipo;
+	s<<this->id<<"| "<<this->nome;
 
     return s.str();
 }
