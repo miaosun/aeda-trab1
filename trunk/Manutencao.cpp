@@ -31,15 +31,6 @@ Manutencao::Manutencao(){
 
 }
 
-/*void Manutencao::removePessoa(int id){
-
-	vector<Pessoa>::iterator it;
-	for(it=pessoas.begin(); it!=pessoas.end(); it++)
-	{
-		if((*it)->getId() == id)
-			pessoas.erase(it);
-	}
-}*/
 
 
 
@@ -295,23 +286,24 @@ void Manutencao::menuPessoas()
 			editPessoas(p);
 			menuPessoas();
 			break;
-		/*case 4://apagar equipa
-			listaEqs();
+		case 4://apagar Pessoa
+			listaPessoas();
 			cout<<endl<<"Introduza o ID da Equipa que pretende apagar: ";
 			id=intinput();
-			ind_eq=findIndEq(id);
-			while(ind_eq==-1)
-			{
-				cout<<"A equipa que inseriu nao existe! Tente novamente: ";
-				id=intinput();
-				ind_eq=findIndEq(id);
-			}
-			showMenu("Detalhes da Equipa", equipas.at(ind_eq).toDetalhes());
+
+			/*
+				excepcoes de caso nao encontra a Pessoa.
+			*/
+
+			for(unsigned int i=0; i<pessoas.size(); i++)
+				if(id == pessoas[i]->getId())
+					p = pessoas[i];
+			showMenu("Detalhes da Pessoa", p->imprime());
 			system("pause");
-			delEq(id);
-			menuEquipas();
+			removePessoa(id);
+			menuPessoas();
 			break;
-		case 5://importar equipas
+		/*case 5://importar equipas
 			clear();
 			cout<<"Nome do ficheiro: ";
 			getline(cin, filename);
@@ -758,6 +750,34 @@ void Manutencao::editPessoas(Pessoa *p)
 
 		}
 	}
+}
 
+void Manutencao::removePessoa(int id){
 
+	int indice;
+	for(unsigned int i=0; i<pessoas.size(); i++)
+		if(id == pessoas[i]->getId())
+			indice = i;
+	int op;
+	vector<string> opcoes;
+	opcoes.push_back("Tem a certeza que quer apagar a equipa?");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Nao");
+	opcoes.push_back("2 - Sim");
+	showMenu("Apagar Equipa", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+
+	switch(op)
+	{
+	case 1:
+		break;
+	case 2:
+		pessoas.erase(pessoas.begin()+indice);
+		break;
+	default:
+		cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
+		system("pause");
+		removePessoa(id);
+	}
 }
