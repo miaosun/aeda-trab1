@@ -347,7 +347,7 @@ void Manutencao::menuPessoas()
 			system("pause");
 			menuPessoas();
 			break;
-		/*case 2://importar equipas
+		/*case 2://importar Pessoas
 			clear();
 			cout<<"   --Importar Equipas--"<<endl<<endl;
 			cout<<"Nome do ficheiro: ";

@@ -6,6 +6,7 @@
 
 #include "Pessoa.h"
 
+int Pessoa::count = 0;
 
 Pessoa::Pessoa(){
 
@@ -21,6 +22,7 @@ Pessoa::~Pessoa(){
 
 Pessoa::Pessoa(string nome, string dataNascimento, string tipo){
 
+	this->id = ++count;
 	this->nome = nome;
 	this->dataNascimento = dataNascimento;
 	this->tipo = tipo;
@@ -93,7 +95,7 @@ string Pessoa::toList()
     s<<"|";
     if (id<10)
         s<<" ";
-	s<<this->id<<"| "<<this->nome;
+	s<<this->id<<"| "<<this->nome<<" |";
 
     return s.str();
 }

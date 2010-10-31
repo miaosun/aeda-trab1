@@ -28,12 +28,13 @@ public:
 	virtual vector<string> imprime();
 	string getTipo();
 	void setTipo(string tipo);
-	virtual string toList();
+	string toList();
 
 private:
 	string nome;
 	string dataNascimento;
 	int id;
+	static int count;
 	string tipo;
 
 };

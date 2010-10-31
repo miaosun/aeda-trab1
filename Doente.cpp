@@ -30,11 +30,6 @@ Doente::Doente(string nome, string dataNascimento, string tipo, string morada):P
 
 vector<string> Doente::imprime(){
 
-	/*stringstream ss;
-	ss<<"Doente:\n";
-	ss<<"\\t"<<Pessoa::imprime()<<"Morada: "<<this->morada<<endl;
-	return ss.str();*/
-
 	stringstream s;
 	vector<string> v;
 	v=Pessoa::imprime();
@@ -49,13 +44,4 @@ vector<string> Doente::imprime(){
 string Doente::getMorada(){
 
 	return this->morada;
-}
-
-string Doente::toList()
-{
-	stringstream s;
-
-	s<<Pessoa::toList()<<" | "<<this->morada;
-
-	return s.str();
 }
