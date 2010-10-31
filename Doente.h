@@ -20,6 +20,7 @@ public:
 	Doente(string nome, string dataNascimento, string tipo, string morada);
 	vector<string> imprime();
 	string getMorada();
+	void setMorada(string morada);
 	vector<string> editPessoa();
 
 private:

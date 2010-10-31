@@ -57,3 +57,8 @@ vector<string> Doente::editPessoa()
 
 	return opcoes;
 }
+
+void Doente::setMorada(string morada)
+{
+	this->morada = morada;
+}

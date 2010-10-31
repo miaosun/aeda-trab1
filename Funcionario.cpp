@@ -68,3 +68,13 @@ vector<string> Funcionario::editPessoa()
 
 	return opcoes;
 }
+
+void Funcionario::setCargo(string cargo)
+{
+	this->cargo = cargo;
+}
+
+void Funcionario::setVencimento(double vencimento)
+{
+	this->vencimento = vencimento;
+}

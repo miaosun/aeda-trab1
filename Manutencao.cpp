@@ -253,6 +253,9 @@ void Manutencao::menuPessoas()
 	cout<<"    Opcao: ";
 	op=intinput();
 	system("cls");
+
+
+
 	if(numPessoas()>0)
 	{
 		switch(op)
@@ -578,6 +581,7 @@ void Manutencao::listaPessoas()
 
 void Manutencao::editPessoas(Pessoa *p)
 {
+
 	vector<string> opcoes;
 	string nome, dataNas, tipo, esp, hor, morada, cargo;
 	double venc;
@@ -619,25 +623,65 @@ void Manutencao::editPessoas(Pessoa *p)
 		p->setTipo(tipo);
 		editPessoas(p);
 		break;
-	/*
+
+	if(p->getTipo()=="Medico")
+	{
+		Medico m;
+		Pessoa p1 = *p;
+		p1 = m;
+		switch(op)
+		{
+		case 4:
+			cout<<"Novo Especialidade de Medico: ";
+			getline(cin, esp);
+			m.setEspecialidade(esp);
+			editPessoas(&p1);
+			break;
+		case 5:
+			cout<<"Novo Horario de Medico: ";
+			getline(cin, hor);
+			m.setHorario(hor);
+			editPessoas(&p1);
+			break;
+		case 6:
+			cout<<"Novo Vencimento de Medico: ";
+			cin>>venc;
+			m.setVencimento(venc);
+			editPessoas(&p1);
+			break;
+		}
+
+	}
+	/*else if(p->getTipo()=="Doente")
+	{
+		switch(op)
+		{
+		case 4:
+			cout<<"Novo Morada de Doente: ";
+			getline(cin, morada);
+			d.setMorada(morada);
+			editPessoas(p2);
+			break;
+		}
+	}
+
+	else if(p->getTipo()=="Funcionario")
+	{
+
 	case 4:
-		cout<<"Novo Especialidade de Medico: ";
-		getline(cin, esp);
-	    p.setEspecialidade(esp);
-	    editPessoas(p);
+		cout<<"Novo Cargo de Funcionario: ";
+		getline(cin, cargo);
+		f.setCargo(cargo);
+		editPessoas(p3);
 		break;
 	case 5:
-		cout<<"Novo Horario de Medico: ";
-		getline(cin, hor);
-		p.setHorario(hor);
-		editPessoas(p);
-		break;
-	case 6:
-		cout<<"Novo Vencimento de Medico: ";
+		cout<<"Novo Vencimento de Funcionario: ";
 		cin>>venc;
-		p.setVencimento(venc);
-		editPessoas(p);
-		break;*/
+		f.setVencimento(venc);
+		editPessoas(p3);
+		break;
+	}*/
+
 	case 0:
 		break;
 	default:

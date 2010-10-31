@@ -20,7 +20,9 @@ public:
 	Funcionario(string nome, string dataNascimento, string tipo, string cargo, double vencimento);
 	vector<string> imprime();
 	string getCargo();
+	void setCargo(string cargo);
 	double getVencimento();
+	void setVencimento(double vencimento);
 	vector<string> editPessoa();
 
 private:
