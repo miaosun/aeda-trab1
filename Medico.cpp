@@ -36,18 +36,18 @@ vector<string> Medico::imprime(){
 	ss<<"\\t"<<Pessoa::imprime()<<"Especialidade: "<<this->especialidade<<"\nHorario: "<<this->horario<<"\nVencimento: "<<vencimento<<endl;
 	return ss.str();*/
 
-	stringstream s;
+	stringstream s1,s2,s3;
 	vector<string> v;
 	v=Pessoa::imprime();
 
-	s<<"   Especialidade: "<<this->especialidade;
-	v.push_back(s.str());
+	s1<<"   Especialidade: "<<this->especialidade;
+	v.push_back(s1.str());
 
-	s<<"   Horario: "<<this->horario;
-	v.push_back(s.str());
+	s2<<"   Horario: "<<this->horario;
+	v.push_back(s2.str());
 
-	s<<"   Vencimento: "<<this->vencimento;
-	v.push_back(s.str());
+	s3<<"   Vencimento: "<<this->vencimento;
+	v.push_back(s3.str());
 	return v;
 }
 
@@ -80,4 +80,13 @@ double Medico::getVencimento(){
 void Medico::setVencimento(double vencimento)
 {
 	this->vencimento = vencimento;
+}
+
+string Medico::toList()
+{
+	stringstream s(Pessoa::toList());
+
+	s<<" | "<<this->especialidade<<" | "<<this->horario<<" | "<<this->vencimento;
+
+	return s.str();
 }

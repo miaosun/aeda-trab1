@@ -261,26 +261,28 @@ void Manutencao::menuPessoas()
 		case 1:
 			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
-			showMenu("Nova Pessoa", pessoas.back().imprime());
+			showMenu("Nova Pessoa", pessoas.back()->imprime());
 			system("pause");
 			menuPessoas();
 			break;
-	/*	case 2://ver detalhes Pessoas
-			//listaEqs();
+		case 2://ver detalhes Pessoas
+			listaPessoas();
 			cout<<endl<<"Introduza o ID da Pessoa que pretende ver os detalhes: ";
-			//id=intinput();
-			//ind_eq=findIndEq(id);
-			while(ind_eq==-1)
+			int id;
+			id=intinput();
+
+			//falta implementar excecao...
+
+			for(unsigned int i=0; i<pessoas.size(); i++)
 			{
-				cout<<"A equipa que inseriu nao existe! Tente novamente: ";
-				id=intinput();
-				ind_eq=findIndEq(id);
+				if(id==pessoas[i]->getId())
+					showMenu("Detalhes da Pessoa", pessoas[i]->imprime());
 			}
-			showMenu("Detalhes da Equipa", equipas.at(ind_eq).toDetalhes());
+
 			system("pause");
-			menuEquipas();//volta ao menu equipas
+			menuPessoas();//volta ao menu equipas
 			break;
-		case 3://editar equipa
+		/*case 3://editar equipa
 			listaEqs();
 			cout<<endl<<"Introduza o ID da Equipa que pretende editar: ";
 			id=intinput();
@@ -343,7 +345,7 @@ void Manutencao::menuPessoas()
 		case 1://criar Pessoa
 			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
-			showMenu("Nova Equipa", pessoas.back().imprime());
+			showMenu("Nova Equipa", pessoas.back()->imprime());
 			system("pause");
 			menuPessoas();
 			break;
@@ -401,7 +403,7 @@ void Manutencao::menuMarcacoes()
 		case 1:
 			cout<<"   --Adicionar Marcacao--"<<endl<<endl;
 			addMarcacao();
-			showMenu("Nova Marcacao", marcacoes.back().imprime());
+			showMenu("Nova Marcacao", marcacoes.back()->imprime());
 			system("pause");
 			menuMarcacoes();
 			break;
@@ -423,7 +425,7 @@ void Manutencao::menuMarcacoes()
 		case 1:
 		cout<<"   --Adicionar Marcacao--"<<endl<<endl;
 		addMarcacao();
-		showMenu("Nova Marcacao", marcacoes.back().imprime());
+		showMenu("Nova Marcacao", marcacoes.back()->imprime());
 		system("pause");
 		menuMarcacoes();
 		break;
@@ -466,7 +468,7 @@ void Manutencao::addPessoa()
 		cout<<"Vencimento: ";
 		cin>>venc;
 		Medico * m = new Medico(nome, dataNas, tipo, esp, hor, venc);
-		pessoas.push_back(*m);
+		pessoas.push_back(m);
 	}
 	else if (tipo=="Doente")
 	{
@@ -477,7 +479,7 @@ void Manutencao::addPessoa()
 		cout<<"Morada: ";
 		getline(cin, mor);
 		Doente * d = new Doente(nome, dataNas, tipo, mor);
-		pessoas.push_back(*d);
+		pessoas.push_back(d);
 	}
 	else if (tipo=="Funcionario")
 	{
@@ -490,7 +492,7 @@ void Manutencao::addPessoa()
 		cout<<"Vencimento: ";
 		cin>>venc;
 		Funcionario * f = new Funcionario(nome, dataNas, tipo, car, venc);
-		pessoas.push_back(*f);
+		pessoas.push_back(f);
 	}
 	else
 	{
@@ -518,7 +520,7 @@ void Manutencao::addMarcacao()
 		cout<<"Hora da Consulta: ";
 		getline(cin, hora);
 		Consulta * c = new Consulta(data, hora, tipo);
-		marcacoes.push_back(*c);
+		marcacoes.push_back(c);
 	}
 	else if(tipo=="Exame")
 	{
@@ -529,7 +531,7 @@ void Manutencao::addMarcacao()
 		cout<<"Sala do Exame: ";
 		getline(cin, sala);
 		Exame * e = new Exame(data, hora, tipo, sala);
-		marcacoes.push_back(*e);
+		marcacoes.push_back(e);
 	}
 	else
 	{
@@ -542,16 +544,36 @@ void Manutencao::listaPessoas()
 {
 	system("cls");
 	cout<<"  --Pessoas no sistema--"<<endl<<endl;
-	vector<Pessoa>::iterator it;
-	for(it=pessoas.begin(); it!=pessoas.end(); it++)
-	{
-		if((*it).getTipo()=="Medico")
-		{
-			//para implementar
-		}
-	}
+	vector<Pessoa *>::iterator it=pessoas.begin();
 
-	//para implementar
+	cout<<"\t|ID| Nome |\n\n";
+	cout<<"Medico: "<<endl;
+	while(it!=pessoas.end())
+	{
+		if((*it)->getTipo() == "Medico")
+		{
+			cout<<"\t"<<(*it)->toList()<<endl;
+		}
+		it++;
+	}
+	cout<<"\nDoente: "<<endl;
+	while(it!=pessoas.end())
+	{
+		if((*it)->getTipo() == "Doente")
+		{
+			cout<<"\t"<<(*it)->toList()<<endl;
+		}
+		it++;
+	}
+	cout<<"\nFuncionario: "<<endl;
+	while(it!=pessoas.end())
+	{
+		if((*it)->getTipo() == "Doente")
+		{
+			cout<<"\t"<<(*it)->toList()<<endl;
+		}
+		it++;
+	}
 
 	cout<<endl;
 }
