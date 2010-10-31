@@ -28,7 +28,6 @@ public:
 	void setHorario(string horario);
 	double getVencimento();
 	void setVencimento(double vencimento);
-	string toList();
 
 private:
 	string especialidade;

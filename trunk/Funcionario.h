@@ -21,7 +21,6 @@ public:
 	vector<string> imprime();
 	string getCargo();
 	double getVencimento();
-	string toList();
 
 private:
 	string cargo;

@@ -41,11 +41,6 @@ void Exame::setSala(){
 
 
 vector<string> Exame::imprime(){
-/*
-	stringstream ss;
-	ss<<"Exame:\n";
-	ss<<"\\t"<<Marcacao::imprime()<<"Sala: "<<sala<<endl;
-	return ss.str();*/
 
 	vector<string> v;
 	stringstream s;

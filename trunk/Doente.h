@@ -20,7 +20,6 @@ public:
 	Doente(string nome, string dataNascimento, string tipo, string morada);
 	vector<string> imprime();
 	string getMorada();
-	string toList();
 
 private:
 	string morada;
