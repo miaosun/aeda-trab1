@@ -28,6 +28,7 @@ public:
 	void setHorario(string horario);
 	double getVencimento();
 	void setVencimento(double vencimento);
+	vector<string> editPessoa();
 
 private:
 	string especialidade;
