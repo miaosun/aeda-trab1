@@ -227,8 +227,6 @@ void Manutencao::menuPrincipal()
     }
 }
 
-
-
 void Manutencao::menuPessoas()
 {
 	int op;

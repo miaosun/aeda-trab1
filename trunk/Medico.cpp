@@ -84,9 +84,9 @@ void Medico::setVencimento(double vencimento)
 
 string Medico::toList()
 {
-	stringstream s(Pessoa::toList());
+	stringstream s;
 
-	s<<" | "<<this->especialidade<<" | "<<this->horario<<" | "<<this->vencimento;
+	s<<Pessoa::toList()<<" | "<<this->especialidade<<" | "<<this->horario<<" | "<<this->vencimento;
 
 	return s.str();
 }
