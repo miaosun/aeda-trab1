@@ -48,15 +48,15 @@ string Manutencao::imprime(){
 
 
 void Manutencao::loadPessoas(string filename)
-{/*
+{
 	stringstream s;
 	unsigned int size;
 	string linha;
 	vector<string> aux, j;
-	ifstream f (filename.c_str());
-	if(f.is_open())
+	ifstream myfile (filename.c_str());
+	if(myfile.is_open())
 	{
-		getline(f, linha);
+		getline(myfile, linha);
 		s<<linha;
 		s>>size;//primeira linha com numero de equipas
 		if(s.fail())
@@ -70,19 +70,19 @@ void Manutencao::loadPessoas(string filename)
 			{
 				for(unsigned int i=0; i<size; i++)
 				{
-					getline(f, linha);
+					getline(myfile, linha);
 					equipas.push_back(Equipa::Equipa(linha));
 				}
 				cout<<endl<<endl<<"Equipas importadas com sucesso!"<<endl<<endl;
 			}
 		}
-		f.close();
+		myfile.close();
 	}
 	else
 	{
 		cout<<"Nao foi possivel abrir o ficheiro "<<filename<<"!"<<endl<<endl;
 	}
-*/
+
 }
 
 
@@ -94,7 +94,7 @@ void Manutencao::savePessoas(string filename)
 	if(myfile.is_open())
 	{
 		myfile<<pessoas.size()<<endl<<endl;
-		myfile<<"Medico:\n";
+		/*myfile<<"Medico:\n";
 		for(it=pessoas.begin(); it!=pessoas.end(); it++)
 			if((*it)->getTipo()=="Medico")
 				myfile<<(*it)->toString()<<endl;
@@ -105,7 +105,10 @@ void Manutencao::savePessoas(string filename)
 		myfile<<"\nFuncionario:\n";
 		for(it=pessoas.begin(); it!=pessoas.end(); it++)
 			if((*it)->getTipo()=="Funcionario")
-				myfile<<(*it)->toString()<<endl;
+				myfile<<(*it)->toString()<<endl;*/
+
+		for(it=pessoas.begin(); it!=pessoas.end(); it++)
+			myfile<<(*it)->toString()<<endl;
 
 		myfile.close();
 		cout<<endl<<endl<<"Equipas exportadas com sucesso!"<<endl;
