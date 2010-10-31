@@ -29,6 +29,8 @@ public:
 	double getVencimento();
 	void setVencimento(double vencimento);
 	vector<string> editPessoa();
+
+	//funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 	void setMorada(string morada);
 	void setCargo(string cargo);
 

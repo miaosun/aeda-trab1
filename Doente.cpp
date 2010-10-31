@@ -61,6 +61,7 @@ void Doente::setMorada(string morada)
 	this->morada = morada;
 }
 
+//funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Doente::setEspecialidade(string especialidade){}
 void Doente::setVencimento(double venc){}
 void Doente::setHorario(string horario){}

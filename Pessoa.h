@@ -30,6 +30,8 @@ public:
 	void setTipo(string tipo);
 	string toList();
 	virtual vector<string> editPessoa();
+
+	//funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 	virtual void setEspecialidade(string especialidade) = 0;
 	virtual void setHorario(string hora) = 0;
 	virtual void setVencimento(double venc) = 0;
