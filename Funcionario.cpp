@@ -79,6 +79,13 @@ void Funcionario::setVencimento(double vencimento)
 	this->vencimento = vencimento;
 }
 
+string Funcionario::toString()
+{
+	stringstream ss;
+	ss<<Pessoa::toString()<<this->cargo<<"|"<<this->vencimento<<"|";
+	return ss.str();
+}
+
 //funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Funcionario::setEspecialidade(string especialidade){}
 void Funcionario::setHorario(string hora){}

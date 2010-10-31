@@ -54,12 +54,8 @@ int Pessoa::getId()
 	return this->id;
 }
 
-vector<string> Pessoa::imprime(){
-/*
-	stringstream ss;
-	ss<<"Nome: "<<this->nome<<"\nData de Nascimento: "<<this->dataNascimento<<"\nTipo: "<<tipo<<endl;
-	return ss.str();*/
-
+vector<string> Pessoa::imprime()
+{
 	vector<string> v;
 	stringstream s1, s2, s3, s4;
 
@@ -78,6 +74,12 @@ vector<string> Pessoa::imprime(){
 	return v;
 }
 
+string Pessoa::toString()
+{
+	stringstream ss;
+	ss<<"|"<<this->id<<"|"<<this->nome<<"|"<<this->dataNascimento<<"|";
+	return ss.str();
+}
 
 string Pessoa::getTipo(){
 

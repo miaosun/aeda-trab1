@@ -77,6 +77,13 @@ void Medico::setVencimento(double vencimento)
 	this->vencimento = vencimento;
 }
 
+string Medico::toString()
+{
+	stringstream ss;
+	ss<<Pessoa::toString()<<this->especialidade<<"|"<<this->horario<<"|"<<this->vencimento<<"|";
+	return ss.str();
+}
+
 //funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Medico::setMorada(string morada){}
 void Medico::setCargo(string cargo){}
