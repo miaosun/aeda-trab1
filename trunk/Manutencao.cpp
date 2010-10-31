@@ -284,7 +284,7 @@ void Manutencao::menuPessoas()
 			system("pause");
 			menuPessoas();//volta ao menu equipas
 			break;
-		case 3://editar equipa
+		case 3://editar Pessoa
 			listaPessoas();
 			cout<<endl<<"Introduza o ID da Pessoa que pretende editar: ";
 			id=intinput();
@@ -444,9 +444,6 @@ void Manutencao::menuMarcacoes()
 
 void Manutencao::addPessoa()
 {
-
-	Pessoa p;
-	Manutencao m;
 	string nome, dataNas, tipo, esp, hor, mor, car;
 	double venc;
 	//clear();
@@ -600,91 +597,167 @@ void Manutencao::editPessoas(Pessoa *p)
 	cout<<"    Opcao: ";
 	op=intinput();
 
-	switch(op)
-	{
-	case 1:
-		system("cls");
-		cout<<"   --Editar Medico--"<<endl<<endl;
-		cout<<"Nome de Medico: "<<p->getName()<<endl;
-		cout<<"Novo nome de Medico: ";
-		getline(cin, nome);
-		p->setName(nome);
-		editPessoas(p);
-		break;
-	case 2:
-		cout<<"Novo Data de Nascimento de Medico: ";
-		getline(cin, dataNas);
-		p->setDataNascimento(dataNas);
-		editPessoas(p);
-		break;
-	case 3:
-		cout<<"Novo Tipo da Medico: ";
-		getline(cin, tipo);
-		p->setTipo(tipo);
-		editPessoas(p);
-		break;
-
 	if(p->getTipo()=="Medico")
 	{
-		Medico m;
-		Pessoa p1 = *p;
-		p1 = m;
 		switch(op)
 		{
+		case 1:
+		//	system("cls");
+		//	cout<<"   --Editar Medico--"<<endl<<endl;
+		//	cout<<"Nome de Medico: "<<p->getName()<<endl;
+			cout<<"Novo nome de Medico: ";
+			getline(cin, nome);
+			p->setName(nome);
+			editPessoas(p);
+			break;
+		case 2:
+		//	system("cls");
+		//	cout<<"   --Editar Medico--"<<endl<<endl;
+			cout<<"Novo Data de Nascimento de Medico: ";
+			getline(cin, dataNas);
+			p->setDataNascimento(dataNas);
+			editPessoas(p);
+			break;
+		case 3:
+		//	system("cls");
+		//	cout<<"   --Editar Medico--"<<endl<<endl;
+			cout<<"Novo Tipo da Medico: ";
+			getline(cin, tipo);
+			p->setTipo(tipo);
+			editPessoas(p);
+			break;
+
 		case 4:
+			//system("cls");
+			//cout<<"   --Editar Medico--"<<endl<<endl;
 			cout<<"Novo Especialidade de Medico: ";
 			getline(cin, esp);
-			m.setEspecialidade(esp);
-			editPessoas(&p1);
+			p->setEspecialidade(esp);
+			editPessoas(p);
 			break;
 		case 5:
+		//	system("cls");
+			//cout<<"   --Editar Medico--"<<endl<<endl;
 			cout<<"Novo Horario de Medico: ";
 			getline(cin, hor);
-			m.setHorario(hor);
-			editPessoas(&p1);
+			p->setHorario(hor);
+			editPessoas(p);
 			break;
 		case 6:
+			//system("cls");
+			//cout<<"   --Editar Medico--"<<endl<<endl;
 			cout<<"Novo Vencimento de Medico: ";
 			cin>>venc;
-			m.setVencimento(venc);
-			editPessoas(&p1);
+			p->setVencimento(venc);
+			editPessoas(p);
 			break;
-		}
+		case 0:
+			break;
+		default:
+			editPessoas(p);
 
+		}
 	}
-	/*else if(p->getTipo()=="Doente")
+	else if(p->getTipo()=="Doente")
 	{
 		switch(op)
 		{
+		case 1:
+			//system("cls");
+			//cout<<"   --Editar Doente--"<<endl<<endl;
+			cout<<"Nome de Doente: "<<p->getName()<<endl;
+			cout<<"Novo nome de Doente: ";
+			getline(cin, nome);
+			p->setName(nome);
+			editPessoas(p);
+			break;
+		case 2:
+			//system("cls");
+			//cout<<"   --Editar Doente--"<<endl<<endl;
+			cout<<"Novo Data de Nascimento de Doente: ";
+			getline(cin, dataNas);
+			p->setDataNascimento(dataNas);
+			editPessoas(p);
+			break;
+		case 3:
+			system("cls");
+			cout<<"   --Editar Doente--"<<endl<<endl;
+			cout<<"Novo Tipo da Doente: ";
+			getline(cin, tipo);
+			p->setTipo(tipo);
+			editPessoas(p);
+			break;
+
 		case 4:
+			//system("cls");
+			//cout<<"   --Editar Doente--"<<endl<<endl;
 			cout<<"Novo Morada de Doente: ";
 			getline(cin, morada);
-			d.setMorada(morada);
-			editPessoas(p2);
+			p->setMorada(morada);
+			editPessoas(p);
 			break;
+		case 0:
+			break;
+		default:
+			editPessoas(p);
+
 		}
 	}
 
 	else if(p->getTipo()=="Funcionario")
 	{
 
-	case 4:
-		cout<<"Novo Cargo de Funcionario: ";
-		getline(cin, cargo);
-		f.setCargo(cargo);
-		editPessoas(p3);
-		break;
-	case 5:
-		cout<<"Novo Vencimento de Funcionario: ";
-		cin>>venc;
-		f.setVencimento(venc);
-		editPessoas(p3);
-		break;
-	}*/
+		switch(op)
+		{
+		case 1:
+			//system("cls");
+			//cout<<"   --Editar Funcionario--"<<endl<<endl;
+			//cout<<"Nome de Funcionario: "<<p->getName()<<endl;
+			cout<<"Novo nome de Funcinario: ";
+			getline(cin, nome);
+			p->setName(nome);
+			editPessoas(p);
+			break;
+		case 2:
+			//system("cls");
+			//cout<<"   --Editar Funcionario--"<<endl<<endl;
+			cout<<"Novo Data de Nascimento de Funcionario: ";
+			getline(cin, dataNas);
+			p->setDataNascimento(dataNas);
+			editPessoas(p);
+			break;
+		case 3:
+			//system("cls");
+			//cout<<"   --Editar Funcionario--"<<endl<<endl;
+			cout<<"Novo Tipo da Funcionario: ";
+			getline(cin, tipo);
+			p->setTipo(tipo);
+			editPessoas(p);
+			break;
 
-	case 0:
-		break;
-	default:
-		editPessoas(p);
+		case 4:
+			//system("cls");
+			//cout<<"   --Editar Funcionario--"<<endl<<endl;
+			cout<<"Novo cargo de Funcionario: ";
+			getline(cin, cargo);
+			p->setCargo(cargo);
+			editPessoas(p);
+			break;
+		case 5:
+			//system("cls");
+			//cout<<"   --Editar Funcionario--"<<endl<<endl;
+			cout<<"Novo Vencimento de Funcionario: ";
+			cin>>venc;
+			p->setVencimento(venc);
+			editPessoas(p);
+			break;
+		case 0:
+			break;
+		default:
+			editPessoas(p);
+
+		}
 	}
+
+
 }

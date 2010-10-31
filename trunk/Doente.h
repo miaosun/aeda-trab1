@@ -22,6 +22,10 @@ public:
 	string getMorada();
 	void setMorada(string morada);
 	vector<string> editPessoa();
+	void setEspecialidade(string especialidade);
+	void setHorario(string hora);
+	void setVencimento(double venc);
+	void setCargo(string cargo);
 
 private:
 	string morada;

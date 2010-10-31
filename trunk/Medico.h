@@ -29,6 +29,8 @@ public:
 	double getVencimento();
 	void setVencimento(double vencimento);
 	vector<string> editPessoa();
+	void setMorada(string morada);
+	void setCargo(string cargo);
 
 private:
 	string especialidade;

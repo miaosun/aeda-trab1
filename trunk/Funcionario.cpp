@@ -78,3 +78,7 @@ void Funcionario::setVencimento(double vencimento)
 {
 	this->vencimento = vencimento;
 }
+
+void Funcionario::setEspecialidade(string especialidade){}
+void Funcionario::setHorario(string hora){}
+void Funcionario::setMorada(string morada){}
