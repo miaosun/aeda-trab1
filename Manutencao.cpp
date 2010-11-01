@@ -400,10 +400,11 @@ void Manutencao::addPessoa()
 {
 	string nome, dataNas, tipo, esp, hor, mor, car;
 	double venc;
-
-	cout<<"Tipo da Pessoa(Medico, Doente ou Funcionario): ";
+	cout<<"Tipo da Pessoa(Medico, Doente ou Funcionario) (0 para voltar):\n";
 	getline(cin, tipo);
-	if(tipo=="Medico")
+	if(tipo=="0")	//quando sair daqui, no menuPessoas 0 voltar termina sempre o programa,
+		menuPessoas();  //se sem isto funcina bem, nao sei porque
+	else if(tipo=="Medico")
 	{
 		cout<<"Nome da Pessoa: ";
 		getline(cin, nome);
@@ -445,7 +446,6 @@ void Manutencao::addPessoa()
 	else
 	{
 		cout<<"Tipo nao e valido, tenta novamente!\n";
-		//system("pause");
 		cout<<endl;
 		addPessoa();
 	}
