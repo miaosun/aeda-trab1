@@ -34,8 +34,6 @@ Manutencao::Manutencao(){
 }
 
 
-
-
 void Manutencao::removeMarcacao(){
 
 }
@@ -52,13 +50,13 @@ void Manutencao::loadPessoas(string filename)
 	stringstream s;
 	unsigned int size;
 	string linha;
-	vector<string> aux, j;
+	vector<string> v;
 	ifstream myfile (filename.c_str());
 	if(myfile.is_open())
 	{
 		getline(myfile, linha);
 		s<<linha;
-		s>>size;//primeira linha com numero de equipas
+		s>>size;//primeira linha com numero de pessoas
 		if(s.fail())
 		{
 			cout<<"Ficheiro nao esta no formato exigido!";
@@ -71,9 +69,30 @@ void Manutencao::loadPessoas(string filename)
 				for(unsigned int i=0; i<size; i++)
 				{
 					getline(myfile, linha);
-					equipas.push_back(Equipa::Equipa(linha));
+					v=split('|', linha);
+					if(v[3]=="Medico")
+					{
+						double venc = atof(v[6].c_str());
+						Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
+						pessoas.push_back(m);
+					}
+					else if(v[3]=="Doente")
+					{
+						Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
+						pessoas.push_back(d);
+					}
+					else if(v[3]=="Doente")
+					{
+						double venc = atof(v[5].c_str());
+						Funcionario *f = new Funcionario(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(), venc);
+						pessoas.push_back(f);
+					}
+					cout<<"v size: "<<v.size()<<endl;
+					cout<<"v3: "<<v[3];
+					cout<<"pessoa size: "<<pessoas.size()<<endl;
+
 				}
-				cout<<endl<<endl<<"Equipas importadas com sucesso!"<<endl<<endl;
+				cout<<endl<<endl<<"Pessoas importadas com sucesso!"<<endl<<endl;
 			}
 		}
 		myfile.close();
@@ -93,7 +112,7 @@ void Manutencao::savePessoas(string filename)
 	ofstream myfile (filename.c_str());
 	if(myfile.is_open())
 	{
-		myfile<<pessoas.size()<<endl<<endl;
+		myfile<<pessoas.size()<<endl;
 		/*myfile<<"Medico:\n";
 		for(it=pessoas.begin(); it!=pessoas.end(); it++)
 			if((*it)->getTipo()=="Medico")
@@ -118,11 +137,6 @@ void Manutencao::savePessoas(string filename)
 		cout<<"Nao foi possivel abrir o ficheiro!"<<endl<<endl;
 		system("pause");
 	}
-}
-
-int Manutencao::numPessoas()
-{
-	return this->pessoas.size();
 }
 
 void Manutencao::welcome()
@@ -293,7 +307,7 @@ void Manutencao::menuPessoas()
 	opcoes.push_back("Escolha uma das seguintes opcoes:");
 	opcoes.push_back("");
 	opcoes.push_back("1 - Nova Pessoa");//opcao 1
-	if(numPessoas()!=0)
+	if(pessoas.size()>0)
 	{
 		opcoes.push_back("2 - Ver detalhes de uma Pessoa");//opcao 2
 		opcoes.push_back("3 - Editar uma Pessoa");//opcao 3
@@ -313,7 +327,7 @@ void Manutencao::menuPessoas()
 
 
 
-	if(numPessoas()>0)
+	if(pessoas.size()>0)
 	{
 		switch(op)
 		{
@@ -371,6 +385,7 @@ void Manutencao::menuPessoas()
 			break;
 		case 5://importar equipas
 			system("cls");
+			cout<<"   --Importar Pessoas--"<<endl<<endl;
 			cout<<"Nome do ficheiro: ";
 			getline(cin, filename);
 			loadPessoas(filename);
@@ -406,15 +421,16 @@ void Manutencao::menuPessoas()
 			system("pause");
 			menuPessoas();
 			break;
-		/*case 2://importar Pessoas
-			clear();
-			cout<<"   --Importar Equipas--"<<endl<<endl;
+		case 2://importar Pessoas
+			system("cls");
+			cout<<"   --Importar Pessoas--"<<endl<<endl;
 			cout<<"Nome do ficheiro: ";
 			getline(cin, filename);
-		   loadEqs(filename);
+		    loadPessoas(filename);
+		    cout<<"pessoa size: "<<pessoas.size()<<endl;
 			system("pause");
-			menuEquipas();
-			break;*/
+			menuPessoas();
+			break;
 		case 0://voltar ao menu anterior
 			break;
 		default:
