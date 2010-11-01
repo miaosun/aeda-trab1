@@ -57,43 +57,36 @@ void Manutencao::loadPessoas(string filename)
 		getline(myfile, linha);
 		s<<linha;
 		s>>size;//primeira linha com numero de pessoas
-		if(s.fail())
-		{
-			cout<<"Ficheiro nao esta no formato exigido!";
-			system("pause");
-		}
-		else
-		{
-			if(size>0)
-			{
-				for(unsigned int i=0; i<size; i++)
-				{
-					getline(myfile, linha);
-					v=split('|', linha);
-					if(v[3]=="Medico")
-					{
-						double venc = atof(v[6].c_str());
-						Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
-						pessoas.push_back(m);
-					}
-					else if(v[3]=="Doente")
-					{
-						Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
-						pessoas.push_back(d);
-					}
-					else if(v[3]=="Funcionario")
-					{
-						double venc = atof(v[5].c_str());
-						Funcionario *f = new Funcionario(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(), venc);
-						pessoas.push_back(f);
-					}
-					cout<<"v size: "<<v.size()<<endl;
-					cout<<"v3: "<<v[3];
-					cout<<"pessoa size: "<<pessoas.size()<<endl;
 
+		/*
+		 * falta implementar a excepcao
+		 */
+
+		if(size>0)
+		{
+			for(unsigned int i=0; i<size; i++)
+			{
+				getline(myfile, linha);
+				v=split('|', linha);
+				if(v[3]=="Medico")
+				{
+					double venc = atof(v[6].c_str());
+					Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
+					pessoas.push_back(m);
 				}
-				cout<<endl<<endl<<"Pessoas importadas com sucesso!"<<endl<<endl;
+				else if(v[3]=="Doente")
+				{
+					Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
+					pessoas.push_back(d);
+				}
+				else if(v[3]=="Funcionario")
+				{
+					double venc = atof(v[5].c_str());
+					Funcionario *f = new Funcionario(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(), venc);
+					pessoas.push_back(f);
+				}
 			}
+			cout<<endl<<endl<<"Pessoas importadas com sucesso!"<<endl<<endl;
 		}
 		myfile.close();
 	}
@@ -427,7 +420,6 @@ void Manutencao::menuPessoas()
 			cout<<"Nome do ficheiro: ";
 			getline(cin, filename);
 		    loadPessoas(filename);
-		    cout<<"pessoa size: "<<pessoas.size()<<endl;
 			system("pause");
 			menuPessoas();
 			break;
