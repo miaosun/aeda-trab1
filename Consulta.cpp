@@ -8,19 +8,9 @@
 #include "Consulta.h"
 
 
-Consulta::Consulta(){
+Consulta::Consulta(){}
 
-}
-
-
-
-Consulta::~Consulta(){
-
-}
-
-
-
-
+Consulta::~Consulta(){}
 
 Consulta::Consulta(string data, string hora, string tipo):Marcacao(data, hora, tipo)
 {

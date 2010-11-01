@@ -8,15 +8,9 @@
 
 int Pessoa::count = 0;
 
-Pessoa::Pessoa(){
+Pessoa::Pessoa(){}
 
-}
-
-
-
-Pessoa::~Pessoa(){
-
-}
+Pessoa::~Pessoa(){}
 
 
 Pessoa::Pessoa(string nome, string dataNascimento, string tipo){
