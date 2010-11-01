@@ -19,8 +19,10 @@ public:
 
 	Exame(string data, string hora, string tipo, string sala);
 	string getSala();
-	void setSala();
+	void setSala(string sala);
 	vector<string> imprime();
+	vector<string> editMarcacao();
+	string toString();
 
 private:
 	string sala;

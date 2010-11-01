@@ -7,7 +7,6 @@
 
 #include "Exame.h"
 
-
 Exame::Exame(){}
 
 Exame::~Exame(){}
@@ -24,7 +23,7 @@ string Exame::getSala(){
 }
 
 
-void Exame::setSala(){
+void Exame::setSala(string sala){
 
 	this->sala = sala;
 }
@@ -41,4 +40,23 @@ vector<string> Exame::imprime(){
 	v.push_back(s.str());
 
 	return v;
+}
+
+vector<string> Exame::editMarcacao()
+{
+	vector<string> opcoes;
+	stringstream ss;
+	opcoes = Marcacao::editMarcacao();
+
+	ss<<"4 - Editar Sala: "<<this->sala;
+	opcoes.push_back(ss.str());
+
+	return opcoes;
+}
+
+string Exame::toString()
+{
+	stringstream ss;
+	ss<<Marcacao::toString()<<this->sala<<"|";
+	return ss.str();
 }

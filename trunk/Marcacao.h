@@ -11,6 +11,9 @@
 #include "Doente.h"
 #include "Medico.h"
 
+#include <string>
+#include <vector>
+using namespace std;
 
 class Marcacao
 {
@@ -28,12 +31,19 @@ public:
 	string getHora();
 	void setHora(string hora);
 	int getId() const;
+	string toList();
+	string getTipo();
+	void setTipo(string tipo);
+	virtual vector<string> editMarcacao();
+	virtual void setSala(string sala) = 0;
+	virtual string toString();
 
 private:
 	string data;
 	string hora;
 	int id;
 	string tipo;
+	static int count;
 
 };
 #endif // !defined(EA_6D34D39A_7937_43d1_9953_2455A3DEDC2B__INCLUDED_)
