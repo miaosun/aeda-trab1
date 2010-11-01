@@ -27,8 +27,8 @@ vector<string> split(char delim, string s)
 			result.push_back( s.substr( 0, cutAt ) );
 		}
 		s = s.substr( ++cutAt );
-		if( s.length() > 0 )
-		result.push_back( s );
+//		if( s.length() > 0 )
+//		result.push_back( s );
 	}
 	return result;
 }

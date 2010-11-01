@@ -29,7 +29,6 @@ public:
 	string imprime();
 	void loadPessoas(string filename);
 	void savePessoas(string filename);
-	int numPessoas();
 	void welcome();
 	void showMenu(string titulo, vector<string> opcoes);
 	void menuPrincipal();
