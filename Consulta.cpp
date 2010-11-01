@@ -31,3 +31,18 @@ vector<string> Consulta::imprime(){
 
 	return v;
 }
+
+vector<string> Consulta::editMarcacao()
+{
+	return Marcacao::editMarcacao();
+}
+
+string Consulta::toString()
+{
+	return Marcacao::toString();
+}
+
+
+
+//////////////////////////
+void Consulta::setSala(string sala){}

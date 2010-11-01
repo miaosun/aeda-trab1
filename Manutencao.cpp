@@ -235,7 +235,7 @@ void Manutencao::menuPessoas()
 			}
 
 			system("pause");
-			menuPessoas();//volta ao menu equipas
+			menuPessoas();//volta ao menu pessoas
 			break;
 		case 3://editar Pessoa
 			listaPessoas();
@@ -265,7 +265,7 @@ void Manutencao::menuPessoas()
 			removePessoa(id);
 			menuPessoas();
 			break;
-		case 5://importar equipas
+		case 5://importar pessoas
 			system("cls");
 			cout<<"   --Importar Pessoas--"<<endl<<endl;
 			cout<<"Nome do ficheiro: ";
@@ -274,7 +274,7 @@ void Manutencao::menuPessoas()
 			system("pause");
 			menuPessoas();
 			break;
-		case 6://exportar equipas
+		case 6://exportar pessoas
 			system("cls");
 			cout<<"   --Exportar Pessoas--"<<endl<<endl;
 			cout<<"Nome do ficheiro para onde vai exportar: ";
@@ -324,14 +324,14 @@ void Manutencao::menuPessoas()
 
 void Manutencao::menuMarcacoes()
 {
-
+	Marcacao *m;
 	int op;
 	vector<string> opcoes;
 	string filename;
 	opcoes.push_back("Escolha uma das seguintes opcoes:");
 	opcoes.push_back("");
 	opcoes.push_back("1 - Nova Marcacao");//opcao 1
-	if(marcacoes.size()!=0)
+	if(marcacoes.size()>0)
 	{
 		opcoes.push_back("2 - Ver detalhes de uma Consulta");//opcao 2
 		opcoes.push_back("3 - Editar uma Marcacao");//opcao 3
@@ -360,8 +360,69 @@ void Manutencao::menuMarcacoes()
 			system("pause");
 			menuMarcacoes();
 			break;
+		case 2://ver detalhes marcacoes
+			listaMarcacoes();
+			cout<<endl<<"Introduza o ID da Marcacao que pretende ver os detalhes: ";
+			int id;
+			id=intinput();
 
+			//falta implementar excecao...
 
+			for(unsigned int i=0; i<marcacoes.size(); i++)
+			{
+				if(id==marcacoes[i]->getId())
+				showMenu("Detalhes da Marcacao", marcacoes[i]->imprime());
+			}
+
+			system("pause");
+			menuMarcacoes();//volta ao menu marcacoes
+			break;
+		case 3://editar Marcacao
+			listaMarcacoes();
+			cout<<endl<<"Introduza o ID da Marcacao que pretende editar: ";
+			id=intinput();
+			for(unsigned int i=0; i<marcacoes.size(); i++)
+				if(id == marcacoes[i]->getId())
+					m = marcacoes[i];
+
+			editMarcacoes(m);
+			menuMarcacoes();
+			break;
+		case 4://apagar marcacao
+			listaMarcacoes();
+			cout<<endl<<"Introduza o ID da Marcacao que pretende apagar: ";
+			id=intinput();
+
+			/*
+				excepcoes de caso nao encontra a Pessoa.
+			 */
+
+			for(unsigned int i=0; i<marcacoes.size(); i++)
+				if(id == marcacoes[i]->getId())
+						m = marcacoes[i];
+			showMenu("Detalhes da Marcacao", m->imprime());
+			system("pause");
+			removeMarcacao(id);
+			menuMarcacoes();
+			break;
+		case 5://importar marcacoes
+			system("cls");
+			cout<<"   --Importar Marcacoes--"<<endl<<endl;
+			cout<<"Nome do ficheiro: ";
+			getline(cin, filename);
+			loadMarcacoes(filename);
+			system("pause");
+			menuMarcacoes();
+			break;
+		case 6://exportar marcacoes
+			system("cls");
+			cout<<"   --Exportar Marcacoes--"<<endl<<endl;
+			cout<<"Nome do ficheiro para onde vai exportar: ";
+			getline(cin, filename);
+			saveMarcacoes(filename);
+			system("pause");
+			menuMarcacoes();
+			break;
 
 		case 0://voltar ao menu anterior
 			break;
@@ -376,22 +437,31 @@ void Manutencao::menuMarcacoes()
 		switch(op)
 		{
 		case 1:
-		cout<<"   --Adicionar Marcacao--"<<endl<<endl;
-		addMarcacao();
-		showMenu("Nova Marcacao", marcacoes.back()->imprime());
-		system("pause");
-		menuMarcacoes();
-		break;
+			cout<<"   --Adicionar Marcacao--"<<endl<<endl;
+			addMarcacao();
+			showMenu("Nova Marcacao", marcacoes.back()->imprime());
+			system("pause");
+			menuMarcacoes();
+			break;
+		case 2://importar Pessoas
+			system("cls");
+			cout<<"   --Importar Marcacoes--"<<endl<<endl;
+			cout<<"Nome do ficheiro: ";
+			getline(cin, filename);
+			loadMarcacoes(filename);
+			cout<<"marcacao size: "<<marcacoes.size()<<endl;
+			system("pause");
+			menuMarcacoes();
+			break;
 
 
-
-	case 0://voltar ao menu anterior
-		break;
-	default:
-		cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
-		system("pause");
-		menuMarcacoes();
-		}
+		case 0://voltar ao menu anterior
+			break;
+		default:
+			cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
+			system("pause");
+			menuMarcacoes();
+			}
 	}
 
 }
@@ -445,8 +515,7 @@ void Manutencao::addPessoa()
 	}
 	else
 	{
-		cout<<"Tipo nao e valido, tenta novamente!\n";
-		cout<<endl;
+		cout<<"Tipo nao e valido, tenta novamente!\n\n";
 		addPessoa();
 	}
 
@@ -461,11 +530,11 @@ void Manutencao::removePessoa(int id){
 			indice = i;
 	int op;
 	vector<string> opcoes;
-	opcoes.push_back("Tem a certeza que quer apagar a equipa?");
+	opcoes.push_back("Tem a certeza que quer apagar a Pessoa?");
 	opcoes.push_back("");
 	opcoes.push_back("1 - Nao");
 	opcoes.push_back("2 - Sim");
-	showMenu("Apagar Equipa", opcoes);
+	showMenu("Apagar Pessoa", opcoes);
 	cout<<"    Opcao: ";
 	op=intinput();
 
@@ -513,13 +582,39 @@ void Manutencao::addMarcacao()
 	}
 	else
 	{
-		cout<<"Tipo nao e valido, tenta novamente!\n";
+		cout<<"Tipo nao e valido, tenta novamente!\n\n";
 		addMarcacao();
 	}
 }
 
-void Manutencao::removeMarcacao(){
+void Manutencao::removeMarcacao(int id)
+{
+	int indice;
+	for(unsigned int i=0; i<marcacoes.size(); i++)
+		if(id == marcacoes[i]->getId())
+			indice = i;
+	int op;
+	vector<string> opcoes;
+	opcoes.push_back("Tem a certeza que quer apagar a Marcacao?");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Nao");
+	opcoes.push_back("2 - Sim");
+	showMenu("Apagar Marcacao", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
 
+	switch(op)
+	{
+	case 1:
+		break;
+	case 2:
+		marcacoes.erase(marcacoes.begin()+indice);
+		break;
+	default:
+		cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
+		system("pause");
+		removeMarcacao(id);
+	}
 }
 
 void Manutencao::listaPessoas()
@@ -564,7 +659,32 @@ void Manutencao::listaPessoas()
 
 void Manutencao::listaMarcacoes()
 {
+	system("cls");
+	cout<<"  --Marcacoes no sistema--"<<endl<<endl;
+	vector<Marcacao *>::iterator it=marcacoes.begin();
 
+	cout<<"\t|ID|\n\n";
+	cout<<"Consulta: "<<endl;
+	while(it!=marcacoes.end())
+	{
+		if((*it)->getTipo() == "Consulta")
+		{
+			cout<<"\t"<<(*it)->toList()<<endl;
+		}
+		it++;
+	}
+	cout<<"\nExame: "<<endl;
+	it=marcacoes.begin();
+	while(it!=marcacoes.end())
+	{
+		if((*it)->getTipo() == "Exame")
+		{
+			cout<<"\t"<<(*it)->toList()<<endl;
+		}
+		it++;
+	}
+
+	cout<<endl;
 }
 
 void Manutencao::editPessoas(Pessoa *p)
@@ -751,6 +871,105 @@ void Manutencao::editPessoas(Pessoa *p)
 	}
 }
 
+void Manutencao::editMarcacoes(Marcacao * m)
+{
+	vector<string> opcoes;
+	string data, hora, tipo, sala;
+	stringstream ss;
+	int op;
+
+	opcoes = m->editMarcacao();
+	for(unsigned int i=0; i<opcoes.size(); i++)
+	{
+		ss<<opcoes[i]<<endl;
+	}
+	opcoes.push_back("");
+	opcoes.push_back("0 - Voltar atras");
+
+	showMenu("Editar Marcacao", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+
+	if(m->getTipo()=="Consulta")
+	{
+		switch(op)
+		{
+		case 1:
+		//	system("cls");
+		//	cout<<"   --Editar Medico--"<<endl<<endl;
+		//	cout<<"Nome de Medico: "<<p->getName()<<endl;
+			cout<<"Novo data de Consulta: ";
+			getline(cin, data);
+			m->setData(data);
+			editMarcacoes(m);
+			break;
+		case 2:
+		//	system("cls");
+		//	cout<<"   --Editar Medico--"<<endl<<endl;
+			cout<<"Novo Hora de Consulta: ";
+			getline(cin, hora);
+			m->setHora(hora);
+			editMarcacoes(m);
+			break;
+		case 3:
+		//	system("cls");
+		//	cout<<"   --Editar Medico--"<<endl<<endl;
+			cout<<"Novo Tipo da Marcacao: ";
+			getline(cin, tipo);
+			m->setTipo(tipo);
+			editMarcacoes(m);
+			break;
+		case 0:
+			break;
+		default:
+			editMarcacoes(m);
+		}
+	}
+	else if(m->getTipo()=="Exame")
+	{
+		switch(op)
+		{
+		case 1:
+			//system("cls");
+			//cout<<"   --Editar Doente--"<<endl<<endl;
+			//cout<<"Nome de Doente: "<<p->getName()<<endl;
+			cout<<"Novo data de Exame: ";
+			getline(cin, data);
+			m->setData(data);
+			editMarcacoes(m);
+			break;
+		case 2:
+			//system("cls");
+			//cout<<"   --Editar Doente--"<<endl<<endl;
+			cout<<"Novo hora de Exame: ";
+			getline(cin, hora);
+			m->setHora(hora);
+			editMarcacoes(m);
+			break;
+		case 3:
+			//system("cls");
+			//cout<<"   --Editar Doente--"<<endl<<endl;
+			cout<<"Novo Tipo da Marcacao: ";
+			getline(cin, tipo);
+			m->setTipo(tipo);
+			editMarcacoes(m);
+			break;
+		case 4:
+			//system("cls");
+			//cout<<"   --Editar Doente--"<<endl<<endl;
+			cout<<"Novo Sala de Exame: ";
+			getline(cin, sala);
+			m->setSala(sala);
+			editMarcacoes(m);
+			break;
+		case 0:
+			break;
+		default:
+			editMarcacoes(m);
+		}
+	}
+}
+
 void Manutencao::loadPessoas(string filename)
 {
 	stringstream s;
@@ -828,7 +1047,7 @@ void Manutencao::savePessoas(string filename)
 			myfile<<(*it)->toString()<<endl;
 
 		myfile.close();
-		cout<<endl<<endl<<"Equipas exportadas com sucesso!"<<endl;
+		cout<<endl<<endl<<"Pessoas exportadas com sucesso!"<<endl;
 	}
 	else
 	{
@@ -836,6 +1055,80 @@ void Manutencao::savePessoas(string filename)
 		system("pause");
 	}
 }
+
+void Manutencao::loadMarcacoes(string filename)
+{
+	stringstream s;
+	unsigned int size;
+	string linha;
+	vector<string> v;
+	ifstream myfile (filename.c_str());
+	if(myfile.is_open())
+	{
+		getline(myfile, linha);
+		s<<linha;
+		s>>size;//primeira linha com numero de pessoas
+
+		/*
+		 * falta implementar a excepcao
+		 */
+
+		if(size>0)
+		{
+			for(unsigned int i=0; i<size; i++)
+			{
+				getline(myfile, linha);
+				v=split('|', linha);
+				if(v[3]=="Consulta")
+				{
+					Consulta *c = new Consulta(v[1].c_str(),v[2].c_str(),v[3].c_str());
+					marcacoes.push_back(c);
+				}
+				else if(v[3]=="Exame")
+				{
+					Exame *e = new Exame(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
+					marcacoes.push_back(e);
+				}
+			}
+			cout<<endl<<endl<<"Marcacoes importadas com sucesso!"<<endl<<endl;
+		}
+		myfile.close();
+	}
+	else
+	{
+		cout<<"Nao foi possivel abrir o ficheiro "<<filename<<"!"<<endl<<endl;
+	}
+}
+
+void Manutencao::saveMarcacoes(string filename)
+{
+	vector<Marcacao *>::iterator it;
+
+	ofstream myfile (filename.c_str());
+	if(myfile.is_open())
+	{
+		myfile<<marcacoes.size()<<endl;
+
+		for(it=marcacoes.begin(); it!=marcacoes.end(); it++)
+			myfile<<(*it)->toString()<<endl;
+
+		myfile.close();
+		cout<<endl<<endl<<"Marcacoes exportadas com sucesso!"<<endl;
+	}
+	else
+	{
+		cout<<"Nao foi possivel abrir o ficheiro!"<<endl<<endl;
+		system("pause");
+	}
+}
+
+
+
+
+
+
+
+
 
 /*string Manutencao::imprime(){
 

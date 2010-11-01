@@ -12,7 +12,6 @@ Pessoa::Pessoa(){}
 
 Pessoa::~Pessoa(){}
 
-
 Pessoa::Pessoa(string nome, string dataNascimento, string tipo){
 
 	this->id = ++count;

@@ -12,8 +12,11 @@ Marcacao::Marcacao(){}
 
 Marcacao::~Marcacao(){}
 
+int Marcacao::count = 0;
+
 Marcacao::Marcacao(string data, string hora, string tipo){
 
+	this->id = ++count;
 	this->data = data;
 	this->hora = hora;
 	this->tipo = tipo;
@@ -58,6 +61,10 @@ string Marcacao::getHora(){
 	return  this->hora;
 }
 
+string Marcacao::getTipo()
+{
+	return this->tipo;
+}
 
 void Marcacao::setHora(string hora){
 
@@ -67,4 +74,43 @@ void Marcacao::setHora(string hora){
 int Marcacao::getId() const
 {
 	return this->id;
+}
+
+string Marcacao::toList()
+{
+	stringstream s;
+	s<<"|";
+	if (id<10)
+		s<<" ";
+	s<<this->id<<"| ";
+
+	return s.str();
+}
+
+void Marcacao::setTipo(string tipo)
+{
+	this->tipo = tipo;
+}
+
+vector<string> Marcacao::editMarcacao()
+{
+	vector<string> opcoes;
+	stringstream ss1,ss2,ss3;
+	opcoes.push_back("Escolha o que editar:");
+	opcoes.push_back("");
+	ss1<<"1 - Editar data: "<<this->data;
+	opcoes.push_back(ss1.str());
+	ss2<<"2 - Editar Hora: "<<this->hora;
+	opcoes.push_back(ss2.str());
+	ss3<<"3 - Editar Tipo: "<<this->tipo;
+	opcoes.push_back(ss3.str());
+
+	return opcoes;
+}
+
+string Marcacao::toString()
+{
+	stringstream ss;
+	ss<<"|"<<this->id<<"|"<<this->data<<"|"<<this->hora<<"|"<<this->tipo<<"|";
+	return ss.str();
 }

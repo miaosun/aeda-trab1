@@ -30,12 +30,15 @@ public:
 	void addPessoa();
 	void removePessoa(int id);
 	void addMarcacao();
-	void removeMarcacao();
+	void removeMarcacao(int id);
 	void listaPessoas();
 	void listaMarcacoes();
 	void editPessoas(Pessoa *p);
+	void editMarcacoes(Marcacao *m);
 	void loadPessoas(string filename);
 	void savePessoas(string filename);
+	void loadMarcacoes(string filename);
+	void saveMarcacoes(string filename);
 	//string imprime();
 
 
