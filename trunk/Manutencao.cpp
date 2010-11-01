@@ -81,7 +81,7 @@ void Manutencao::loadPessoas(string filename)
 						Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
 						pessoas.push_back(d);
 					}
-					else if(v[3]=="Doente")
+					else if(v[3]=="Funcionario")
 					{
 						double venc = atof(v[5].c_str());
 						Funcionario *f = new Funcionario(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(), venc);
