@@ -512,8 +512,6 @@ void Manutencao::addPessoa()
 {
 	string nome, dataNas, tipo, esp, hor, mor, car;
 	double venc;
-	//clear();
-	//cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 
 	cout<<"Tipo da Pessoa(Medico, Doente ou Funcionario): ";
 	getline(cin, tipo);
