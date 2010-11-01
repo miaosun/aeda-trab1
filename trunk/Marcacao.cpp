@@ -8,19 +8,9 @@
 #include "Marcacao.h"
 
 
-Marcacao::Marcacao(){
+Marcacao::Marcacao(){}
 
-}
-
-
-
-Marcacao::~Marcacao(){
-
-}
-
-
-
-
+Marcacao::~Marcacao(){}
 
 Marcacao::Marcacao(string data, string hora, string tipo){
 

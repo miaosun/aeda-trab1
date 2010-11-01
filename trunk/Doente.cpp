@@ -8,15 +8,9 @@
 #include "Doente.h"
 
 
-Doente::Doente(){
+Doente::Doente(){}
 
-}
-
-
-
-Doente::~Doente(){
-
-}
+Doente::~Doente(){}
 
 
 Doente::Doente(string nome, string dataNascimento, string tipo, string morada):Pessoa(nome, dataNascimento, tipo)

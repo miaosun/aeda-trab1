@@ -8,16 +8,9 @@
 #include "Funcionario.h"
 
 
-Funcionario::Funcionario(){
+Funcionario::Funcionario(){}
 
-}
-
-
-
-Funcionario::~Funcionario(){
-
-}
-
+Funcionario::~Funcionario(){}
 
 Funcionario::Funcionario(string nome, string dataNascimento, string tipo, string cargo, double vencimento):Pessoa(nome, dataNascimento, tipo)
 {

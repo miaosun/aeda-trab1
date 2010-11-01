@@ -7,16 +7,9 @@
 #include "Medico.h"
 
 
-Medico::Medico(){
+Medico::Medico(){}
 
-}
-
-
-
-Medico::~Medico(){
-
-}
-
+Medico::~Medico(){}
 
 Medico::Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento):Pessoa(nome, dataNascimento, tipo)
 {
