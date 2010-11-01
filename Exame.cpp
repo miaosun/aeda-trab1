@@ -16,18 +16,22 @@ Exame::Exame(string data, string hora, string tipo, string sala):Marcacao(data, 
 	this->sala = sala;
 }
 
-
 string Exame::getSala(){
 
 	return this->sala;
 }
-
 
 void Exame::setSala(string sala){
 
 	this->sala = sala;
 }
 
+string Exame::toString()
+{
+	stringstream ss;
+	ss<<Marcacao::toString()<<this->sala<<"|";
+	return ss.str();
+}
 
 vector<string> Exame::imprime(){
 
@@ -54,9 +58,3 @@ vector<string> Exame::editMarcacao()
 	return opcoes;
 }
 
-string Exame::toString()
-{
-	stringstream ss;
-	ss<<Marcacao::toString()<<this->sala<<"|";
-	return ss.str();
-}

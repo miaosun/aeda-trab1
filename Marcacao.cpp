@@ -22,43 +22,23 @@ Marcacao::Marcacao(string data, string hora, string tipo){
 	this->tipo = tipo;
 }
 
-
-vector<string> Marcacao::imprime(){
-
-	/*stringstream ss;
-	ss<<"Data: "<<data<<"\nHora: "<<hora<<endl;
-	return ss.str();*/
-
-	vector<string> v;
-	stringstream s1,s2,s3;
-
-	s1<<this->tipo<<":";
-	v.push_back(s1.str());
-
-	s2<<"   Data: "<<this->data;
-	v.push_back(s2.str());
-
-	s3<<"   Hora: "<<this->hora;
-	v.push_back(s3.str());
-
-	return v;
-}
-
-
 string Marcacao::getData(){
 
 	return  this->data;
 }
 
-
 void Marcacao::setData(string data){
 	this->data = data;
 }
 
-
 string Marcacao::getHora(){
 
 	return  this->hora;
+}
+
+void Marcacao::setHora(string hora){
+
+	this->hora = hora;
 }
 
 string Marcacao::getTipo()
@@ -66,9 +46,9 @@ string Marcacao::getTipo()
 	return this->tipo;
 }
 
-void Marcacao::setHora(string hora){
-
-	this->hora = hora;
+void Marcacao::setTipo(string tipo)
+{
+	this->tipo = tipo;
 }
 
 int Marcacao::getId() const
@@ -87,9 +67,28 @@ string Marcacao::toList()
 	return s.str();
 }
 
-void Marcacao::setTipo(string tipo)
+string Marcacao::toString()
 {
-	this->tipo = tipo;
+	stringstream ss;
+	ss<<"|"<<this->id<<"|"<<this->data<<"|"<<this->hora<<"|"<<this->tipo<<"|";
+	return ss.str();
+}
+
+vector<string> Marcacao::imprime()
+{
+	vector<string> v;
+	stringstream s1,s2,s3;
+
+	s1<<this->tipo<<":";
+	v.push_back(s1.str());
+
+	s2<<"   Data: "<<this->data;
+	v.push_back(s2.str());
+
+	s3<<"   Hora: "<<this->hora;
+	v.push_back(s3.str());
+
+	return v;
 }
 
 vector<string> Marcacao::editMarcacao()
@@ -108,9 +107,3 @@ vector<string> Marcacao::editMarcacao()
 	return opcoes;
 }
 
-string Marcacao::toString()
-{
-	stringstream ss;
-	ss<<"|"<<this->id<<"|"<<this->data<<"|"<<this->hora<<"|"<<this->tipo<<"|";
-	return ss.str();
-}
