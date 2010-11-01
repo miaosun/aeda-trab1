@@ -17,14 +17,13 @@ Consulta::Consulta(string data, string hora, string tipo):Marcacao(data, hora, t
 
 }
 
+string Consulta::toString()
+{
+	return Marcacao::toString();
+}
 
-vector<string> Consulta::imprime(){
-/*
-	stringstream ss;
-	ss<<"Consulta:\n";
-	ss<<"\\t"<<Marcacao::imprime();
-	return ss.str();*/
-
+vector<string> Consulta::imprime()
+{
 	vector<string> v;
 
 	v=Marcacao::imprime();
@@ -37,12 +36,7 @@ vector<string> Consulta::editMarcacao()
 	return Marcacao::editMarcacao();
 }
 
-string Consulta::toString()
-{
-	return Marcacao::toString();
-}
-
-
 
 //////////////////////////
+//
 void Consulta::setSala(string sala){}

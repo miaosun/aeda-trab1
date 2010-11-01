@@ -18,10 +18,13 @@ public:
 	virtual ~Consulta();
 
 	Consulta(string data, string hora, string tipo);
+	string toString();
 	vector<string> imprime();
 	vector<string> editMarcacao();
+
+	/////////////////////////////
+	//
 	void setSala(string sala);
-	string toString();
 
 };
 #endif // !defined(EA_58523BA4_83E1_4418_9232_D55F12BD24FC__INCLUDED_)

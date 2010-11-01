@@ -25,18 +25,22 @@ public:
 	Medico *m_Medico;
 
 	Marcacao(string data, string hora, string tipo);
-	virtual vector<string> imprime();
 	string getData();
 	void setData(string data);
 	string getHora();
 	void setHora(string hora);
-	int getId() const;
-	string toList();
 	string getTipo();
 	void setTipo(string tipo);
-	virtual vector<string> editMarcacao();
-	virtual void setSala(string sala) = 0;
+	int getId() const;
+	string toList();
 	virtual string toString();
+	virtual vector<string> imprime();
+	virtual vector<string> editMarcacao();
+
+	///////////////////////////////////////
+	//
+	virtual void setSala(string sala) = 0;
+
 
 private:
 	string data;
