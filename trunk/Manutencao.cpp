@@ -34,104 +34,6 @@ Manutencao::Manutencao(){
 }
 
 
-void Manutencao::removeMarcacao(){
-
-}
-
-
-string Manutencao::imprime(){
-
-	return  NULL;
-}
-
-
-void Manutencao::loadPessoas(string filename)
-{
-	stringstream s;
-	unsigned int size;
-	string linha;
-	vector<string> v;
-	ifstream myfile (filename.c_str());
-	if(myfile.is_open())
-	{
-		getline(myfile, linha);
-		s<<linha;
-		s>>size;//primeira linha com numero de pessoas
-
-		/*
-		 * falta implementar a excepcao
-		 */
-
-		if(size>0)
-		{
-			for(unsigned int i=0; i<size; i++)
-			{
-				getline(myfile, linha);
-				v=split('|', linha);
-				if(v[3]=="Medico")
-				{
-					double venc = atof(v[6].c_str());
-					Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
-					pessoas.push_back(m);
-				}
-				else if(v[3]=="Doente")
-				{
-					Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
-					pessoas.push_back(d);
-				}
-				else if(v[3]=="Funcionario")
-				{
-					double venc = atof(v[5].c_str());
-					Funcionario *f = new Funcionario(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(), venc);
-					pessoas.push_back(f);
-				}
-			}
-			cout<<endl<<endl<<"Pessoas importadas com sucesso!"<<endl<<endl;
-		}
-		myfile.close();
-	}
-	else
-	{
-		cout<<"Nao foi possivel abrir o ficheiro "<<filename<<"!"<<endl<<endl;
-	}
-
-}
-
-
-void Manutencao::savePessoas(string filename)
-{
-	vector<Pessoa *>::iterator it;
-
-	ofstream myfile (filename.c_str());
-	if(myfile.is_open())
-	{
-		myfile<<pessoas.size()<<endl;
-		/*myfile<<"Medico:\n";
-		for(it=pessoas.begin(); it!=pessoas.end(); it++)
-			if((*it)->getTipo()=="Medico")
-				myfile<<(*it)->toString()<<endl;
-		myfile<<"\nDoente:\n";
-		for(it=pessoas.begin(); it!=pessoas.end(); it++)
-			if((*it)->getTipo()=="Doente")
-				myfile<<(*it)->toString()<<endl;
-		myfile<<"\nFuncionario:\n";
-		for(it=pessoas.begin(); it!=pessoas.end(); it++)
-			if((*it)->getTipo()=="Funcionario")
-				myfile<<(*it)->toString()<<endl;*/
-
-		for(it=pessoas.begin(); it!=pessoas.end(); it++)
-			myfile<<(*it)->toString()<<endl;
-
-		myfile.close();
-		cout<<endl<<endl<<"Equipas exportadas com sucesso!"<<endl;
-	}
-	else
-	{
-		cout<<"Nao foi possivel abrir o ficheiro!"<<endl<<endl;
-		system("pause");
-	}
-}
-
 void Manutencao::welcome()
 {
 	stringstream o;
@@ -433,7 +335,6 @@ void Manutencao::menuPessoas()
 	}
 }
 
-
 void Manutencao::menuMarcacoes()
 {
 
@@ -565,6 +466,36 @@ void Manutencao::addPessoa()
 	cout<<endl;
 }
 
+void Manutencao::removePessoa(int id){
+
+	int indice;
+	for(unsigned int i=0; i<pessoas.size(); i++)
+		if(id == pessoas[i]->getId())
+			indice = i;
+	int op;
+	vector<string> opcoes;
+	opcoes.push_back("Tem a certeza que quer apagar a equipa?");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Nao");
+	opcoes.push_back("2 - Sim");
+	showMenu("Apagar Equipa", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+
+	switch(op)
+	{
+	case 1:
+		break;
+	case 2:
+		pessoas.erase(pessoas.begin()+indice);
+		break;
+	default:
+		cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
+		system("pause");
+		removePessoa(id);
+	}
+}
+
 void Manutencao::addMarcacao()
 {
 
@@ -598,6 +529,10 @@ void Manutencao::addMarcacao()
 		cout<<"Tipo nao e valido, tenta novamente!\n";
 		addMarcacao();
 	}
+}
+
+void Manutencao::removeMarcacao(){
+
 }
 
 void Manutencao::listaPessoas()
@@ -638,6 +573,11 @@ void Manutencao::listaPessoas()
 	}
 
 	cout<<endl;
+}
+
+void Manutencao::listaMarcacoes()
+{
+
 }
 
 void Manutencao::editPessoas(Pessoa *p)
@@ -824,32 +764,93 @@ void Manutencao::editPessoas(Pessoa *p)
 	}
 }
 
-void Manutencao::removePessoa(int id){
-
-	int indice;
-	for(unsigned int i=0; i<pessoas.size(); i++)
-		if(id == pessoas[i]->getId())
-			indice = i;
-	int op;
-	vector<string> opcoes;
-	opcoes.push_back("Tem a certeza que quer apagar a equipa?");
-	opcoes.push_back("");
-	opcoes.push_back("1 - Nao");
-	opcoes.push_back("2 - Sim");
-	showMenu("Apagar Equipa", opcoes);
-	cout<<"    Opcao: ";
-	op=intinput();
-
-	switch(op)
+void Manutencao::loadPessoas(string filename)
+{
+	stringstream s;
+	unsigned int size;
+	string linha;
+	vector<string> v;
+	ifstream myfile (filename.c_str());
+	if(myfile.is_open())
 	{
-	case 1:
-		break;
-	case 2:
-		pessoas.erase(pessoas.begin()+indice);
-		break;
-	default:
-		cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
+		getline(myfile, linha);
+		s<<linha;
+		s>>size;//primeira linha com numero de pessoas
+
+		/*
+		 * falta implementar a excepcao
+		 */
+
+		if(size>0)
+		{
+			for(unsigned int i=0; i<size; i++)
+			{
+				getline(myfile, linha);
+				v=split('|', linha);
+				if(v[3]=="Medico")
+				{
+					double venc = atof(v[6].c_str());
+					Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
+					pessoas.push_back(m);
+				}
+				else if(v[3]=="Doente")
+				{
+					Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
+					pessoas.push_back(d);
+				}
+				else if(v[3]=="Funcionario")
+				{
+					double venc = atof(v[5].c_str());
+					Funcionario *f = new Funcionario(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(), venc);
+					pessoas.push_back(f);
+				}
+			}
+			cout<<endl<<endl<<"Pessoas importadas com sucesso!"<<endl<<endl;
+		}
+		myfile.close();
+	}
+	else
+	{
+		cout<<"Nao foi possivel abrir o ficheiro "<<filename<<"!"<<endl<<endl;
+	}
+
+}
+
+void Manutencao::savePessoas(string filename)
+{
+	vector<Pessoa *>::iterator it;
+
+	ofstream myfile (filename.c_str());
+	if(myfile.is_open())
+	{
+		myfile<<pessoas.size()<<endl;
+		/*myfile<<"Medico:\n";
+		for(it=pessoas.begin(); it!=pessoas.end(); it++)
+			if((*it)->getTipo()=="Medico")
+				myfile<<(*it)->toString()<<endl;
+		myfile<<"\nDoente:\n";
+		for(it=pessoas.begin(); it!=pessoas.end(); it++)
+			if((*it)->getTipo()=="Doente")
+				myfile<<(*it)->toString()<<endl;
+		myfile<<"\nFuncionario:\n";
+		for(it=pessoas.begin(); it!=pessoas.end(); it++)
+			if((*it)->getTipo()=="Funcionario")
+				myfile<<(*it)->toString()<<endl;*/
+
+		for(it=pessoas.begin(); it!=pessoas.end(); it++)
+			myfile<<(*it)->toString()<<endl;
+
+		myfile.close();
+		cout<<endl<<endl<<"Equipas exportadas com sucesso!"<<endl;
+	}
+	else
+	{
+		cout<<"Nao foi possivel abrir o ficheiro!"<<endl<<endl;
 		system("pause");
-		removePessoa(id);
 	}
 }
+
+/*string Manutencao::imprime(){
+
+	return  NULL;
+}*/

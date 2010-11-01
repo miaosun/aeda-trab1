@@ -22,21 +22,21 @@ public:
 	Marcacao *m_Marcacao;
 
 	Manutencao();
-	void removePessoa(int id);
-	void addPessoa();
-	void addMarcacao();
-	void removeMarcacao();
-	string imprime();
-	void loadPessoas(string filename);
-	void savePessoas(string filename);
 	void welcome();
 	void showMenu(string titulo, vector<string> opcoes);
 	void menuPrincipal();
 	void menuPessoas();
 	void menuMarcacoes();
+	void addPessoa();
+	void removePessoa(int id);
+	void addMarcacao();
+	void removeMarcacao();
 	void listaPessoas();
 	void listaMarcacoes();
 	void editPessoas(Pessoa *p);
+	void loadPessoas(string filename);
+	void savePessoas(string filename);
+	//string imprime();
 
 
 private:

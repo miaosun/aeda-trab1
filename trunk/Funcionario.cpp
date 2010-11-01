@@ -19,15 +19,31 @@ Funcionario::~Funcionario(){
 }
 
 
-
-
-
 Funcionario::Funcionario(string nome, string dataNascimento, string tipo, string cargo, double vencimento):Pessoa(nome, dataNascimento, tipo)
 {
 	this->cargo = cargo;
 	this->vencimento = vencimento;
 }
 
+string Funcionario::getCargo(){
+
+	return this->cargo;
+}
+
+void Funcionario::setCargo(string cargo)
+{
+	this->cargo = cargo;
+}
+
+double Funcionario::getVencimento(){
+
+	return this->vencimento;
+}
+
+void Funcionario::setVencimento(double vencimento)
+{
+	this->vencimento = vencimento;
+}
 
 vector<string> Funcionario::imprime(){
 
@@ -41,18 +57,6 @@ vector<string> Funcionario::imprime(){
 	s2<<"   Vencimento: "<<this->vencimento;
 	v.push_back(s2.str());
 	return v;
-}
-
-
-string Funcionario::getCargo(){
-
-	return this->cargo;
-}
-
-
-double Funcionario::getVencimento(){
-
-	return this->vencimento;
 }
 
 vector<string> Funcionario::editPessoa()
@@ -69,22 +73,13 @@ vector<string> Funcionario::editPessoa()
 	return opcoes;
 }
 
-void Funcionario::setCargo(string cargo)
-{
-	this->cargo = cargo;
-}
-
-void Funcionario::setVencimento(double vencimento)
-{
-	this->vencimento = vencimento;
-}
-
 string Funcionario::toString()
 {
 	stringstream ss;
 	ss<<Pessoa::toString()<<this->cargo<<"|"<<this->vencimento<<"|";
 	return ss.str();
 }
+
 
 //funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Funcionario::setEspecialidade(string especialidade){}

@@ -21,13 +21,13 @@ public:
 	Doente *m_Doente;
 
 	Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento);
-	vector<string> imprime();
 	string getEspecialidade();
 	void setEspecialidade(string especialidade);
 	string getHorario();
 	void setHorario(string horario);
 	double getVencimento();
 	void setVencimento(double vencimento);
+	vector<string> imprime();
 	vector<string> editPessoa();
 	string toString();
 
