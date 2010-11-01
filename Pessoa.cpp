@@ -19,7 +19,6 @@ Pessoa::~Pessoa(){
 }
 
 
-
 Pessoa::Pessoa(string nome, string dataNascimento, string tipo){
 
 	this->id = ++count;
@@ -27,7 +26,6 @@ Pessoa::Pessoa(string nome, string dataNascimento, string tipo){
 	this->dataNascimento = dataNascimento;
 	this->tipo = tipo;
 }
-
 
 string Pessoa::getName(){
 
@@ -47,6 +45,15 @@ string Pessoa::getDataNascimento(){
 void Pessoa::setDataNascimento(string dataNascimento)
 {
 	this->dataNascimento = dataNascimento;
+}
+
+string Pessoa::getTipo(){
+
+	return  this->tipo;
+}
+
+void Pessoa::setTipo(string tipo){
+	this->tipo = tipo;
 }
 
 int Pessoa::getId()
@@ -81,15 +88,6 @@ string Pessoa::toString()
 	return ss.str();
 }
 
-string Pessoa::getTipo(){
-
-	return  this->tipo;
-}
-
-
-void Pessoa::setTipo(string tipo){
-	this->tipo = tipo;
-}
 
 string Pessoa::toList()
 {

@@ -19,12 +19,20 @@ Doente::~Doente(){
 }
 
 
-
 Doente::Doente(string nome, string dataNascimento, string tipo, string morada):Pessoa(nome, dataNascimento, tipo)
 {
 	this->morada = morada;
 }
 
+string Doente::getMorada(){
+
+	return this->morada;
+}
+
+void Doente::setMorada(string morada)
+{
+	this->morada = morada;
+}
 
 vector<string> Doente::imprime(){
 
@@ -38,12 +46,6 @@ vector<string> Doente::imprime(){
 	return v;
 }
 
-
-string Doente::getMorada(){
-
-	return this->morada;
-}
-
 vector<string> Doente::editPessoa()
 {
 	vector<string> opcoes;
@@ -54,11 +56,6 @@ vector<string> Doente::editPessoa()
 	opcoes.push_back(ss.str());
 
 	return opcoes;
-}
-
-void Doente::setMorada(string morada)
-{
-	this->morada = morada;
 }
 
 string Doente::toString()

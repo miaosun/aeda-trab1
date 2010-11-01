@@ -22,15 +22,15 @@ public:
 	Pessoa(string nome, string dataNascimento, string tipo);
 	string getName();
 	void setName(string nome);
-	string getTipo();
-	void setTipo(string tipo);
 	string getDataNascimento();
 	void setDataNascimento(string dataNascimento);
+	string getTipo();
+	void setTipo(string tipo);
 	int getId();
-	virtual vector<string> imprime();
-	virtual string toString();
-	string toList();
-	virtual vector<string> editPessoa();
+	virtual vector<string> imprime();//serve para a mostragem dos dados da Pessoa, utilizado no menuPessoas
+	virtual string toString();//serve para exportacao para ficheiro
+	string toList();//serve para a listagem das Pessoas
+	virtual vector<string> editPessoa();//serve para a funcao editPessoas na classe Manutencao
 
 	//funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 	virtual void setEspecialidade(string especialidade) = 0;

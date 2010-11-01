@@ -18,9 +18,9 @@ public:
 	virtual ~Doente();
 
 	Doente(string nome, string dataNascimento, string tipo, string morada);
-	vector<string> imprime();
 	string getMorada();
 	void setMorada(string morada);
+	vector<string> imprime();
 	vector<string> editPessoa();
 	string toString();
 
