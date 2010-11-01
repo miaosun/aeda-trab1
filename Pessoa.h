@@ -22,13 +22,13 @@ public:
 	Pessoa(string nome, string dataNascimento, string tipo);
 	string getName();
 	void setName(string nome);
+	string getTipo();
+	void setTipo(string tipo);
 	string getDataNascimento();
 	void setDataNascimento(string dataNascimento);
 	int getId();
 	virtual vector<string> imprime();
 	virtual string toString();
-	string getTipo();
-	void setTipo(string tipo);
 	string toList();
 	virtual vector<string> editPessoa();
 
