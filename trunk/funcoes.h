@@ -77,4 +77,13 @@ int intinput()
 }
 
 
+void inserirTipo()
+{
+	string tipo;
+	getline(cin, tipo);
+	if(tipo!="Medico"&&tipo!="Doente"&&tipo!="Funcionario")
+		throw tipoInvalido(tipo);
+}
+
+
 #endif /* FUNCOES_H_ */

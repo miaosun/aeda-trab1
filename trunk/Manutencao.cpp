@@ -16,23 +16,10 @@
 #include <fstream>
 using namespace std;
 
-Manutencao::~Manutencao(){
 
-}
+Manutencao::Manutencao(){}
 
-void inserirTipo()
-{
-	string tipo;
-	getline(cin, tipo);
-	if(tipo!="Medico"&&tipo!="Doente"&&tipo!="Funcionario")
-		throw tipoInvalido(tipo);
-}
-
-
-Manutencao::Manutencao(){
-
-}
-
+Manutencao::~Manutencao(){}
 
 void Manutencao::welcome()
 {
