@@ -77,7 +77,7 @@ vector<string> Pessoa::imprime()
 string Pessoa::toString()
 {
 	stringstream ss;
-	ss<<this->id<<"|"<<this->nome<<"|"<<this->dataNascimento<<"|"<<this->tipo<<"|";
+	ss<<"|"<<this->id<<"|"<<this->nome<<"|"<<this->dataNascimento<<"|"<<this->tipo<<"|";
 	return ss.str();
 }
 
