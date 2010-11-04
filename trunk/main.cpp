@@ -10,7 +10,6 @@
 int main()
 {
 	Manutencao m;
-	m.welcome();
-	m.menuPrincipal();
+	m.startManutencao();
 	return 0;
 }
