@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 #include "Manutencao.h"
-#include "Excecoes.h"
+#include "Excepcoes.h"
 #include "funcoes.h"
 #include <iostream>
 #include <stdlib.h>
@@ -170,8 +170,8 @@ void Manutencao::menuPrincipal()
         menuMarcacoes(); //vai para menu estadios
         menuPrincipal(); //volta ao menu principal
         break;
-    case 0://vai para funcao de fim para fechar programa
-       // fim();
+    case 0:
+    	saveManutencao();
         break;
     default:
         cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
@@ -218,7 +218,7 @@ void Manutencao::menuPessoas()
 			addPessoa();
 			showMenu("Nova Pessoa", pessoas.back()->imprime());
 			system("pause");
-			menuPessoas();
+			//menuPessoas();
 			break;
 		case 2://ver detalhes Pessoas
 			listaPessoas();
@@ -283,8 +283,8 @@ void Manutencao::menuPessoas()
 			system("pause");
 			menuPessoas();
 			break;
-		case 0://voltar ao menu anterior
-			//saveEqs("equipas.dll", equipas);
+		case 0:
+			menuPrincipal();
 			break;
 		default:
 			cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
@@ -366,7 +366,9 @@ void Manutencao::menuMarcacoes()
 			int id;
 			id=intinput();
 
-			//falta implementar excecao...
+			//falta implementar excecao.../
+			/////////////
+			///////////////////////
 
 			for(unsigned int i=0; i<marcacoes.size(); i++)
 			{
@@ -470,54 +472,53 @@ void Manutencao::addPessoa()
 {
 	string nome, dataNas, tipo, esp, hor, mor, car;
 	double venc;
-	cout<<"Tipo da Pessoa(Medico, Doente ou Funcionario) (0 para voltar):\n";
-	getline(cin, tipo);
-	if(tipo=="0")	//quando sair daqui, no menuPessoas 0 voltar termina sempre o programa,
-		menuPessoas();  //se sem isto funcina bem, nao sei porque
-	else if(tipo=="Medico")
+	do
 	{
-		cout<<"Nome da Pessoa: ";
-		getline(cin, nome);
-		cout<<"Data de Nascimento: ";
-		getline(cin, dataNas);
-		cout<<"Especialidade: ";
-		getline(cin, esp);
-		cout<<"Horario: ";
-		getline(cin, hor);
-		cout<<"Vencimento: ";
-		cin>>venc;
-		Medico * m = new Medico(nome, dataNas, tipo, esp, hor, venc);
-		pessoas.push_back(m);
-	}
-	else if (tipo=="Doente")
-	{
-		cout<<"Nome da Pessoa: ";
-		getline(cin, nome);
-		cout<<"Data de Nascimento: ";
-		getline(cin, dataNas);
-		cout<<"Morada: ";
-		getline(cin, mor);
-		Doente * d = new Doente(nome, dataNas, tipo, mor);
-		pessoas.push_back(d);
-	}
-	else if (tipo=="Funcionario")
-	{
-		cout<<"Nome da Pessoa: ";
-		getline(cin, nome);
-		cout<<"Data de Nascimento: ";
-		getline(cin, dataNas);
-		cout<<"Cargo: ";
-		getline(cin, car);
-		cout<<"Vencimento: ";
-		cin>>venc;
-		Funcionario * f = new Funcionario(nome, dataNas, tipo, car, venc);
-		pessoas.push_back(f);
-	}
-	else
-	{
-		cout<<"Tipo nao e valido, tenta novamente!\n\n";
-		addPessoa();
-	}
+		cout<<"Tipo da Pessoa(Medico, Doente ou Funcionario) (0 para voltar):\n";
+		getline(cin, tipo);
+//		if(tipo=="0")	//quando sair daqui, no menuPessoas 0 voltar termina sempre o programa,
+//			;  //se sem isto funcina bem, nao sei porque
+		if(tipo=="Medico")
+		{
+			cout<<"Nome da Pessoa: ";
+			getline(cin, nome);
+			cout<<"Data de Nascimento: ";
+			getline(cin, dataNas);
+			cout<<"Especialidade: ";
+			getline(cin, esp);
+			cout<<"Horario: ";
+			getline(cin, hor);
+			cout<<"Vencimento: ";
+			cin>>venc;
+			Medico * m = new Medico(nome, dataNas, tipo, esp, hor, venc);
+			pessoas.push_back(m);
+		}
+		else if (tipo=="Doente")
+		{
+			cout<<"Nome da Pessoa: ";
+			getline(cin, nome);
+			cout<<"Data de Nascimento: ";
+			getline(cin, dataNas);
+			cout<<"Morada: ";
+			getline(cin, mor);
+			Doente * d = new Doente(nome, dataNas, tipo, mor);
+			pessoas.push_back(d);
+		}
+		else if (tipo=="Funcionario")
+		{
+			cout<<"Nome da Pessoa: ";
+			getline(cin, nome);
+			cout<<"Data de Nascimento: ";
+			getline(cin, dataNas);
+			cout<<"Cargo: ";
+			getline(cin, car);
+			cout<<"Vencimento: ";
+			cin>>venc;
+			Funcionario * f = new Funcionario(nome, dataNas, tipo, car, venc);
+			pessoas.push_back(f);
+		}
+	}while(tipo!="Medico"&&tipo!="Doente"&&tipo!="Funcionario");
+
 
 	cout<<endl;
 }
@@ -1122,9 +1123,19 @@ void Manutencao::saveMarcacoes(string filename)
 	}
 }
 
+void Manutencao::saveManutencao()
+{
+	savePessoas("pessoas.dll");
+	saveMarcacoes("marcacoes.dll");
+}
 
-
-
+void Manutencao::startManutencao()
+{
+	loadPessoas("pessoas.dll");
+	loadMarcacoes("marcacoes.dll");
+	welcome();
+	menuPrincipal();
+}
 
 
 

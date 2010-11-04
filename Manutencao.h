@@ -39,6 +39,8 @@ public:
 	void savePessoas(string filename);
 	void loadMarcacoes(string filename);
 	void saveMarcacoes(string filename);
+	void saveManutencao();
+	void startManutencao();
 	//string imprime();
 
 
