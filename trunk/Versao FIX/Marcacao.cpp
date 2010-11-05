@@ -14,12 +14,34 @@ Marcacao::~Marcacao(){}
 
 int Marcacao::count = 0;
 
-Marcacao::Marcacao(string data, string hora, string tipo){
+Marcacao::Marcacao(string data, string hora, string tipo, Pessoa * medico, Pessoa * Doente){
 
 	this->id = ++count;
 	this->data = data;
 	this->hora = hora;
 	this->tipo = tipo;
+	this->medico=medico;
+	this->doente=doente;
+}
+
+Pessoa * Marcacao::getMedico()
+{
+	return this->medico;
+}
+
+Pessoa * Marcacao::getDoente()
+{
+	return this->doente;
+}
+
+void Marcacao::setMedico(Pessoa * medico)
+{
+	this->medico=medico;
+}
+
+void Marcacao::setDoente(Pessoa * doente)
+{
+	this->doente=doente;
 }
 
 string Marcacao::getData(){
@@ -77,7 +99,7 @@ string Marcacao::toString()
 vector<string> Marcacao::imprime()
 {
 	vector<string> v;
-	stringstream s1,s2,s3;
+	stringstream s1,s2,s3, s4, s5;
 
 	s1<<this->tipo<<":";
 	v.push_back(s1.str());
@@ -88,21 +110,29 @@ vector<string> Marcacao::imprime()
 	s3<<"   Hora: "<<this->hora;
 	v.push_back(s3.str());
 
+	s4<<"   Medico: "<<this->medico->getName();
+	v.push_back(s4.str());
+
+	s5<<"   Doente: "<<this->doente->getName();
+	v.push_back(s5.str());
+
 	return v;
 }
 
 vector<string> Marcacao::editMarcacao()
 {
 	vector<string> opcoes;
-	stringstream ss1,ss2,ss3;
+	stringstream ss1,ss2,ss3, ss4;
 	opcoes.push_back("Escolha o que editar:");
 	opcoes.push_back("");
 	ss1<<"1 - Editar data: "<<this->data;
 	opcoes.push_back(ss1.str());
 	ss2<<"2 - Editar Hora: "<<this->hora;
 	opcoes.push_back(ss2.str());
-	//ss3<<"3 - Editar Tipo: "<<this->tipo;
-	//opcoes.push_back(ss3.str());
+	ss3<<"3 - Mudar Medico: "<<this->medico->getName();
+	opcoes.push_back(ss3.str());
+	ss4<<"4 - Mudar Doente: "<<this->doente->getName();
+	opcoes.push_back(ss4.str());
 
 	return opcoes;
 }

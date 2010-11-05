@@ -33,9 +33,12 @@ public:
 	double getVencimento();
 	string getEspecialidade();
 	string getHorario();
+	void addMedico(Pessoa * medico);
+	vector<Pessoa *> * getMedicos();
 
 private:
 	string morada;
+	vector<Pessoa *> medicos;
 
 };
 #endif // !defined(EA_6B04B8B3_574E_437d_9E32_00DB174900BC__INCLUDED_)

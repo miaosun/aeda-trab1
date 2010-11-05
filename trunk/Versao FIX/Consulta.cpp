@@ -12,7 +12,7 @@ Consulta::Consulta(){}
 
 Consulta::~Consulta(){}
 
-Consulta::Consulta(string data, string hora, string tipo):Marcacao(data, hora, tipo)
+Consulta::Consulta(string data, string hora, string tipo, Pessoa * medico, Pessoa * doente):Marcacao(data, hora, tipo, medico, doente)
 {
 
 }

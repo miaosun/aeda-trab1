@@ -8,6 +8,7 @@
 #if !defined(EA_6D34D39A_7937_43d1_9953_2455A3DEDC2B__INCLUDED_)
 #define EA_6D34D39A_7937_43d1_9953_2455A3DEDC2B__INCLUDED_
 
+#include "Pessoa.h"
 #include "Doente.h"
 #include "Medico.h"
 
@@ -21,10 +22,8 @@ class Marcacao
 public:
 	Marcacao();
 	virtual ~Marcacao();
-	Doente *m_Doente;
-	Medico *m_Medico;
 
-	Marcacao(string data, string hora, string tipo);
+	Marcacao(string data, string hora, string tipo, Pessoa * medico, Pessoa * Doente);
 	string getData();
 	void setData(string data);
 	string getHora();
@@ -36,6 +35,10 @@ public:
 	virtual string toString();
 	virtual vector<string> imprime();
 	virtual vector<string> editMarcacao();
+	Pessoa * getMedico();
+	Pessoa * getDoente();
+	void setMedico(Pessoa * medico);
+	void setDoente(Pessoa * doente);
 
 	///////////////////////////////////////
 	//
@@ -48,6 +51,8 @@ private:
 	int id;
 	string tipo;
 	static int count;
+	Pessoa * medico;
+	Pessoa * doente;
 
 };
 #endif // !defined(EA_6D34D39A_7937_43d1_9953_2455A3DEDC2B__INCLUDED_)

@@ -17,7 +17,7 @@ public:
 	Exame();
 	virtual ~Exame();
 
-	Exame(string data, string hora, string tipo, string sala);
+	Exame(string data, string hora, string tipo, string sala, Pessoa * medico, Pessoa * doente);
 	string getSala();
 	void setSala(string sala);
 	string toString();
