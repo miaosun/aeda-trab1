@@ -899,7 +899,7 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 			editPessoas(p);
 			break;
 		case 6:
-			m = new Medico(p->getName(), p->getDataNascimento(), p->getTipo(), p->getEspecialidade(), p->getHorario(), p->getVencimento());
+			m = new Medico(p->getId(), p->getName(), p->getDataNascimento(), p->getTipo(), p->getEspecialidade(), p->getHorario(), p->getVencimento());
 			system("pause");
 			associarFuncionario(m);
 			editPessoas(m);
@@ -1139,15 +1139,18 @@ void Manutencao::loadPessoas(string filename)
 				{
 					double venc = atof(v[6].c_str());
 					Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
-			/*		p=find(&pessoas,atoi(v[6].c_str()));
-					if(p==NULL){system("pause");
-					m->setFuncionario(0);cout<<"teste";}
+
+					if(atoi(v[7].c_str())==0)
+						m->setFuncionario(0);
 					else
-						f = new Funcionario(p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());*/
-					associarFuncionario(m);
-					system("pause");
-					cout<<"teste3";
+					{
+						p=find(&pessoas,atoi(v[7].c_str()));
+						f = new Funcionario(p->getId(), p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());
+						m->setFuncionario(f);
+					}
+
 					pessoas.push_back(m);
+		
 				}
 				else if(v[3]=="Doente")
 				{
@@ -1317,7 +1320,7 @@ void Manutencao::associarFuncionario(Medico *m)
 
 	catch (NotFound)
 	{
-		cout<<"Nao tem nenhum funcionario com esse ID, tenta novamente: ";
+		cout<<"Nao existe o ID no sistema, tenta novamente: ";
 		system("pause");
 	}
 

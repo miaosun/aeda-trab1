@@ -20,6 +20,7 @@ public:
 	Funcionario *f_Funcionario;
 	Doente *m_Doente;
 
+	Medico(int id, string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento);
 	Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento);
 	string getEspecialidade();
 	void setEspecialidade(string especialidade);

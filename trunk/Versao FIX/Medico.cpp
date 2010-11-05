@@ -11,6 +11,14 @@ Medico::Medico(){}
 
 Medico::~Medico(){}
 
+Medico::Medico(int id, string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento):Pessoa(id, nome, dataNascimento, tipo)
+{
+	this->especialidade = especialidade;
+	this->horario = horario;
+	this->vencimento = vencimento;
+	this->func = 0;
+}
+
 Medico::Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento):Pessoa(nome, dataNascimento, tipo)
 {
 	this->especialidade = especialidade;
@@ -76,7 +84,7 @@ vector<string> Medico::imprime(){
 
 	ss4<<"   Funcionario Associado(ID, nome): ";
 	if(this->func==0){
-		ss4<<" Nao tem.";
+		ss4<<"nao tem";
 		system("pause");}
 	else{
 		ss4<<this->func->getId()<<", "<<this->func->getName();}
@@ -113,9 +121,9 @@ string Medico::toString()
 	stringstream ss;
 	ss<<Pessoa::toString()<<this->especialidade<<"|"<<this->horario<<"|"<<this->vencimento<<"|";
 	if(func==0)
-		ss<<"nao tem";
+		ss<<"0"<<"|";
 	else
-		ss<<this->func->getId();
+		ss<<this->func->getId()<<"|";
 	return ss.str();
 }
 
