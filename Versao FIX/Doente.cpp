@@ -37,6 +37,7 @@ void Doente::addMedico(Pessoa * medico)
 		medicos.push_back(medico);
 	}
 }
+
 vector<Pessoa *> * Doente::getMedicos()
 {
 	return &this->medicos;

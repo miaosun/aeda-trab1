@@ -511,8 +511,7 @@ string Manutencao::escolheEspecialidade()
 	{
 		cout<<"Especialidade: ";
 		op=intinput();
-	}
-	while(op<0||op>especialidades.size()-1){};
+	}while(op<0||op>especialidades.size()-1);
 	return especialidades.at(op);
 }
 
@@ -669,7 +668,7 @@ void Manutencao::addMarcacao()//visto
 	{
 		system("cls");
 		listaDoentes();
-		cout<<"Qual o doente que vai ter a consulta (ID): ";
+		cout<<"Qual o doente que vai ter a Marcacao (ID): ";
 		id=intinput();
 
 		p = find(&pessoas, id);
@@ -723,6 +722,7 @@ void Manutencao::addMarcacao()//visto
 		{
 			cout<<"Nao existe esse ID no sistema!"<<endl;
 			system("pause");
+			return;
 		}
 		break;
 	case 2:
@@ -748,6 +748,7 @@ void Manutencao::addMarcacao()//visto
 		{
 			cout<<"Nao existe esse ID no sistema!"<<endl;
 			system("pause");
+			return;
 		}
 		break;
 	case 0:
