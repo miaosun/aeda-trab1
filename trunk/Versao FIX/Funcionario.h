@@ -16,7 +16,7 @@ class Funcionario : public Pessoa
 public:
 	Funcionario();
 	virtual ~Funcionario();
-
+	Funcionario(int id, string nome, string dataNascimento, string tipo, string cargo, double vencimento);
 	Funcionario(string nome, string dataNascimento, string tipo, string cargo, double vencimento);
 	string getCargo();
 	void setCargo(string cargo);

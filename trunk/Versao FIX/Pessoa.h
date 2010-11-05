@@ -18,6 +18,7 @@ class Pessoa
 public:
 	Pessoa();
 	virtual ~Pessoa();
+	Pessoa(int id, string nome, string dataNascimento, string tipo);
 
 	Pessoa(string nome, string dataNascimento, string tipo);
 	string getName();
