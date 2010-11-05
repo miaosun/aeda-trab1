@@ -1299,16 +1299,23 @@ void Manutencao::associarFuncionario(Medico *m)
 
 	cout<<"Insere o ID do funcionario que pretende de associar: ";
 	id = intinput();
-	for(unsigned int i=0; i<pessoas.size(); i++)
+	try
 	{
-		if(pessoas.at(i)->getTipo=="Funcionario"&&pessoas.at(i)->getId()==id)
+		p = find(&pessoas, id);
+
+		while(p->getTipo() != "Funcionario")
 		{
-			m->setFuncionario(p);
-			return;
+			cout<<"Nao tem nenhum funcionario com esse ID, tenta novamente: ";
+			id = intinput();
+			p = find(&pessoas, id);
 		}
+		m->setFuncionario(p);
 	}
-	cout<<"Nao tem nenhum funcionario com esse ID!";
-	system("pause");
+	catch (NotFound)
+	{
+		cout<<"Nao tem nenhum funcionario com esse ID, tenta novamente: ";
+		system("pause");
+	}
 }
 
 
