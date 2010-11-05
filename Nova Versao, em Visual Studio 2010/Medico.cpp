@@ -79,7 +79,6 @@ vector<string> Medico::imprime(){
 		ss4<<" Nao tem.";
 		system("pause");}
 	else{
-		ss4<<"testeestranho!";
 		ss4<<this->func->getId()<<", "<<this->func->getName();}
 	v.push_back(ss4.str());
 	return v;
@@ -89,7 +88,7 @@ vector<string> Medico::editPessoa()
 {
 	vector<string> opcoes;
 	opcoes = Pessoa::editPessoa();
-	stringstream ss1,ss2,ss3;
+	stringstream ss1,ss2,ss3,ss4;
 
 	ss1<<"3 - Editar Especialidade: "<<this->especialidade;
 	opcoes.push_back(ss1.str());
@@ -97,6 +96,14 @@ vector<string> Medico::editPessoa()
 	opcoes.push_back(ss2.str());
 	ss3<<"5 - Editar Vencimento: "<<this->vencimento;
 	opcoes.push_back(ss3.str());
+	ss4<<"6 - Editar o Funcionario associado: ";
+	if(this->func==0){
+		ss4<<" Nao tem.";
+		system("pause");}
+	else{
+		ss4<<this->func->getId()<<", "<<this->func->getName();}
+
+	opcoes.push_back(ss4.str());
 
 	return opcoes;
 }

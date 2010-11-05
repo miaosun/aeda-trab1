@@ -119,7 +119,7 @@ string inserirData()
 	}
 	catch (DataInvalida)
 	{
-		cout<<"Data invalida! pressione uma tecla para tentar novamente";
+		cout<<"Data invalida! tenta novamente\n";
 		system("pause");
 		inserirData();
 		return "";
@@ -149,7 +149,7 @@ string inserirHorario()
 	}
 	catch (HoraInvalida)
 	{
-		cout<<"Horario invalido! pressione uma tecla para tentar novamente";
+		cout<<"Horario invalido! tenta novamente\n";
 		system("pause");
 		inserirHorario();
 		return "";

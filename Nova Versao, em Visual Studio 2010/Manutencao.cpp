@@ -206,10 +206,6 @@ void Manutencao::menuPessoas()
 		case 1:
 			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
-			cout<<"teste menupessoas";
-			showMenu("Nova Pessoa", pessoas.back()->imprime());
-			//cout<<"o que se passa?";
-			system("pause");
 			menuPessoas();
 			break;
 		case 2://ver detalhes Pessoas
@@ -455,7 +451,7 @@ void Manutencao::menuMarcacoes()
 
 void Manutencao::addPessoa()//visto
 {
-	string nome, dataNas, tipo, esp, hor, mor, car;
+	string nome, dataNas, tipo, esp, hor, mor, car, s;
 	vector<string> opcoes;
 	double venc;
 	int op;
@@ -497,13 +493,13 @@ void Manutencao::addPessoa()//visto
 		m = new Medico(nome, dataNas, tipo, esp, hor, venc);
 		pessoas.push_back(m);
 
-		/*string s;
 		cout<<"Pretende de associar um Funcionario agora(s/n)? ";
 		getline(cin, s);
 		if(s=="s")
 			associarFuncionario();
 		else
-			return;*/
+			return;
+
 		break;
 	case 2: //funcionario
 		cout<<"Nome da Pessoa: ";
@@ -798,6 +794,9 @@ void Manutencao::editPessoas(Pessoa *p)
 			venc=inserirVencimento();
 			p->setVencimento(venc);
 			editPessoas(p);
+			break;
+		case 6:
+			associarFuncionario();
 			break;
 		case 0:
 			break;
