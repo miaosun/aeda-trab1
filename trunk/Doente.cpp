@@ -30,12 +30,12 @@ void Doente::setMorada(string morada)
 
 vector<string> Doente::imprime(){
 
-	stringstream s;
+	stringstream ss;
 	vector<string> v;
 	v=Pessoa::imprime();
 
-	s<<"   Morada: "<<this->morada;
-	v.push_back(s.str());
+	ss<<"   Morada: "<<this->morada;
+	v.push_back(ss.str());
 
 	return v;
 }
@@ -64,3 +64,5 @@ void Doente::setEspecialidade(string especialidade){}
 void Doente::setVencimento(double venc){}
 void Doente::setHorario(string horario){}
 void Doente::setCargo(string cargo){}
+string Doente::getCargo(){return "";}
+double Doente::getVencimento(){return NULL;}

@@ -16,6 +16,7 @@ Medico::Medico(string nome, string dataNascimento, string tipo, string especiali
 	this->especialidade = especialidade;
 	this->horario = horario;
 	this->vencimento = vencimento;
+	this->funcionario = 0;
 }
 
 string Medico::getEspecialidade(){
@@ -48,20 +49,32 @@ void Medico::setVencimento(double vencimento)
 	this->vencimento = vencimento;
 }
 
+Funcionario *Medico::getFuncionario()
+{
+	return this->funcionario;
+}
+
+void Medico::setFuncionario(Funcionario *funcionario)
+{
+	this->funcionario = funcionario;
+}
+
 vector<string> Medico::imprime(){
 
-	stringstream s1,s2,s3;
+	stringstream ss1,ss2,ss3,ss4;
 	vector<string> v;
 	v=Pessoa::imprime();
 
-	s1<<"   Especialidade: "<<this->especialidade;
-	v.push_back(s1.str());
+	ss1<<"   Especialidade: "<<this->especialidade;
+	v.push_back(ss1.str());
 
-	s2<<"   Horario: "<<this->horario;
-	v.push_back(s2.str());
+	ss2<<"   Horario: "<<this->horario;
+	v.push_back(ss2.str());
 
-	s3<<"   Vencimento: "<<this->vencimento;
-	v.push_back(s3.str());
+	ss3<<"   Vencimento: "<<this->vencimento;
+	v.push_back(ss3.str());
+
+	ss4<<"  Funcionario Associado(ID, nome): "<<funcionario->getId()<<", "<<funcionario->getName();
 	return v;
 }
 
@@ -71,11 +84,11 @@ vector<string> Medico::editPessoa()
 	opcoes = Pessoa::editPessoa();
 	stringstream ss1,ss2,ss3;
 
-	ss1<<"4 - Editar Especialidade: "<<this->especialidade;
+	ss1<<"3 - Editar Especialidade: "<<this->especialidade;
 	opcoes.push_back(ss1.str());
-	ss2<<"5 - Editar Horario: "<<this->horario;
+	ss2<<"4 - Editar Horario: "<<this->horario;
 	opcoes.push_back(ss2.str());
-	ss3<<"6 - Editar Vencimento: "<<this->vencimento;
+	ss3<<"5 - Editar Vencimento: "<<this->vencimento;
 	opcoes.push_back(ss3.str());
 
 	return opcoes;
@@ -92,3 +105,4 @@ string Medico::toString()
 //funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Medico::setMorada(string morada){}
 void Medico::setCargo(string cargo){}
+string Medico::getCargo(){return "";}
