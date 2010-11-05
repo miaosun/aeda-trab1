@@ -41,7 +41,6 @@ public:
 	void saveMarcacoes(string filename);
 	void saveManutencao();
 	void startManutencao();
-	void associarFuncionario();
 	//string imprime();
 
 

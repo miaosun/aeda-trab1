@@ -10,6 +10,8 @@
 
 #include "Marcacao.h"
 
+
+
 class Consulta : public Marcacao
 {
 
