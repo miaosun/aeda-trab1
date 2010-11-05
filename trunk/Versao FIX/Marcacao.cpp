@@ -131,8 +131,6 @@ vector<string> Marcacao::editMarcacao()
 	opcoes.push_back(ss2.str());
 	ss3<<"3 - Mudar Medico: "<<this->medico->getName();
 	opcoes.push_back(ss3.str());
-	ss4<<"4 - Mudar Doente: "<<this->doente->getName();
-	opcoes.push_back(ss4.str());
 
 	return opcoes;
 }

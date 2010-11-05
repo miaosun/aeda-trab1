@@ -1066,42 +1066,11 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 		case 3: //medico
 			try
 			{
-				listaMedicos();
-				cout<<"Qual o novo medico (ID): ";
+				m->getDoente()->showMedicos();
+				cout<<endl<<"Qual o medico que vai dar a consulta (ID): ";
 				id=intinput();
-
-				p = find(&pessoas, id);
-
-				while(p->getTipo() != "Medico")
-				{
-					cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
-					id = intinput();
-					p = find(&pessoas, id);
-				}
+				p = find(m->getDoente()->getMedicos(), id);
 				m->setMedico(p);
-			}
-			catch (NotFound)
-			{
-				cout<<"Nao existe esse ID no sistema!"<<endl;
-				system("pause");
-			}
-			break;
-		case 4: //doente
-			try
-			{
-				listaDoentes();
-				cout<<"Qual o novo Doente (ID): ";
-				id=intinput();
-
-				p = find(&pessoas, id);
-
-				while(p->getTipo() != "Doente")
-				{
-					cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
-					id = intinput();
-					p = find(&pessoas, id);
-				}
-				m->setDoente(p);
 			}
 			catch (NotFound)
 			{
@@ -1133,18 +1102,10 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 		case 3: //medico
 			try
 			{
-				listaMedicos();
-				cout<<"Qual o novo medico (ID): ";
+				m->getDoente()->showMedicos();
+				cout<<endl<<"Qual o medico que vai fazer o exame (ID): ";
 				id=intinput();
-
-				p = find(&pessoas, id);
-
-				while(p->getTipo() != "Medico")
-				{
-					cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
-					id = intinput();
-					p = find(&pessoas, id);
-				}
+				p = find(m->getDoente()->getMedicos(), id);
 				m->setMedico(p);
 			}
 			catch (NotFound)
@@ -1153,30 +1114,7 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 				system("pause");
 			}
 			break;
-		case 4: //doente
-			try
-			{
-				listaDoentes();
-				cout<<"Qual o novo Doente (ID): ";
-				id=intinput();
-
-				p = find(&pessoas, id);
-
-				while(p->getTipo() != "Doente")
-				{
-					cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
-					id = intinput();
-					p = find(&pessoas, id);
-				}
-				m->setDoente(p);
-			}
-			catch (NotFound)
-			{
-				cout<<"Nao existe esse ID no sistema!"<<endl;
-				system("pause");
-			}
-			break;
-		case 5://sala
+		case 4://sala
 			cout<<"Nova Sala de Exame: ";
 			getline(cin, sala);
 			m->setSala(sala);
@@ -1188,7 +1126,7 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 			editMarcacoes(m);
 		}
 	}
-	if(op>0&&op<=5)
+	if(op>0&&op<5)
 	{
 		showMenu("Marcacao", m->imprime());
 		system("pause");
