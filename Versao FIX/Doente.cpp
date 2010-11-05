@@ -86,10 +86,16 @@ vector<string> Doente::editPessoa()
 void Doente::showMedicos()
 {
 	system("cls");
-	cout<<"Medicos que acompanham o doente:"<<endl<<endl;
-	for(unsigned int i=0; i<medicos.size(); i++)
+	cout<<"Medicos que acompanham o doente:\n";
+	if(medicos.empty())
+		cout<<"\n\tNao tem medico associado!\n";
+	else
 	{
-		medicos.at(i)->toList();
+		cout<<"\n\tID   Nome";
+		for(unsigned int i=0; i<medicos.size(); i++)
+		{
+			cout<<"\n\t"<<medicos[i]->getId()<<", "<<medicos[i]->getName();
+		}
 	}
 	cout<<endl;
 }
