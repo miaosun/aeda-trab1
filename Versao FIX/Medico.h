@@ -38,6 +38,8 @@ public:
 	void setMorada(string morada);
 	void setCargo(string cargo);
 	string getCargo();
+	void showMedicos();
+	void addMedico(Pessoa * medico);
 
 private:
 	string especialidade;

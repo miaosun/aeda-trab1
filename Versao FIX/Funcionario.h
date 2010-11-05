@@ -32,7 +32,8 @@ public:
 	void setMorada(string morada);
 	string getEspecialidade();
 	string getHorario();
-
+	void showMedicos();
+	void addMedico(Pessoa * medico);
 
 private:
 	string cargo;
