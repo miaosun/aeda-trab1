@@ -92,7 +92,7 @@ string Marcacao::toList()
 string Marcacao::toString()
 {
 	stringstream ss;
-	ss<<"|"<<this->id<<"|"<<this->data<<"|"<<this->hora<<"|"<<this->tipo<<"|";
+	ss<<"|"<<this->id<<"|"<<this->data<<"|"<<this->hora<<"|"<<this->tipo<<"|"<<this->medico->getId()<<"|"<<this->doente->getId()<<"|";
 	return ss.str();
 }
 

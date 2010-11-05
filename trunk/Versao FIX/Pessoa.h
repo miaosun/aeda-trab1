@@ -18,7 +18,7 @@ class Pessoa
 public:
 	Pessoa();
 	virtual ~Pessoa();
-	Pessoa(int id, string nome, string dataNascimento, string tipo);
+//	Pessoa(int id, string nome, string dataNascimento, string tipo);
 
 	Pessoa(string nome, string dataNascimento, string tipo);
 	string getName();
@@ -29,6 +29,7 @@ public:
 	void setTipo(string tipo);
 	int getId();
 	void setId(int id);
+
 	virtual vector<string> imprime();//serve para a mostragem dos dados da Pessoa, utilizado no menuPessoas
 	virtual string toString();//serve para exportacao para ficheiro
 	string toList();//serve para a listagem das Pessoas
@@ -44,12 +45,12 @@ public:
 	virtual double getVencimento() = 0;
 	virtual string getEspecialidade() = 0;
 	virtual string getHorario() = 0;
-
+	static int count;
 private:
 	string nome;
 	string dataNascimento;
 	int id;
-	static int count;
+	
 	string tipo;
 
 };

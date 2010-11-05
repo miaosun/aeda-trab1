@@ -20,7 +20,7 @@ public:
 	Funcionario *f_Funcionario;
 	Doente *m_Doente;
 
-	Medico(int id, string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento);
+//	Medico(int id, string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento);
 	Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento);
 	string getEspecialidade();
 	void setEspecialidade(string especialidade);
@@ -28,8 +28,8 @@ public:
 	void setHorario(string horario);
 	double getVencimento();
 	void setVencimento(double vencimento);
-	Funcionario *getFuncionario();
-	void setFuncionario(Funcionario *func);
+	Pessoa *getPessoa();
+	void setPessoa(Pessoa *pes);
 	vector<string> imprime();
 	vector<string> editPessoa();
 	string toString();
@@ -43,7 +43,7 @@ private:
 	string especialidade;
 	string horario;
 	double vencimento;
-	Funcionario *func;
+	Pessoa *pes;
 
 };
 #endif // !defined(EA_FC464729_C72D_4115_B003_E0DAD8DDC9B3__INCLUDED_)
