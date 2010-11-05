@@ -10,6 +10,17 @@
 
 #include <iostream>
 
+class tipoPessoaInvalida
+{
+public:
+	string devia_ser, foi;
+	tipoPessoaInvalida(string devia_ser, string foi)
+	{
+		this->devia_ser=devia_ser;
+		this->foi=foi;
+	}
+};
+
 class DataInvalida 
 {
 public:

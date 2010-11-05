@@ -11,7 +11,7 @@ Exame::Exame(){}
 
 Exame::~Exame(){}
 
-Exame::Exame(string data, string hora, string tipo, string sala):Marcacao(data, hora, tipo)
+Exame::Exame(string data, string hora, string tipo, string sala, Pessoa * medico, Pessoa * doente):Marcacao(data, hora, tipo, medico, doente)
 {
 	this->sala = sala;
 }
@@ -52,9 +52,8 @@ vector<string> Exame::editMarcacao()
 	stringstream ss;
 	opcoes = Marcacao::editMarcacao();
 
-	ss<<"3 - Editar Sala: "<<this->sala;
+	ss<<"5 - Editar Sala: "<<this->sala;
 	opcoes.push_back(ss.str());
 
 	return opcoes;
 }
-

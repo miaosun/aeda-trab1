@@ -655,12 +655,15 @@ void Manutencao::removePessoa(int id)//visto
 void Manutencao::addMarcacao()//visto
 {
 	vector<string> opcoes;
-	int op;
+	int op, id;
 	stringstream s;
 	vector<string> v;
 	string tipo, data, hora, sala;
 	Consulta * c;
 	Exame * e;
+	Pessoa * p;
+	Pessoa * m;
+	Pessoa * d;
 
 	opcoes.push_back("Escolha um dos seguintes tipos de marcacao:");
 	opcoes.push_back("");
@@ -676,24 +679,96 @@ void Manutencao::addMarcacao()//visto
 	switch(op)
 	{
 	case 1:
-		tipo = "Consulta";
-		cout<<"Data da Consulta: ";
-		data=inserirData();
-		cout<<"Hora da Consulta: ";
-		getline(cin, hora);
-		c = new Consulta(data, hora, tipo);
-		marcacoes.push_back(c);
+		try
+		{
+			listaMedicos();
+			cout<<"Qual o medico que vai dar a consulta (ID): ";
+			id=intinput();
+
+			p = find(&pessoas, id);
+
+			while(p->getTipo() != "Medico")
+			{
+				cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
+				id = intinput();
+				p = find(&pessoas, id);
+			}
+			m=p;
+
+			listaDoentes();
+			cout<<"Qual o doente que vai ter a consulta (ID): ";
+			id=intinput();
+
+			p = find(&pessoas, id);
+
+			while(p->getTipo() != "Doente")
+			{
+				cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
+				id = intinput();
+				p = find(&pessoas, id);
+			}
+			d=p;
+
+			tipo = "Consulta";
+			cout<<"Data da Consulta: ";
+			data=inserirData();
+			cout<<"Hora da Consulta: ";
+			getline(cin, hora);
+			c = new Consulta(data, hora, tipo, m, d);
+			marcacoes.push_back(c);
+		}
+		catch (NotFound)
+		{
+			cout<<"Nao existe esse ID no sistema!"<<endl;
+			system("pause");
+		}
 		break;
 	case 2:
-		tipo = "Exame";
-		cout<<"Data do Exame: ";
-		data=inserirData();
-		cout<<"Hora do Exame: ";
-		getline(cin, hora);
-		cout<<"Sala do Exame: ";
-		getline(cin, sala);
-		e = new Exame(data, hora, tipo, sala);
-		marcacoes.push_back(e);
+		try
+		{
+			listaMedicos();
+			cout<<"Qual o medico que vai fazer o exame (ID): ";
+			id=intinput();
+
+			p = find(&pessoas, id);
+
+			while(p->getTipo() != "Medico")
+			{
+				cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
+				id = intinput();
+				p = find(&pessoas, id);
+			}
+			m=p;
+
+			listaDoentes();
+			cout<<"Qual o doente que vai fazer o exame (ID): ";
+			id=intinput();
+
+			p = find(&pessoas, id);
+
+			while(p->getTipo() != "Doente")
+			{
+				cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
+				id = intinput();
+				p = find(&pessoas, id);
+			}
+			d=p;
+
+			tipo = "Exame";
+			cout<<"Data do Exame: ";
+			data=inserirData();
+			cout<<"Hora do Exame: ";
+			getline(cin, hora);
+			cout<<"Sala do Exame: ";
+			getline(cin, sala);
+			e = new Exame(data, hora, tipo, sala, m, d);
+			marcacoes.push_back(e);
+		}
+		catch (NotFound)
+		{
+			cout<<"Nao existe esse ID no sistema!"<<endl;
+			system("pause");
+		}
 		break;
 	case 0:
 		return;
@@ -743,7 +818,7 @@ void Manutencao::removeMarcacao(int id)//visto
 void Manutencao::listaMedicos()
 {
 	vector<Pessoa *>::iterator it=pessoas.begin();
-	cout<<"Medico: "<<endl;
+	cout<<"Medicos: "<<endl;
 	while(it!=pessoas.end())
 	{
 		if((*it)->getTipo() == "Medico")
@@ -1019,8 +1094,8 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 {
 	vector<string> opcoes;
 	string data, hora, tipo, sala;
-	int op;
-
+	int op, id;
+	Pessoa * p;
 	opcoes = m->editMarcacao();
 
 	opcoes.push_back("");
@@ -1029,36 +1104,68 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 	showMenu("Editar Marcacao", opcoes);
 	cout<<"    Opcao: ";
 	op=intinput();
+	system("cls");
 
 	if(m->getTipo()=="Consulta")
 	{
 		switch(op)
 		{
-		case 1:
-		//	system("cls");
-		//	cout<<"   --Editar Medico--"<<endl<<endl;
-		//	cout<<"Nome de Medico: "<<p->getName()<<endl;
+		case 1: //data
 			cout<<"Novo data de Consulta: ";
 			data=inserirData();
 			m->setData(data);
-			editMarcacoes(m);
 			break;
-		case 2:
-		//	system("cls");
-		//	cout<<"   --Editar Medico--"<<endl<<endl;
+		case 2: //hora
 			cout<<"Novo Hora de Consulta: ";
 			getline(cin, hora);
 			m->setHora(hora);
-			editMarcacoes(m);
 			break;
-	/*	case 3:
-		//	system("cls");
-		//	cout<<"   --Editar Medico--"<<endl<<endl;
-			cout<<"Novo Tipo da Marcacao: ";
-			getline(cin, tipo);
-			m->setTipo(tipo);
-			editMarcacoes(m);
-			break;*/
+		case 3: //medico
+			try
+			{
+				listaMedicos();
+				cout<<"Qual o novo medico (ID): ";
+				id=intinput();
+
+				p = find(&pessoas, id);
+
+				while(p->getTipo() != "Medico")
+				{
+					cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
+					id = intinput();
+					p = find(&pessoas, id);
+				}
+				m->setMedico(p);
+			}
+			catch (NotFound)
+			{
+				cout<<"Nao existe esse ID no sistema!"<<endl;
+				system("pause");
+			}
+			break;
+		case 4: //doente
+			try
+			{
+				listaDoentes();
+				cout<<"Qual o novo Doente (ID): ";
+				id=intinput();
+
+				p = find(&pessoas, id);
+
+				while(p->getTipo() != "Doente")
+				{
+					cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
+					id = intinput();
+					p = find(&pessoas, id);
+				}
+				m->setDoente(p);
+			}
+			catch (NotFound)
+			{
+				cout<<"Nao existe esse ID no sistema!"<<endl;
+				system("pause");
+			}
+			break;
 		case 0:
 			break;
 		default:
@@ -1069,38 +1176,66 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 	{
 		switch(op)
 		{
-		case 1:
-			//system("cls");
-			//cout<<"   --Editar Doente--"<<endl<<endl;
-			//cout<<"Nome de Doente: "<<p->getName()<<endl;
+		case 1://data
 			cout<<"Nova data de Exame: ";
 			data=inserirData();
 			m->setData(data);
-			editMarcacoes(m);
 			break;
-		case 2:
-			//system("cls");
-			//cout<<"   --Editar Doente--"<<endl<<endl;
+		case 2://hora
 			cout<<"Nova hora de Exame: ";
 			data=inserirData();
 			m->setHora(hora);
-			editMarcacoes(m);
 			break;
-		/*case 3:
-			//system("cls");
-			//cout<<"   --Editar Doente--"<<endl<<endl;
-			cout<<"Novo Tipo da Marcacao: ";
-			getline(cin, tipo);
-			m->setTipo(tipo);
-			editMarcacoes(m);
-			break;*/
-		case 3:
-			//system("cls");
-			//cout<<"   --Editar Doente--"<<endl<<endl;
+		case 3: //medico
+			try
+			{
+				listaMedicos();
+				cout<<"Qual o novo medico (ID): ";
+				id=intinput();
+
+				p = find(&pessoas, id);
+
+				while(p->getTipo() != "Medico")
+				{
+					cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
+					id = intinput();
+					p = find(&pessoas, id);
+				}
+				m->setMedico(p);
+			}
+			catch (NotFound)
+			{
+				cout<<"Nao existe esse ID no sistema!"<<endl;
+				system("pause");
+			}
+			break;
+		case 4: //doente
+			try
+			{
+				listaDoentes();
+				cout<<"Qual o novo Doente (ID): ";
+				id=intinput();
+
+				p = find(&pessoas, id);
+
+				while(p->getTipo() != "Doente")
+				{
+					cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
+					id = intinput();
+					p = find(&pessoas, id);
+				}
+				m->setDoente(p);
+			}
+			catch (NotFound)
+			{
+				cout<<"Nao existe esse ID no sistema!"<<endl;
+				system("pause");
+			}
+			break;
+		case 5://sala
 			cout<<"Nova Sala de Exame: ";
 			getline(cin, sala);
 			m->setSala(sala);
-			editMarcacoes(m);
 			break;
 		case 0:
 			break;

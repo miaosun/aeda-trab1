@@ -17,7 +17,7 @@ public:
 	Consulta();
 	virtual ~Consulta();
 
-	Consulta(string data, string hora, string tipo);
+	Consulta(string data, string hora, string tipo, Pessoa * medico, Pessoa * doente);
 	string toString();
 	vector<string> imprime();
 	vector<string> editMarcacao();

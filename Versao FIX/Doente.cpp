@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 #include "Doente.h"
+#include "Excepcoes.h"
 
 
 Doente::Doente(){}
@@ -16,6 +17,18 @@ Doente::~Doente(){}
 Doente::Doente(string nome, string dataNascimento, string tipo, string morada):Pessoa(nome, dataNascimento, tipo)
 {
 	this->morada = morada;
+}
+
+void Doente::addMedico(Pessoa * medico)
+{
+	if(medico->getTipo()!="Medico")
+		throw tipoPessoaInvalida("Medico", medico->getTipo());
+	else
+		medicos.push_back(medico);
+}
+vector<Pessoa *> * Doente::getMedicos()
+{
+	return &this->medicos;
 }
 
 string Doente::getMorada(){
