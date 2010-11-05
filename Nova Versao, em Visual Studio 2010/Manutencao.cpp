@@ -164,11 +164,10 @@ void Manutencao::menuPrincipal()
         break;
     case 0:
 		saveManutencao();
-		system("pause");
         break;
     default:
         cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
-        menuPrincipal();
+        //menuPrincipal();
     }
 }
 
