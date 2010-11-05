@@ -7,15 +7,28 @@
 
 #include "Exame.h"
 
+/**
+ * Construtor por omissao da classe Exame
+ */ 
 Exame::Exame(){}
 
+/**
+ * Destrutor da classe Exame
+ */
 Exame::~Exame(){}
 
+/**
+ * Construtor da classe Exame com data, tipo, sala
+ * @param 
+ */
 Exame::Exame(string data, string hora, string tipo, string sala):Marcacao(data, hora, tipo)
 {
 	this->sala = sala;
 }
 
+/**
+ * Construtor da classe Exame com data, tipo, sala
+ */
 string Exame::getSala(){
 
 	return this->sala;

@@ -10,6 +10,9 @@
 
 #include <iostream>
 
+/**
+*
+*/
 class notIntInput
 {
 public:
@@ -30,7 +33,7 @@ public:
 	}
 };
 
-class DataInvalida 
+class DataInvalida
 {
 public:
 	int dia, mes, ano;
@@ -48,7 +51,4 @@ public:
 	int hora_ini, hora_fim;
 	HoraInvalida(int hora_ini, int hora_fim){this->hora_ini=hora_ini;this->hora_fim=hora_fim;}
 };
-
-class NotFound {};
-
 #endif /* EXCEPCOES_H_ */

@@ -84,13 +84,13 @@ string Pessoa::toString()
 
 string Pessoa::toList()
 {
-    ostringstream ss;
-    ss<<"|";
+    ostringstream s;
+    s<<"|";
     if (id<10)
-        ss<<" ";
-	ss<<this->id<<"| "<<this->nome<<" |";
+        s<<" ";
+	s<<this->id<<"| "<<this->nome<<" |";
 
-    return ss.str();
+    return s.str();
 }
 
 vector<string> Pessoa::editPessoa()
