@@ -40,6 +40,8 @@ public:
 	virtual void setCargo(string cargo) = 0;
 	virtual string getCargo() = 0;
 	virtual double getVencimento() = 0;
+	virtual string getEspecialidade() = 0;
+	virtual string getHorario() = 0;
 
 private:
 	string nome;

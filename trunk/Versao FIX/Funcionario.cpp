@@ -78,4 +78,6 @@ string Funcionario::toString()
 void Funcionario::setEspecialidade(string especialidade){}
 void Funcionario::setHorario(string hora){}
 void Funcionario::setMorada(string morada){}
+string Funcionario::getEspecialidade(){return "";}
+string Funcionario::getHorario(){return "";}
 

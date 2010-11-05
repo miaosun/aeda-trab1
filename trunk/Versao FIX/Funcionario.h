@@ -30,6 +30,8 @@ public:
 	void setEspecialidade(string especialidade);
 	void setHorario(string hora);
 	void setMorada(string morada);
+	string getEspecialidade();
+	string getHorario();
 
 
 private:
