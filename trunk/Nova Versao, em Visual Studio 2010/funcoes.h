@@ -71,7 +71,7 @@ double inserirVencimento()
 	
 	do
 	{
-		cout<<"Vencimento(tem que ser digital): ";
+		cout<<"Vencimento(tem que ser um numero): ";
 		getline(cin,s);
 	}while(!isDouble(s));
 
@@ -88,32 +88,42 @@ void inserirTipo()
 		throw tipoInvalido(tipo);
 }
 
-string inserirData(string data)
+string inserirData()
 {
 	stringstream ss, saida;
 	int dia, mes, ano;
+	string data;
 	getline(cin, data);
 	ss<<data;
 	ss>>dia;
 	ss>>mes;
 	ss>>ano;
-	if(ano>2010||ano<1920)
-		throw DataInvalida(dia, mes, ano);
-	if(mes>12||mes<1)
-		throw DataInvalida(dia, mes, ano);
-	if(mes==4||mes==6||mes==9||mes==11)
+	try
 	{
-		if(dia>30||dia<1)
+		if(ano>2010||ano<1920)
+			throw DataInvalida(dia, mes, ano);
+		if(mes>12||mes<1)
+			throw DataInvalida(dia, mes, ano);
+		if(mes==4||mes==6||mes==9||mes==11)
+		{
+			if(dia>30||dia<1)
+				throw DataInvalida(dia, mes, ano);
+		}
+		else if(mes==2)
+		{
+			if(dia>28||dia<1)
+				throw DataInvalida(dia, mes, ano);
+		}
+		else if(dia>31||dia<1)
 			throw DataInvalida(dia, mes, ano);
 	}
-	else if(mes==2)
+	catch (DataInvalida)
 	{
-		if(dia>28||dia<1)
-			throw DataInvalida(dia, mes, ano);
+		cout<<"Data invalida! pressione uma tecla para tentar novamente";
+		system("pause");
+		inserirData();
+		return "";
 	}
-	else if(dia>31||dia<1)
-		throw DataInvalida(dia, mes, ano);
-	
 	saida<<dia<<"/"<<mes<<"/"<<ano;
 	data = saida.str();
 	ss.str("");
@@ -122,18 +132,28 @@ string inserirData(string data)
 
 }
 
-string inserirHorario(string hora)
+string inserirHorario()
 {
 	stringstream ss, saida;
 	int hora_ini, hora_fim;
+	string hora;
 	cout<<"Horario(inicio fim (inteiro)) (ex: 9 19): ";
 	getline(cin, hora);
 	ss<<hora;
 	ss>>hora_ini;
 	ss>>hora_fim;
-
-	if(hora_ini>=hora_fim||(hora_ini<9||hora_ini>21)||(hora_fim<9||hora_fim>21))
-		throw HoraInvalida(hora_ini, hora_fim);
+	try
+	{
+		if(hora_ini>=hora_fim||(hora_ini<9||hora_ini>21)||(hora_fim<9||hora_fim>21))
+			throw HoraInvalida(hora_ini, hora_fim);
+	}
+	catch (HoraInvalida)
+	{
+		cout<<"Horario invalido! pressione uma tecla para tentar novamente";
+		system("pause");
+		inserirHorario();
+		return "";
+	}
 
 	saida<<hora_ini<<"h-"<<hora_fim<<"h";
 	hora=saida.str();
