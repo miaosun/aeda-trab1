@@ -613,7 +613,7 @@ void Manutencao::addMarcacao()//visto
 	case 2:
 		tipo = "Exame";
 		cout<<"Data do Exame: ";
-		getline(cin, data);
+		data=inserirData();
 		cout<<"Hora do Exame: ";
 		getline(cin, hora);
 		cout<<"Sala do Exame: ";
@@ -930,6 +930,7 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 	int op;
 
 	opcoes = m->editMarcacao();
+
 	opcoes.push_back("");
 	opcoes.push_back("0 - Voltar atras");
 
