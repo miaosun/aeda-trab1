@@ -28,8 +28,8 @@ public:
 	void setHorario(string horario);
 	double getVencimento();
 	void setVencimento(double vencimento);
-	Pessoa *getPessoa();
-	void setPessoa(Pessoa *pes);
+	Pessoa * getFuncionario();
+	void setFuncionario(Pessoa * func);
 	vector<string> imprime();
 	vector<string> editPessoa();
 	string toString();
@@ -46,7 +46,7 @@ private:
 	string especialidade;
 	string horario;
 	double vencimento;
-	Pessoa *pes;
+	Pessoa * funcionario;
 
 };
 #endif // !defined(EA_FC464729_C72D_4115_B003_E0DAD8DDC9B3__INCLUDED_)
