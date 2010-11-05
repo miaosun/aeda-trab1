@@ -91,10 +91,9 @@ void Doente::showMedicos()
 		cout<<"\n\tNao tem medico associado!\n";
 	else
 	{
-		cout<<"\n\tID   Nome";
 		for(unsigned int i=0; i<medicos.size(); i++)
 		{
-			cout<<"\n\t"<<medicos[i]->getId()<<", "<<medicos[i]->getName();
+			cout<<"\n\t"<<medicos[i]->toList()<<endl;
 		}
 	}
 	cout<<endl;
