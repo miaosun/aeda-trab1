@@ -512,7 +512,7 @@ string Manutencao::escolheEspecialidade()
 		cout<<"Especialidade: ";
 		op=intinput();
 	}
-	while(op<0||op>especialidades.size()-1);
+	while(op<0||op>especialidades.size()-1){};
 	return especialidades.at(op);
 }
 

@@ -36,6 +36,8 @@ public:
 	void showMedicos();
 	void addMedico(Pessoa * medico);
 	vector<Pessoa *> * getMedicos();
+	Pessoa * getFuncionario(){Pessoa * p; return p;};
+	void setFuncionario(Pessoa * func){};
 	
 
 private:
