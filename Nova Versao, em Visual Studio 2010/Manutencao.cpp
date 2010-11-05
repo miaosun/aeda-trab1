@@ -219,11 +219,13 @@ void Manutencao::menuPessoas()
 			id=intinput();
 
 			//falta implementar excecao...
-
-			for(unsigned int i=0; i<pessoas.size(); i++)
+			try
 			{
-				if(id==pessoas[i]->getId())
-					showMenu("Detalhes da Pessoa", pessoas[i]->imprime());
+				showMenu("Detalhes da Pessoa", find(&pessoas, id)->imprime());
+			}
+			catch (NotFound)
+			{
+				cout<<endl<<"Pessoa nao encontrada!"<<endl;
 			}
 
 			system("pause");
