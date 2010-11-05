@@ -311,7 +311,7 @@ void Manutencao::menuPessoas()//visto
 	}
 }
 
-void Manutencao::menuMarcacoes()
+void Manutencao::menuMarcacoes()//visto
 {
 	Marcacao *m;
 	int op;
@@ -387,16 +387,18 @@ void Manutencao::menuMarcacoes()
 			cout<<endl<<"Introduza o ID da Marcacao que pretende apagar: ";
 			id=intinput();
 
-			/*
-				excepcoes de caso nao encontra a Pessoa.
-			 */
-
-			for(unsigned int i=0; i<marcacoes.size(); i++)
-				if(id == marcacoes[i]->getId())
-						m = marcacoes[i];
-			showMenu("Detalhes da Marcacao", m->imprime());
-			system("pause");
-			removeMarcacao(id);
+			try
+			{
+				m=find(&marcacoes, id);
+				showMenu("Detalhes da Marcacao", m->imprime());
+				system("pause");
+				removeMarcacao(id);
+			}
+			catch (NotFound)
+			{
+				cout<<endl<<"Marcacao nao encontrada!"<<endl;
+				system("pause");
+			}
 			menuMarcacoes();
 			break;
 		case 5://importar marcacoes
@@ -454,7 +456,6 @@ void Manutencao::menuMarcacoes()
 			menuMarcacoes();
 			}
 	}
-
 }
 
 void Manutencao::addPessoa()//visto
@@ -635,7 +636,7 @@ void Manutencao::addMarcacao()//visto
 	}
 }
 
-void Manutencao::removeMarcacao(int id)
+void Manutencao::removeMarcacao(int id)//visto
 {
 	int indice;
 	for(unsigned int i=0; i<marcacoes.size(); i++)
@@ -705,7 +706,7 @@ void Manutencao::listaPessoas()//visto
 	cout<<endl;
 }
 
-void Manutencao::listaMarcacoes()
+void Manutencao::listaMarcacoes()//visto
 {
 	system("cls");
 	cout<<"  --Marcacoes no sistema--"<<endl<<endl;
