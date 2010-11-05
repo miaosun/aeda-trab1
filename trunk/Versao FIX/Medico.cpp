@@ -24,7 +24,7 @@ Medico::Medico(string nome, string dataNascimento, string tipo, string especiali
 	this->especialidade = especialidade;
 	this->horario = horario;
 	this->vencimento = vencimento;
-	this->pes = 0;
+	this->funcionario = 0;
 }
 
 string Medico::getEspecialidade(){

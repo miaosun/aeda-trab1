@@ -1347,6 +1347,7 @@ void Manutencao::associarFuncionario(Pessoa * medico)
 		}
 	
 		medico->setFuncionario(p);
+
 	}
 
 	catch (NotFound)
