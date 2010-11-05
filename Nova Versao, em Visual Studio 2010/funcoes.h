@@ -34,33 +34,35 @@ vector<string> split(char delim, string s)
 	return result;
 }
 
-int intinput()
-{
-    stringstream entrada;
-    string sintinput;
-    int saida=0;
-    getline(cin, sintinput);
-    entrada<<sintinput;
-    entrada>>saida;
-	entrada.str("");
-    while(entrada.fail())
-    {
-        cout<<"O que era pedido era um numero! Tente novamente: ";
-		cout<<"\n"<<saida;
-		entrada.str("");
-        getline(cin, sintinput);
-		entrada<<sintinput;
-		entrada>>saida;
-    }
-    return saida;
-}
-
 bool isDouble(const string& s)
 {
   istringstream i(s);
   double temp;
   return ( (i >> temp) ? true : false );
 }
+
+bool isDigit(const string& s)
+{
+	istringstream i(s);
+	int temp;
+	return ( (i >> temp) ? true : false );
+}
+
+int intinput()
+{
+	string s;
+	int i=0;
+	getline(cin, s);
+	while(!isDigit(s))
+	{
+		cout<<"A opcao nao e valida, tenta novamente: ";
+		getline(cin, s);
+	};
+
+	i = atoi(s.c_str());
+	return i;
+}
+
 
 double inserirVencimento()
 {
@@ -69,7 +71,7 @@ double inserirVencimento()
 	
 	do
 	{
-		cout<<"Vencimento(tem que ser digital): ";
+		cout<<"Vencimento(tem que ser um numero): ";
 		getline(cin,s);
 	}while(!isDouble(s));
 
@@ -86,8 +88,9 @@ void inserirTipo()
 		throw tipoInvalido(tipo);
 }
 
-string inserirData(string data)
+string inserirData()
 {
+	string data;
 	stringstream ss, saida;
 	int dia, mes, ano;
 	getline(cin, data);
@@ -95,23 +98,32 @@ string inserirData(string data)
 	ss>>dia;
 	ss>>mes;
 	ss>>ano;
-	if(ano>2010||ano<1920)
-		throw DataInvalida(dia, mes, ano);
-	if(mes>12||mes<1)
-		throw DataInvalida(dia, mes, ano);
-	if(mes==4||mes==6||mes==9||mes==11)
+	try
 	{
-		if(dia>30||dia<1)
+		if(ano>2010||ano<1920)
+			throw DataInvalida(dia, mes, ano);
+		if(mes>12||mes<1)
+			throw DataInvalida(dia, mes, ano);
+		if(mes==4||mes==6||mes==9||mes==11)
+		{
+			if(dia>30||dia<1)
+				throw DataInvalida(dia, mes, ano);
+		}
+		else if(mes==2)
+		{
+			if(dia>28||dia<1)
+				throw DataInvalida(dia, mes, ano);
+		}
+		else if(dia>31||dia<1)
 			throw DataInvalida(dia, mes, ano);
 	}
-	else if(mes==2)
+	catch (DataInvalida)
 	{
-		if(dia>28||dia<1)
-			throw DataInvalida(dia, mes, ano);
+		cout<<"Data invalida! tenta novamente\n";
+		system("pause");
+		inserirData();
+		return "";
 	}
-	else if(dia>31||dia<1)
-		throw DataInvalida(dia, mes, ano);
-	
 	saida<<dia<<"/"<<mes<<"/"<<ano;
 	data = saida.str();
 	ss.str("");
@@ -120,8 +132,9 @@ string inserirData(string data)
 
 }
 
-string inserirHorario(string hora)
+string inserirHorario()
 {
+	string hora;
 	stringstream ss, saida;
 	int hora_ini, hora_fim;
 	cout<<"Horario(inicio fim (inteiro)) (ex: 9 19): ";
@@ -129,15 +142,36 @@ string inserirHorario(string hora)
 	ss<<hora;
 	ss>>hora_ini;
 	ss>>hora_fim;
-
-	if(hora_ini>=hora_fim||(hora_ini<9||hora_ini>21)||(hora_fim<9||hora_fim>21))
-		throw HoraInvalida(hora_ini, hora_fim);
+	try
+	{
+		if(hora_ini>=hora_fim||(hora_ini<9||hora_ini>21)||(hora_fim<9||hora_fim>21))
+			throw HoraInvalida(hora_ini, hora_fim);
+	}
+	catch (HoraInvalida)
+	{
+		cout<<"Horario invalido! tenta novamente\n";
+		system("pause");
+		inserirHorario();
+		return "";
+	}
 
 	saida<<hora_ini<<"h-"<<hora_fim<<"h";
 	hora=saida.str();
 	ss.str("");
 	saida.str("");
 	return hora;
+}
+
+template <class T>
+T * find(vector<T *> * v, int id)
+{
+	for(unsigned int i=0; i<v->size(); i++)
+	{
+		if(id==v->at(i)->getId())
+			return v->at(i);
+	}
+	throw NotFound();
+	return NULL;
 }
 
 #endif /* FUNCOES_H_ */
