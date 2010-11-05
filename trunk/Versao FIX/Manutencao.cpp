@@ -911,7 +911,7 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 	string nome, dataNas, tipo, esp, hor, morada, cargo;
 	double venc;
 	int op;
-
+	Pessoa * p2;
 	opcoes = p->editPessoa();
 
 	opcoes.push_back("");
@@ -920,6 +920,7 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 	showMenu("Editar Pessoa", opcoes);
 	cout<<"    Opcao: ";
 	op=intinput();
+	system("cls");
 
 	if(p->getTipo()=="Medico")
 	{
@@ -984,50 +985,57 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 
 		}
 	}
-	else if(p->getTipo()=="Doente")
+	else if(p->getTipo()=="Doente")//visto
 	{
 		switch(op)
 		{
-		case 1:
-			//system("cls");
-			//cout<<"   --Editar Doente--"<<endl<<endl;
+		case 1://nome
 			cout<<"Nome de Doente: "<<p->getName()<<endl;
 			cout<<"Novo nome de Doente: ";
 			getline(cin, nome);
 			p->setName(nome);
-			editPessoas(p);
 			break;
-		case 2:
-			//system("cls");
-			//cout<<"   --Editar Doente--"<<endl<<endl;
+		case 2://data nasc
 			cout<<"Novo Data de Nascimento de Doente: ";
 			dataNas = inserirData();
 			p->setDataNascimento(dataNas);
-			editPessoas(p);
 			break;
-	/*	case 3:
-			system("cls");
-			cout<<"   --Editar Doente--"<<endl<<endl;
-			cout<<"Novo Tipo da Doente: ";
-			getline(cin, tipo);
-			p->setTipo(tipo);
-			editPessoas(p);
-			break;*/
-
-		case 3:
-			//system("cls");
-			//cout<<"   --Editar Doente--"<<endl<<endl;
+		case 3://morada
 			cout<<"Novo Morada de Doente: ";
 			getline(cin, morada);
 			p->setMorada(morada);
-			editPessoas(p);
+			break;
+		case 4://add medico
+			try
+			{
+				listaMedicos();
+				cout<<"Qual o medico que quer associar (ID): ";
+				id=intinput();
+
+				p2 = find(&pessoas, id);
+
+				while(p2->getTipo() != "Medico")
+				{
+					cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
+					id = intinput();
+					p2 = find(&pessoas, id);
+				}
+				p->addMedico(p2);
+			}
+			catch(NotFound)
+			{
+				cout<<"Nao existe esse ID no sistema!"<<endl;
+				system("pause");
+			}
+			break;
+		case 5://ver medicos
+			p->showMedicos();
 			break;
 		case 0:
 			return;
 			break;
 		default:
 			editPessoas(p);
-
 		}
 	}
 
