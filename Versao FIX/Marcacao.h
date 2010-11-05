@@ -23,7 +23,7 @@ public:
 	Marcacao();
 	virtual ~Marcacao();
 
-	Marcacao(string data, string hora, string tipo, Pessoa * medico, Pessoa * Doente);
+	Marcacao(string data, string hora, string tipo, Pessoa * medico, Pessoa * doente);
 	string getData();
 	void setData(string data);
 	string getHora();
@@ -32,13 +32,14 @@ public:
 	void setTipo(string tipo);
 	int getId() const;
 	string toList();
+	Pessoa * getMedico();
+	void setMedico(Pessoa * medico);
+	Pessoa * getDoente();
+	void setDoente(Pessoa * doente);
+
 	virtual string toString();
 	virtual vector<string> imprime();
 	virtual vector<string> editMarcacao();
-	Pessoa * getMedico();
-	Pessoa * getDoente();
-	void setMedico(Pessoa * medico);
-	void setDoente(Pessoa * doente);
 
 	///////////////////////////////////////
 	//
