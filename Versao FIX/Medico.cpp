@@ -10,21 +10,21 @@
 Medico::Medico(){}
 
 Medico::~Medico(){}
-
+/*
 Medico::Medico(int id, string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento):Pessoa(id, nome, dataNascimento, tipo)
 {
 	this->especialidade = especialidade;
 	this->horario = horario;
 	this->vencimento = vencimento;
 	this->func = 0;
-}
+}*/
 
 Medico::Medico(string nome, string dataNascimento, string tipo, string especialidade, string horario, double vencimento):Pessoa(nome, dataNascimento, tipo)
 {
 	this->especialidade = especialidade;
 	this->horario = horario;
 	this->vencimento = vencimento;
-	this->func = 0;
+	this->pes = 0;
 }
 
 string Medico::getEspecialidade(){
@@ -57,14 +57,14 @@ void Medico::setVencimento(double vencimento)
 	this->vencimento = vencimento;
 }
 
-Funcionario *Medico::getFuncionario()
+Pessoa *Medico::getPessoa()
 {
-	return this->func;
+	return this->pes;
 }
 
-void Medico::setFuncionario(Funcionario *func)
+void Medico::setPessoa(Pessoa *pes)
 {
-	this->func = func;
+	this->pes = pes;
 }
 
 vector<string> Medico::imprime(){
@@ -83,11 +83,12 @@ vector<string> Medico::imprime(){
 	v.push_back(ss3.str());
 
 	ss4<<"   Funcionario Associado(ID, nome): ";
-	if(this->func==0){
+
+	if(this->pes!=0)
+		ss4<<this->pes->getId()<<", "<<this->pes->getName();
+	else
 		ss4<<"nao tem";
-		system("pause");}
-	else{
-		ss4<<this->func->getId()<<", "<<this->func->getName();}
+
 	v.push_back(ss4.str());
 	return v;
 }
@@ -105,11 +106,11 @@ vector<string> Medico::editPessoa()
 	ss3<<"5 - Editar Vencimento: "<<this->vencimento;
 	opcoes.push_back(ss3.str());
 	ss4<<"6 - Editar o Funcionario associado: ";
-	if(this->func==0){
+
+	if(this->pes==0)
 		ss4<<" Nao tem.";
-		system("pause");}
-	else{
-		ss4<<this->func->getId()<<", "<<this->func->getName();}
+	else
+		ss4<<this->pes->getId()<<", "<<this->pes->getName();
 
 	opcoes.push_back(ss4.str());
 
@@ -120,10 +121,10 @@ string Medico::toString()
 {
 	stringstream ss;
 	ss<<Pessoa::toString()<<this->especialidade<<"|"<<this->horario<<"|"<<this->vencimento<<"|";
-	if(func==0)
+	if(pes==0)
 		ss<<"0"<<"|";
 	else
-		ss<<this->func->getId()<<"|";
+		ss<<this->pes->getId()<<"|";
 	return ss.str();
 }
 

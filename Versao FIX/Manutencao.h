@@ -48,7 +48,7 @@ public:
 	void saveMarcacoes(string filename);
 	void saveManutencao();
 	void startManutencao();
-	void associarFuncionario(Medico *m);
+	void associarFuncionario(Pessoa *p);
 	//string imprime();
 
 

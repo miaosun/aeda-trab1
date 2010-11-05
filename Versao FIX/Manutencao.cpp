@@ -906,7 +906,7 @@ void Manutencao::listaMarcacoes()//visto
 
 void Manutencao::editPessoas(Pessoa *p)//visto
 {
-	Medico * m;
+	Medico *m;
 	vector<string> opcoes;
 	string nome, dataNas, tipo, esp, hor, morada, cargo;
 	double venc;
@@ -974,13 +974,10 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 			editPessoas(p);
 			break;
 		case 6:
-			m = new Medico(p->getId(), p->getName(), p->getDataNascimento(), p->getTipo(), p->getEspecialidade(), p->getHorario(), p->getVencimento());
-			system("pause");
-			associarFuncionario(m);
-			editPessoas(m);
+			associarFuncionario(p);
+			editPessoas(p);
 			break;
 		case 0:
-			return;
 			break;
 		default:
 			editPessoas(p);
@@ -1276,12 +1273,12 @@ void Manutencao::loadPessoas(string filename)
 					Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
 
 					if(atoi(v[7].c_str())==0)
-						m->setFuncionario(0);
+						m->setPessoa(0);
 					else
 					{
 						p=find(&pessoas,atoi(v[7].c_str()));
-						f = new Funcionario(p->getId(), p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());
-						m->setFuncionario(f);
+						
+						m->setPessoa(p);
 					}
 
 					pessoas.push_back(m);
@@ -1369,12 +1366,12 @@ void Manutencao::loadMarcacoes(string filename)
 				v=split('|', linha);
 				if(v[3]=="Consulta")
 				{
-					Consulta *c = new Consulta(v[1].c_str(),v[2].c_str(),v[3].c_str());
+					Consulta *c = new Consulta(v[1].c_str(),v[2].c_str(),v[3].c_str(),atoi(v[4].c_str()),atoi(v[5].c_str()));
 					marcacoes.push_back(c);
 				}
 				else if(v[3]=="Exame")
 				{
-					Exame *e = new Exame(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
+					Exame *e = new Exame(v[1].c_str(),v[2].c_str(),v[3].c_str(),atoi(v[4].c_str()), atoi(v[5].c_str()), v[6].c_str());
 					marcacoes.push_back(e);
 				}
 			}
@@ -1424,12 +1421,10 @@ void Manutencao::startManutencao()
 	menuPrincipal();
 }
 
-void Manutencao::associarFuncionario(Medico *m)
+void Manutencao::associarFuncionario(Pessoa *p)
 {
-	Pessoa *p;
-	Funcionario *f;
+	Medico *m;
 	int id;
-	system("pause");
 	system("cls");
 	cout<<"  --Funcionarios no sistema--"<<endl<<endl;
 	
@@ -1448,9 +1443,8 @@ void Manutencao::associarFuncionario(Medico *m)
 			id = intinput();
 			p = find(&pessoas, id);
 		}
-		f = new Funcionario(p->getId(), p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());
-
-		m->setFuncionario(f);
+	
+		m->setPessoa(p);
 	}
 
 	catch (NotFound)

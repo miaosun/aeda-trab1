@@ -11,7 +11,7 @@ Exame::Exame(){}
 
 Exame::~Exame(){}
 
-Exame::Exame(string data, string hora, string tipo, string sala, Pessoa * medico, Pessoa * doente):Marcacao(data, hora, tipo, medico, doente)
+Exame::Exame(string data, string hora, string tipo, Pessoa * medico, Pessoa * doente, string sala):Marcacao(data, hora, tipo, medico, doente)
 {
 	this->sala = sala;
 }
