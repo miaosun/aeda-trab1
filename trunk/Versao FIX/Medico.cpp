@@ -134,4 +134,5 @@ void Medico::setMorada(string morada){}
 void Medico::setCargo(string cargo){}
 string Medico::getCargo(){return "";}
 void Medico::showMedicos(){};
-void Medico::addMedico(Pessoa * medico){};
+void Medico::addMedico(Pessoa * medico){}
+vector<Pessoa *> * getMedicos(){vector<Pessoa *> v; return &v;}

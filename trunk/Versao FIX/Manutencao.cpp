@@ -665,6 +665,30 @@ void Manutencao::addMarcacao()//visto
 	Pessoa * m;
 	Pessoa * d;
 
+	try
+	{
+		system("cls");
+		listaDoentes();
+		cout<<"Qual o doente que vai ter a consulta (ID): ";
+		id=intinput();
+
+		p = find(&pessoas, id);
+
+		while(p->getTipo() != "Doente")
+		{
+			cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
+			id = intinput();
+			p = find(&pessoas, id);
+		}
+		d=p;
+	}
+	catch (NotFound)
+	{
+		cout<<"Nao existe esse ID no sistema!"<<endl;
+		system("pause");
+		return;
+	}
+
 	opcoes.push_back("Escolha um dos seguintes tipos de marcacao:");
 	opcoes.push_back("");
 	opcoes.push_back("1 - Consulta");
@@ -681,33 +705,11 @@ void Manutencao::addMarcacao()//visto
 	case 1:
 		try
 		{
-			listaMedicos();
-			cout<<"Qual o medico que vai dar a consulta (ID): ";
+			d->showMedicos();
+			cout<<endl<<"Qual o medico que vai dar a consulta (ID): ";
 			id=intinput();
-
-			p = find(&pessoas, id);
-
-			while(p->getTipo() != "Medico")
-			{
-				cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
-				id = intinput();
-				p = find(&pessoas, id);
-			}
+			p = find(d->getMedicos(), id);
 			m=p;
-
-			listaDoentes();
-			cout<<"Qual o doente que vai ter a consulta (ID): ";
-			id=intinput();
-
-			p = find(&pessoas, id);
-
-			while(p->getTipo() != "Doente")
-			{
-				cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
-				id = intinput();
-				p = find(&pessoas, id);
-			}
-			d=p;
 
 			tipo = "Consulta";
 			cout<<"Data da Consulta: ";
@@ -726,33 +728,11 @@ void Manutencao::addMarcacao()//visto
 	case 2:
 		try
 		{
-			listaMedicos();
-			cout<<"Qual o medico que vai fazer o exame (ID): ";
+			d->showMedicos();
+			cout<<endl<<"Qual o medico que vai fazer o exame (ID): ";
 			id=intinput();
-
-			p = find(&pessoas, id);
-
-			while(p->getTipo() != "Medico")
-			{
-				cout<<"Nao tem nenhum medico com esse ID, tenta novamente: ";
-				id = intinput();
-				p = find(&pessoas, id);
-			}
+			p = find(d->getMedicos(), id);
 			m=p;
-
-			listaDoentes();
-			cout<<"Qual o doente que vai fazer o exame (ID): ";
-			id=intinput();
-
-			p = find(&pessoas, id);
-
-			while(p->getTipo() != "Doente")
-			{
-				cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
-				id = intinput();
-				p = find(&pessoas, id);
-			}
-			d=p;
 
 			tipo = "Exame";
 			cout<<"Data do Exame: ";
