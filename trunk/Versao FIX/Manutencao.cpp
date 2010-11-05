@@ -512,6 +512,7 @@ string Manutencao::escolheEspecialidade()
 		cout<<"Especialidade: ";
 		op=intinput();
 	}while(op<0||op>especialidades.size()-1);
+
 	return especialidades.at(op);
 }
 
@@ -986,6 +987,7 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 			break;
 		case 5://ver medicos
 			p->showMedicos();
+			system("pause");
 			break;
 		case 0:
 			return;
@@ -1353,7 +1355,7 @@ void Manutencao::associarFuncionario(Pessoa * medico)
 
 	catch (NotFound)
 	{
-		cout<<"Nao existe o ID no sistema, tenta novamente: ";
+		cout<<"Nao existe o ID no sistema\n";
 		system("pause");
 	}
 

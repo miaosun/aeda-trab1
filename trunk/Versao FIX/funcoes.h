@@ -141,8 +141,7 @@ string inserirHorario()
 	}
 	catch (HoraInvalida)
 	{
-		cout<<"Horario invalido! tenta novamente\n";
-		system("pause");
+		cout<<"Horario invalido! tenta novamente\nHorario: ";
 		inserirHorario();
 		return "";
 	}
