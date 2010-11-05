@@ -1164,12 +1164,12 @@ void Manutencao::loadPessoas(string filename)
 					Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
 
 					if(atoi(v[7].c_str())==0)
-						m->setPessoa(0);
+						m->setFuncionario(0);
 					else
 					{
 						p=find(&pessoas,atoi(v[7].c_str()));
 						
-						m->setPessoa(p);
+						m->setFuncionario(p);
 					}
 
 					pessoas.push_back(m);
@@ -1323,9 +1323,9 @@ void Manutencao::startManutencao()
 	menuPrincipal();
 }
 
-void Manutencao::associarFuncionario(Pessoa *p)
+void Manutencao::associarFuncionario(Pessoa * medico)
 {
-	Medico *m;
+	Pessoa * p;
 	int id;
 	system("cls");
 	cout<<"  --Funcionarios no sistema--"<<endl<<endl;
@@ -1346,7 +1346,7 @@ void Manutencao::associarFuncionario(Pessoa *p)
 			p = find(&pessoas, id);
 		}
 	
-		m->setPessoa(p);
+		medico->setFuncionario(p);
 	}
 
 	catch (NotFound)
