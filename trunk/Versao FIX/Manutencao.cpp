@@ -173,7 +173,7 @@ void Manutencao::menuPrincipal()
 
 void Manutencao::menuPessoas()
 {
-	int op;
+	int op, id;
 	Pessoa *p;
 	vector<string> opcoes;
 	string filename;
@@ -204,17 +204,14 @@ void Manutencao::menuPessoas()
 		switch(op)
 		{
 		case 1:
-			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
 			menuPessoas();
 			break;
 		case 2://ver detalhes Pessoas
 			listaPessoas();
 			cout<<endl<<"Introduza o ID da Pessoa que pretende ver os detalhes: ";
-			int id;
 			id=intinput();
 
-			//falta implementar excecao...
 			try
 			{
 				showMenu("Detalhes da Pessoa", find(&pessoas, id)->imprime());
@@ -231,11 +228,16 @@ void Manutencao::menuPessoas()
 			listaPessoas();
 			cout<<endl<<"Introduza o ID da Pessoa que pretende editar: ";
 			id=intinput();
-			for(unsigned int i=0; i<pessoas.size(); i++)
-				if(id == pessoas[i]->getId())
-					p = pessoas[i];
-
-			editPessoas(p);
+			try
+			{
+				p=find(&pessoas, id)
+				editPessoas(p);
+			}
+			catch (NotFound)
+			{
+				cout<<endl<<"Pessoa nao encontrada!"<<endl;
+				system("pause");
+			}
 			menuPessoas();
 			break;
 		case 4://apagar Pessoa
@@ -286,10 +288,7 @@ void Manutencao::menuPessoas()
 		switch(op)
 		{
 		case 1://criar Pessoa
-			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
-			showMenu("Nova Equipa", pessoas.back()->imprime());
-			system("pause");
 			menuPessoas();
 			break;
 		case 2://importar Pessoas
@@ -652,7 +651,7 @@ void Manutencao::removeMarcacao(int id)
 }
 
 
-void Manutencao::listaPessoas()
+void Manutencao::listaPessoas()//visto
 {
 	system("cls");
 	cout<<"  --Pessoas no sistema--"<<endl<<endl;
