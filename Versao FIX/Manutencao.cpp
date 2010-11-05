@@ -910,7 +910,7 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 	vector<string> opcoes;
 	string nome, dataNas, tipo, esp, hor, morada, cargo;
 	double venc;
-	int op;
+	int op, id;
 	Pessoa * p2;
 	opcoes = p->editPessoa();
 
@@ -926,59 +926,34 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 	{
 		switch(op)
 		{
-		case 1:
-		//	system("cls");
-		//	cout<<"   --Editar Medico--"<<endl<<endl;
-		//	cout<<"Nome de Medico: "<<p->getName()<<endl;
+		case 1://nome
 			cout<<"Novo nome de Medico: ";
 			getline(cin, nome);
 			p->setName(nome);
-			editPessoas(p);
 			break;
-		case 2:
-		//	system("cls");
-		//	cout<<"   --Editar Medico--"<<endl<<endl;
+		case 2:// data nasc
 			cout<<"Novo Data de Nascimento de Medico: ";
 			dataNas=inserirData();
 			p->setDataNascimento(dataNas);
-			editPessoas(p);
 			break;
-	/*	case 3:
-		//	system("cls");
-		//	cout<<"   --Editar Medico--"<<endl<<endl;
-			cout<<"Novo Tipo da Medico: ";
-			getline(cin, tipo);
-			p->setTipo(tipo);
-			editPessoas(p);
-			break;*/
-
-		case 3:
-			//system("cls");
-			//cout<<"   --Editar Medico--"<<endl<<endl;
+		case 3://especialidade
 			cout<<"Novo Especialidade de Medico: ";
 			getline(cin, esp);
 			p->setEspecialidade(esp);
-			editPessoas(p);
 			break;
-		case 4:
-		//	system("cls");
-			//cout<<"   --Editar Medico--"<<endl<<endl;
+		case 4://horario
 			hor=inserirHorario();
 			p->setHorario(hor);
-			editPessoas(p);
 			break;
-		case 5:
-			//system("cls");
-			//cout<<"   --Editar Medico--"<<endl<<endl;
+		case 5://vencimento
 			venc=inserirVencimento();
 			p->setVencimento(venc);
-			editPessoas(p);
 			break;
 		case 6:
 			associarFuncionario(p);
-			editPessoas(p);
 			break;
 		case 0:
+			return;
 			break;
 		default:
 			editPessoas(p);
@@ -1045,45 +1020,23 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 		switch(op)
 		{
 		case 1:
-			//system("cls");
-			//cout<<"   --Editar Funcionario--"<<endl<<endl;
-			//cout<<"Nome de Funcionario: "<<p->getName()<<endl;
 			cout<<"Novo nome de Funcinario: ";
 			getline(cin, nome);
 			p->setName(nome);
-			editPessoas(p);
 			break;
 		case 2:
-			//system("cls");
-			//cout<<"   --Editar Funcionario--"<<endl<<endl;
 			cout<<"Novo Data de Nascimento de Funcionario: ";
 			dataNas=inserirData();
 			p->setDataNascimento(dataNas);
-			editPessoas(p);
 			break;
-	/*	case 3:
-			//system("cls");
-			//cout<<"   --Editar Funcionario--"<<endl<<endl;
-			cout<<"Novo Tipo da Funcionario: ";
-			getline(cin, tipo);
-			p->setTipo(tipo);
-			editPessoas(p);
-			break;*/
-
-		case 3:
-			//system("cls");
-			//cout<<"   --Editar Funcionario--"<<endl<<endl;
+		case 3://cargo
 			cout<<"Novo cargo de Funcionario: ";
 			getline(cin, cargo);
 			p->setCargo(cargo);
-			editPessoas(p);
 			break;
-		case 4:
-			//system("cls");
-			//cout<<"   --Editar Funcionario--"<<endl<<endl;
+		case 4://vencimento
 			venc=inserirVencimento();
 			p->setVencimento(venc);
-			editPessoas(p);
 			break;
 		case 0:
 			return;
@@ -1092,6 +1045,11 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 			editPessoas(p);
 
 		}
+	}
+	if(op>0)
+	{
+		showMenu("Pessoa", p->imprime());
+		system("pause");
 	}
 }
 
@@ -1172,6 +1130,7 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 			}
 			break;
 		case 0:
+			return;
 			break;
 		default:
 			editMarcacoes(m);
@@ -1243,10 +1202,16 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 			m->setSala(sala);
 			break;
 		case 0:
+			return;
 			break;
 		default:
 			editMarcacoes(m);
 		}
+	}
+	if(op>0&&op<=5)
+	{
+		showMenu("Marcacao", m->imprime());
+		system("pause");
 	}
 }
 
