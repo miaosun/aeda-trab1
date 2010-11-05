@@ -35,6 +35,7 @@ public:
 	string getHorario();
 	void addMedico(Pessoa * medico);
 	vector<Pessoa *> * getMedicos();
+	void showMedicos();
 
 private:
 	string morada;

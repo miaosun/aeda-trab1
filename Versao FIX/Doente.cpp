@@ -24,7 +24,18 @@ void Doente::addMedico(Pessoa * medico)
 	if(medico->getTipo()!="Medico")
 		throw tipoPessoaInvalida("Medico", medico->getTipo());
 	else
+	{
+		for(unsigned int i=0; i<medicos.size(); i++)
+		{
+			if(medico==medicos.at(i))
+			{
+				cout<<"Medico ja associado!"<<endl;
+				system("pause");
+				return;
+			}
+		}
 		medicos.push_back(medico);
+	}
 }
 vector<Pessoa *> * Doente::getMedicos()
 {
@@ -56,13 +67,30 @@ vector<string> Doente::imprime(){
 vector<string> Doente::editPessoa()
 {
 	vector<string> opcoes;
-	stringstream ss;
+	stringstream ss, ss1, ss2;
 	opcoes = Pessoa::editPessoa();
 
-	ss<<"4 - Editar Morada: "<<this->morada;
+	ss<<"3 - Editar Morada: "<<this->morada;
 	opcoes.push_back(ss.str());
 
+	ss1<<"4 - Adicionar medico";
+	opcoes.push_back(ss1.str());
+
+	ss2<<"5 - Ver medicos";
+	opcoes.push_back(ss2.str());
+
 	return opcoes;
+}
+
+void Doente::showMedicos()
+{
+	system("cls");
+	cout<<"Medicos que acompanham o doente:"<<endl<<endl;
+	for(unsigned int i=0; i<medicos.size(); i++)
+	{
+		medicos.at(i)->toList();
+	}
+	cout<<endl;
 }
 
 string Doente::toString()

@@ -45,12 +45,13 @@ public:
 	virtual double getVencimento() = 0;
 	virtual string getEspecialidade() = 0;
 	virtual string getHorario() = 0;
-	static int count;
+	virtual void showMedicos() = 0;
+	virtual void addMedico(Pessoa * medico) = 0;
 private:
 	string nome;
 	string dataNascimento;
 	int id;
-	
+	static int count;
 	string tipo;
 
 };
