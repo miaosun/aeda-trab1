@@ -17,7 +17,15 @@
 using namespace std;
 
 
-Manutencao::Manutencao(){}
+Manutencao::Manutencao()
+{
+	especialidades.push_back("Dentaria");
+	especialidades.push_back("Ortopedia");
+	especialidades.push_back("Oftaumonologia");
+	especialidades.push_back("Psiquiatria");
+	especialidades.push_back("Cirurgia");
+	especialidades.push_back("Imagiologia");
+}
 
 Manutencao::~Manutencao(){}
 
@@ -145,6 +153,7 @@ void Manutencao::menuPrincipal()
 
     opcoes.push_back("1 - Gestao de Pessoas");
     opcoes.push_back("2 - Gestao de Marcacoes");
+	opcoes.push_back("3 - Gestao de Especialidades");
     opcoes.push_back("");
     opcoes.push_back("0 - Gravar e sair");
 
@@ -162,6 +171,9 @@ void Manutencao::menuPrincipal()
         menuMarcacoes(); //vai para menu marcacoes
         menuPrincipal(); //volta ao menu principal
         break;
+	case 3:
+		menuEspecialidades();
+		menuPrincipal();
     case 0:
 		saveManutencao();
         break;
@@ -458,6 +470,69 @@ void Manutencao::menuMarcacoes()//visto
 	}
 }
 
+void Manutencao::menuEspecialidades()
+{
+	vector<string> opcoes;
+	int op;
+	opcoes.push_back("Escolha uma das seguintes opcoes:");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Ver Especialidades");
+	opcoes.push_back("2 - Nova Especialidade");
+	opcoes.push_back("");
+	opcoes.push_back("0 - Voltar atras");
+	showMenu("Gestao de especialidades", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+	system("cls");
+
+	switch (op)
+	{
+	case 1:
+		listaEspecialidades();
+		system("pause");
+		menuEspecialidades();
+		break;
+	case 2:
+		addEspecialidade();
+		menuEspecialidades();
+		break;
+	case 0:
+		break;
+	default:
+		menuEspecialidades();
+	}
+}
+
+string Manutencao::escolheEspecialidade()
+{
+	int op;
+	listaEspecialidades();
+	do
+	{
+		cout<<"Especialidade: ";
+		op=intinput();
+	}
+	while(op<0||op>especialidades.size()-1);
+	return especialidades.at(op);
+}
+
+void Manutencao::listaEspecialidades()
+{
+	system("cls");
+	for(unsigned int i=0; i<especialidades.size(); i++)
+		cout<<i<<" - "<<especialidades.at(i)<<endl;
+	cout<<endl;
+}
+
+void Manutencao::addEspecialidade()
+{
+	string esp;
+	listaEspecialidades();
+	cout<<"Nome da nova especialidade: ";
+	cin>>esp;
+	especialidades.push_back(esp);
+}
+
 void Manutencao::addPessoa()//visto
 {
 	string nome, dataNas, tipo, esp, hor, mor, car, s;
@@ -492,9 +567,8 @@ void Manutencao::addPessoa()//visto
 		
 		dataNas=inserirData();
 
-		//TODO especialidade
-		cout<<"Especialidade: ";
-		getline(cin, esp);
+
+		esp=escolheEspecialidade();
 		
 		hor=inserirHorario();
 		
