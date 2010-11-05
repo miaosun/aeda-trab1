@@ -831,7 +831,7 @@ void Manutencao::listaMarcacoes()//visto
 
 void Manutencao::editPessoas(Pessoa *p)//visto
 {
-	Medico *m;
+	Medico * m;
 	vector<string> opcoes;
 	string nome, dataNas, tipo, esp, hor, morada, cargo;
 	double venc;
@@ -1285,7 +1285,7 @@ void Manutencao::associarFuncionario(Medico *m)
 	Pessoa *p;
 	Funcionario *f;
 	int id;
-
+	system("pause");
 	system("cls");
 	cout<<"  --Funcionarios no sistema--"<<endl<<endl;
 	
@@ -1293,7 +1293,8 @@ void Manutencao::associarFuncionario(Medico *m)
 
 	cout<<"Insere o ID do funcionario que pretende de associar: ";
 	id = intinput();
-
+	cout<<"hello:";
+	system("pause");
 	p = find(&pessoas, id);
 
 	while(p->getTipo() != "Funcionario")
@@ -1302,9 +1303,13 @@ void Manutencao::associarFuncionario(Medico *m)
 		id = intinput();
 		p = find(&pessoas, id);
 	}
-	
+	cout<<"nihao";
+	system("pause");
 	f = new Funcionario(p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());
+	cout<<"erro esta aqui";
+	system("pause");
 	m->setFuncionario(f);
+	system("pause");
 	 
 }
 
