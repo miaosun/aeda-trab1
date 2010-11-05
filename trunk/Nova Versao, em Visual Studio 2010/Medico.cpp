@@ -51,12 +51,12 @@ void Medico::setVencimento(double vencimento)
 
 Funcionario *Medico::getFuncionario()
 {
-	return this->funcionario;
+	return this->func;
 }
 
-void Medico::setFuncionario(Funcionario *funcionario)
+void Medico::setFuncionario(Funcionario *func)
 {
-	this->funcionario = funcionario;
+	this->func = func;
 }
 
 vector<string> Medico::imprime(){
