@@ -835,14 +835,10 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 	vector<string> opcoes;
 	string nome, dataNas, tipo, esp, hor, morada, cargo;
 	double venc;
-	stringstream ss;
 	int op;
 
 	opcoes = p->editPessoa();
-	for(unsigned int i=0; i<opcoes.size(); i++)
-	{
-		ss<<opcoes[i]<<endl;
-	}
+
 	opcoes.push_back("");
 	opcoes.push_back("0 - Voltar atras");
 
@@ -903,10 +899,10 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 			editPessoas(p);
 			break;
 		case 6:
-			cout<<"teste: 123";
+			m = new Medico(p->getName(), p->getDataNascimento(), p->getTipo(), p->getEspecialidade(), p->getHorario(), p->getVencimento());
 			system("pause");
 			associarFuncionario(m);
-			cout<<"teste:";
+			editPessoas(m);
 			break;
 		case 0:
 			return;
@@ -1293,8 +1289,7 @@ void Manutencao::associarFuncionario(Medico *m)
 
 	cout<<"Insere o ID do funcionario que pretende de associar: ";
 	id = intinput();
-	cout<<"hello:";
-	system("pause");
+
 	p = find(&pessoas, id);
 
 	while(p->getTipo() != "Funcionario")
@@ -1303,13 +1298,10 @@ void Manutencao::associarFuncionario(Medico *m)
 		id = intinput();
 		p = find(&pessoas, id);
 	}
-	cout<<"nihao";
-	system("pause");
+
 	f = new Funcionario(p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());
-	cout<<"erro esta aqui";
-	system("pause");
+
 	m->setFuncionario(f);
-	system("pause");
 	 
 }
 

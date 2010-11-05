@@ -31,6 +31,8 @@ public:
 	void setCargo(string cargo);
 	string getCargo();
 	double getVencimento();
+	string getEspecialidade();
+	string getHorario();
 
 private:
 	string morada;

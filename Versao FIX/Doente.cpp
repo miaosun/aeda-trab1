@@ -66,3 +66,5 @@ void Doente::setHorario(string horario){}
 void Doente::setCargo(string cargo){}
 string Doente::getCargo(){return "";}
 double Doente::getVencimento(){return NULL;}
+string Doente::getEspecialidade(){return "";};
+string Doente::getHorario(){return "";};
