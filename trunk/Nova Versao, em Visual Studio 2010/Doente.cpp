@@ -7,63 +7,39 @@
 
 #include "Doente.h"
 
-/**
- * Construtor por omissao da classe Doente
- */
+
 Doente::Doente(){}
 
-/**
- * Destrutor da classe Doente
- */
 Doente::~Doente(){}
 
 
-/**
- * Construtor da classe Doente com nome, data de nascimento, tipo, morada
- * @param tipo tipo de Pessoa 
- */
 Doente::Doente(string nome, string dataNascimento, string tipo, string morada):Pessoa(nome, dataNascimento, tipo)
 {
 	this->morada = morada;
 }
 
-
-/**
- * Funçao que retorna a Morada do Doente
- */
 string Doente::getMorada(){
 
 	return this->morada;
 }
 
-
-/**
- * Funçao que modifica a morada do Doente
- */
 void Doente::setMorada(string morada)
 {
 	this->morada = morada;
 }
 
-
-/**
- * Funçao que imprime 
- */
 vector<string> Doente::imprime(){
 
-	stringstream s;
+	stringstream ss;
 	vector<string> v;
 	v=Pessoa::imprime();
 
-	s<<"   Morada: "<<this->morada;
-	v.push_back(s.str());
+	ss<<"   Morada: "<<this->morada;
+	v.push_back(ss.str());
 
 	return v;
 }
 
-/**
- * Função
- */
 vector<string> Doente::editPessoa()
 {
 	vector<string> opcoes;
@@ -76,10 +52,6 @@ vector<string> Doente::editPessoa()
 	return opcoes;
 }
 
-
-/**
- * 
- */
 string Doente::toString()
 {
 	stringstream ss;
@@ -87,10 +59,10 @@ string Doente::toString()
 	return ss.str();
 }
 
-/**
- * 
- */
+//funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Doente::setEspecialidade(string especialidade){}
 void Doente::setVencimento(double venc){}
 void Doente::setHorario(string horario){}
 void Doente::setCargo(string cargo){}
+string Doente::getCargo(){return "";}
+double Doente::getVencimento(){return NULL;}
