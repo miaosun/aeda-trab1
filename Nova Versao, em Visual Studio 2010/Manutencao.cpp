@@ -204,10 +204,7 @@ void Manutencao::menuPessoas()
 		switch(op)
 		{
 		case 1:
-			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
-			showMenu("Nova Pessoa", pessoas.back()->imprime());
-			system("pause");
 			menuPessoas();
 			break;
 		case 2://ver detalhes Pessoas
@@ -287,10 +284,7 @@ void Manutencao::menuPessoas()
 		switch(op)
 		{
 		case 1://criar Pessoa
-			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
-			showMenu("Nova Equipa", pessoas.back()->imprime());
-			system("pause");
 			menuPessoas();
 			break;
 		case 2://importar Pessoas
@@ -459,41 +453,45 @@ void Manutencao::menuMarcacoes()
 void Manutencao::addPessoa()
 {
 	string nome, dataNas, tipo, esp, hor, mor, car;
-	//stringstream ss;
+	vector<string> opcoes;
 	double venc;
-	//int dia, mes, ano;
-	cout<<"Tipo da Pessoa(Medico, Doente ou Funcionario):\n";// (0 para voltar);
-	getline(cin, tipo);
-	//if(tipo=="0")	//quando sair daqui, no menuPessoas 0 voltar termina sempre o programa,
-		//menuPessoas();  //se sem isto funcina bem, nao sei porque
-	if(tipo=="Medico")
+	int op;
+	Medico * m;
+	Funcionario * f;
+	Doente * d;
+
+	opcoes.push_back("Escolha uma das seguintes opcoes:");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Novo Medico");
+	opcoes.push_back("2 - Novo Funcionario");
+	opcoes.push_back("3 - Novo Doente");
+	opcoes.push_back("");
+	opcoes.push_back("0 - Voltar atras");
+	showMenu("Adicionar Pessoa", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+	system("cls");
+
+
+	switch(op)
 	{
+	case 1: //medico
 		cout<<"Nome da Pessoa: ";
 		getline(cin, nome);
 
 		cout<<"Data de Nascimento(dia, mes, ano) (separado com espaco, ex: 23 08 2010):\n";
-		dataNas=inserirData(dataNas);
+		
+		dataNas=inserirData();
 
-
-		///////////////////////////////
-		//  excepcoes dataInvalido() //
-		///////////////////////////////
-
+		//TODO especialidade
 		cout<<"Especialidade: ";
 		getline(cin, esp);
 		
-		hor=inserirHorario(hor);
-
-		///////////////////////////////
-		//  excepcoes horaInvalido() //
-		///////////////////////////////
+		hor=inserirHorario();
 		
-		/*cout<<"Vencimento: ";
-		cin>>venc;
-		cin.ignore();*/
 		venc = inserirVencimento();
 
-		Medico * m = new Medico(nome, dataNas, tipo, esp, hor, venc);
+		m = new Medico(nome, dataNas, tipo, esp, hor, venc);
 		pessoas.push_back(m);
 
 		/*string s;
@@ -503,38 +501,48 @@ void Manutencao::addPessoa()
 			associarFuncionario();
 		else
 			return;*/
-	}
-
-	else if (tipo=="Doente")
-	{
+		break;
+	case 2: //funcionario
 		cout<<"Nome da Pessoa: ";
 		getline(cin, nome);
 		cout<<"Data de Nascimento(dia, mes, ano) (separado com espaco, ex: 23 08 2010):\n";
-		dataNas=inserirData(dataNas);
-		cout<<"Morada: ";
-		getline(cin, mor);
-		Doente * d = new Doente(nome, dataNas, tipo, mor);
-		pessoas.push_back(d);
-	}
-	else if (tipo=="Funcionario")
-	{
-		cout<<"Nome da Pessoa: ";
-		getline(cin, nome);
-		cout<<"Data de Nascimento(dia, mes, ano) (separado com espaco, ex: 23 08 2010):\n";
-		dataNas=inserirData(dataNas);
+		dataNas=inserirData();
 		cout<<"Cargo: ";
 		getline(cin, car);
 		venc = inserirVencimento();
-		Funcionario * f = new Funcionario(nome, dataNas, tipo, car, venc);
+		f = new Funcionario(nome, dataNas, tipo, car, venc);
 		pessoas.push_back(f);
-	}
-	else
-	{
-		cout<<"Tipo nao e valido, tenta novamente!\n\n";
-		addPessoa();
+		break;
+	case 3: //doente
+		cout<<"Nome da Pessoa: ";
+		getline(cin, nome);
+		cout<<"Data de Nascimento(dia, mes, ano) (separado com espaco, ex: 23 08 2010):\n";
+		dataNas=inserirData();
+		cout<<"Morada: ";
+		getline(cin, mor);
+		d = new Doente(nome, dataNas, tipo, mor);
+		pessoas.push_back(d);
+		break;
+	case 0: //sair
+	default:
+		break;
 	}
 
-	cout<<endl;
+	if(op==1||op==2||op==3)
+	{
+		showMenu("Nova Pessoa", pessoas.back()->imprime());
+		system("pause");
+	}
+
+
+	//stringstream ss;
+
+	//int dia, mes, ano;
+	//cout<<"Tipo da Pessoa(Medico, Doente ou Funcionario):\n";// (0 para voltar);
+	//getline(cin, tipo);
+	//if(tipo=="0")	//quando sair daqui, no menuPessoas 0 voltar termina sempre o programa,
+		//menuPessoas();  //se sem isto funcina bem, nao sei porque
+
 }
 
 void Manutencao::removePessoa(int id){
@@ -578,7 +586,7 @@ void Manutencao::addMarcacao()
 	if(tipo=="Consulta")
 	{
 		cout<<"Data da Consulta: ";
-		data=inserirData(data);
+		data=inserirData();
 		cout<<"Hora da Consulta: ";
 		getline(cin, hora);
 		Consulta * c = new Consulta(data, hora, tipo);
@@ -741,7 +749,7 @@ void Manutencao::editPessoas(Pessoa *p)
 		//	system("cls");
 		//	cout<<"   --Editar Medico--"<<endl<<endl;
 			cout<<"Novo Data de Nascimento de Medico: ";
-			dataNas=inserirData(dataNas);
+			dataNas=inserirData();
 			p->setDataNascimento(dataNas);
 			editPessoas(p);
 			break;
@@ -765,7 +773,7 @@ void Manutencao::editPessoas(Pessoa *p)
 		case 4:
 		//	system("cls");
 			//cout<<"   --Editar Medico--"<<endl<<endl;
-			hor=inserirHorario(hor);
+			hor=inserirHorario();
 			p->setHorario(hor);
 			editPessoas(p);
 			break;
@@ -800,7 +808,7 @@ void Manutencao::editPessoas(Pessoa *p)
 			//system("cls");
 			//cout<<"   --Editar Doente--"<<endl<<endl;
 			cout<<"Novo Data de Nascimento de Doente: ";
-			dataNas = inserirData(dataNas);
+			dataNas = inserirData();
 			p->setDataNascimento(dataNas);
 			editPessoas(p);
 			break;
@@ -847,7 +855,7 @@ void Manutencao::editPessoas(Pessoa *p)
 			//system("cls");
 			//cout<<"   --Editar Funcionario--"<<endl<<endl;
 			cout<<"Novo Data de Nascimento de Funcionario: ";
-			dataNas=inserirData(dataNas);
+			dataNas=inserirData();
 			p->setDataNascimento(dataNas);
 			editPessoas(p);
 			break;
@@ -912,7 +920,7 @@ void Manutencao::editMarcacoes(Marcacao * m)
 		//	cout<<"   --Editar Medico--"<<endl<<endl;
 		//	cout<<"Nome de Medico: "<<p->getName()<<endl;
 			cout<<"Novo data de Consulta: ";
-			data=inserirData(data);
+			data=inserirData();
 			m->setData(data);
 			editMarcacoes(m);
 			break;
@@ -947,7 +955,7 @@ void Manutencao::editMarcacoes(Marcacao * m)
 			//cout<<"   --Editar Doente--"<<endl<<endl;
 			//cout<<"Nome de Doente: "<<p->getName()<<endl;
 			cout<<"Novo data de Exame: ";
-			data=inserirData(data);
+			data=inserirData();
 			m->setData(data);
 			editMarcacoes(m);
 			break;
@@ -955,7 +963,7 @@ void Manutencao::editMarcacoes(Marcacao * m)
 			//system("cls");
 			//cout<<"   --Editar Doente--"<<endl<<endl;
 			cout<<"Novo hora de Exame: ";
-			data=inserirData(data);
+			data=inserirData();
 			m->setHora(hora);
 			editMarcacoes(m);
 			break;

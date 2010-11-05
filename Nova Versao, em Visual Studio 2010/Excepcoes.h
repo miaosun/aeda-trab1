@@ -30,7 +30,7 @@ public:
 	}
 };
 
-class DataInvalida
+class DataInvalida 
 {
 public:
 	int dia, mes, ano;

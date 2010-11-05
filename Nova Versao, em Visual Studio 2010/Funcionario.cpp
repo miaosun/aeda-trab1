@@ -74,7 +74,7 @@ string Funcionario::toString()
 }
 
 
-//funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
+//funcoes abstractas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Funcionario::setEspecialidade(string especialidade){}
 void Funcionario::setHorario(string hora){}
 void Funcionario::setMorada(string morada){}
