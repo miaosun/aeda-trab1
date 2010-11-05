@@ -988,6 +988,7 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 		case 5://ver medicos
 			p->showMedicos();
 			system("pause");
+			editPessoas(p);
 			break;
 		case 0:
 			return;
