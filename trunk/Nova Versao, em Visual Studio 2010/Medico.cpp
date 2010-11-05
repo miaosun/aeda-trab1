@@ -16,7 +16,7 @@ Medico::Medico(string nome, string dataNascimento, string tipo, string especiali
 	this->especialidade = especialidade;
 	this->horario = horario;
 	this->vencimento = vencimento;
-//	this->funcionario = 0;
+	this->func = 0;
 }
 
 string Medico::getEspecialidade(){
@@ -74,8 +74,14 @@ vector<string> Medico::imprime(){
 	ss3<<"   Vencimento: "<<this->vencimento;
 	v.push_back(ss3.str());
 
-	/*ss4<<"  Funcionario Associado(ID, nome): "<<this->funcionario->getId()<<", "<<this->funcionario->getName();
-	v.push_back(ss4.str());*/
+	ss4<<"   Funcionario Associado(ID, nome): ";
+	if(this->func==0){
+		ss4<<" Nao tem.";
+		system("pause");}
+	else{
+		ss4<<"testeestranho!";
+		ss4<<this->func->getId()<<", "<<this->func->getName();}
+	v.push_back(ss4.str());
 	return v;
 }
 
@@ -106,4 +112,4 @@ string Medico::toString()
 //funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Medico::setMorada(string morada){}
 void Medico::setCargo(string cargo){}
-//string Medico::getCargo(){return "";}
+string Medico::getCargo(){return "";}

@@ -90,6 +90,7 @@ void inserirTipo()
 
 string inserirData()
 {
+	string data;
 	stringstream ss, saida;
 	int dia, mes, ano;
 	string data;
@@ -134,6 +135,7 @@ string inserirData()
 
 string inserirHorario()
 {
+	string hora;
 	stringstream ss, saida;
 	int hora_ini, hora_fim;
 	string hora;
