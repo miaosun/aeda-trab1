@@ -10,26 +10,6 @@
 
 #include <iostream>
 
-class notIntInput
-{
-public:
-	int op;
-	notIntInput(int op)
-	{
-		this->op=op;
-	}
-};
-
-class tipoInvalido
-{
-public:
-	string tipo;
-	tipoInvalido(string tipo)
-	{
-		this->tipo=tipo;
-	}
-};
-
 class DataInvalida 
 {
 public:
