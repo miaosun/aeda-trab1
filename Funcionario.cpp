@@ -58,9 +58,9 @@ vector<string> Funcionario::editPessoa()
 	opcoes = Pessoa::editPessoa();
 	stringstream ss1,ss2;
 
-	ss1<<"4 - Editar Cargo: "<<this->cargo;
+	ss1<<"3 - Editar Cargo: "<<this->cargo;
 	opcoes.push_back(ss1.str());
-	ss2<<"5 - Editar Vencimento: "<<this->vencimento;
+	ss2<<"4 - Editar Vencimento: "<<this->vencimento;
 	opcoes.push_back(ss2.str());
 
 	return opcoes;
@@ -78,3 +78,4 @@ string Funcionario::toString()
 void Funcionario::setEspecialidade(string especialidade){}
 void Funcionario::setHorario(string hora){}
 void Funcionario::setMorada(string morada){}
+

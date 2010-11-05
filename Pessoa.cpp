@@ -84,13 +84,13 @@ string Pessoa::toString()
 
 string Pessoa::toList()
 {
-    ostringstream s;
-    s<<"|";
+    ostringstream ss;
+    ss<<"|";
     if (id<10)
-        s<<" ";
-	s<<this->id<<"| "<<this->nome<<" |";
+        ss<<" ";
+	ss<<this->id<<"| "<<this->nome<<" |";
 
-    return s.str();
+    return ss.str();
 }
 
 vector<string> Pessoa::editPessoa()
@@ -103,8 +103,8 @@ vector<string> Pessoa::editPessoa()
 	opcoes.push_back(ss1.str());
 	ss2<<"2 - Editar Data de Nascimento: "<<this->dataNascimento;
 	opcoes.push_back(ss2.str());
-	ss3<<"3 - Editar Tipo: "<<this->tipo;
-	opcoes.push_back(ss3.str());
+/*	ss3<<"3 - Editar Tipo: "<<this->tipo;
+	opcoes.push_back(ss3.str());*/
 
 	return opcoes;
 }

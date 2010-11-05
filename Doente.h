@@ -29,6 +29,8 @@ public:
 	void setHorario(string hora);
 	void setVencimento(double venc);
 	void setCargo(string cargo);
+	string getCargo();
+	double getVencimento();
 
 private:
 	string morada;

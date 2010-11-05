@@ -38,6 +38,8 @@ public:
 	virtual void setVencimento(double venc) = 0;
 	virtual void setMorada(string morada) = 0;
 	virtual void setCargo(string cargo) = 0;
+	virtual string getCargo() = 0;
+	virtual double getVencimento() = 0;
 
 private:
 	string nome;
