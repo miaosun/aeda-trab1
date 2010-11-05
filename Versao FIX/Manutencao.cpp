@@ -171,7 +171,7 @@ void Manutencao::menuPrincipal()
     }
 }
 
-void Manutencao::menuPessoas()
+void Manutencao::menuPessoas()//visto
 {
 	int op, id;
 	Pessoa *p;
@@ -254,8 +254,8 @@ void Manutencao::menuPessoas()
 			catch (NotFound)
 			{
 				cout<<endl<<"Pessoa nao encontrada!"<<endl;
+				system("pause");
 			}
-			system("pause");
 			menuPessoas();
 			break;
 		case 5://importar pessoas
@@ -322,7 +322,7 @@ void Manutencao::menuMarcacoes()
 	opcoes.push_back("1 - Nova Marcacao");//opcao 1
 	if(marcacoes.size()>0)
 	{
-		opcoes.push_back("2 - Ver detalhes de uma Consulta");//opcao 2
+		opcoes.push_back("2 - Ver detalhes de uma Marcacao");//opcao 2
 		opcoes.push_back("3 - Editar uma Marcacao");//opcao 3
 		opcoes.push_back("4 - Apagar uma Marcacao");//opcao 4
 		opcoes.push_back("5 - Importar Marcacao dum ficheiro");//opcao 5
@@ -352,12 +352,14 @@ void Manutencao::menuMarcacoes()
 			int id;
 			id=intinput();
 
-			//falta implementar excecao...
-
-			for(unsigned int i=0; i<marcacoes.size(); i++)
+			try
 			{
-				if(id==marcacoes[i]->getId())
-					showMenu("Detalhes da Marcacao", marcacoes[i]->imprime());
+				m=find(&marcacoes, id);
+				showMenu("Detalhes da Marcacao", m->imprime());
+			}
+			catch (NotFound)
+			{
+				cout<<endl<<"Marcacao nao encontrada!"<<endl;
 			}
 
 			system("pause");
@@ -367,11 +369,17 @@ void Manutencao::menuMarcacoes()
 			listaMarcacoes();
 			cout<<endl<<"Introduza o ID da Marcacao que pretende editar: ";
 			id=intinput();
-			for(unsigned int i=0; i<marcacoes.size(); i++)
-				if(id == marcacoes[i]->getId())
-					m = marcacoes[i];
 
-			editMarcacoes(m);
+			try
+			{
+				m=find(&marcacoes, id);
+				editMarcacoes(m);
+			}
+			catch (NotFound)
+			{
+				cout<<endl<<"Marcacao nao encontrada!"<<endl;
+				system("pause");
+			}			
 			menuMarcacoes();
 			break;
 		case 4://apagar marcacao
@@ -538,7 +546,8 @@ void Manutencao::addPessoa()//visto
 
 }
 
-void Manutencao::removePessoa(int id){
+void Manutencao::removePessoa(int id)//visto
+{
 
 	int indice;
 	for(unsigned int i=0; i<pessoas.size(); i++)
@@ -655,7 +664,6 @@ void Manutencao::removeMarcacao(int id)
 		removeMarcacao(id);
 	}
 }
-
 
 void Manutencao::listaPessoas()//visto
 {
@@ -914,18 +922,13 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 	}
 }
 
-void Manutencao::editMarcacoes(Marcacao * m)
+void Manutencao::editMarcacoes(Marcacao * m)//visto
 {
 	vector<string> opcoes;
 	string data, hora, tipo, sala;
-	stringstream ss;
 	int op;
 
 	opcoes = m->editMarcacao();
-	for(unsigned int i=0; i<opcoes.size(); i++)
-	{
-		ss<<opcoes[i]<<endl;
-	}
 	opcoes.push_back("");
 	opcoes.push_back("0 - Voltar atras");
 
@@ -976,7 +979,7 @@ void Manutencao::editMarcacoes(Marcacao * m)
 			//system("cls");
 			//cout<<"   --Editar Doente--"<<endl<<endl;
 			//cout<<"Nome de Doente: "<<p->getName()<<endl;
-			cout<<"Novo data de Exame: ";
+			cout<<"Nova data de Exame: ";
 			data=inserirData();
 			m->setData(data);
 			editMarcacoes(m);
@@ -984,7 +987,7 @@ void Manutencao::editMarcacoes(Marcacao * m)
 		case 2:
 			//system("cls");
 			//cout<<"   --Editar Doente--"<<endl<<endl;
-			cout<<"Novo hora de Exame: ";
+			cout<<"Nova hora de Exame: ";
 			data=inserirData();
 			m->setHora(hora);
 			editMarcacoes(m);
@@ -1000,7 +1003,7 @@ void Manutencao::editMarcacoes(Marcacao * m)
 		case 4:
 			//system("cls");
 			//cout<<"   --Editar Doente--"<<endl<<endl;
-			cout<<"Novo Sala de Exame: ";
+			cout<<"Nova Sala de Exame: ";
 			getline(cin, sala);
 			m->setSala(sala);
 			editMarcacoes(m);
