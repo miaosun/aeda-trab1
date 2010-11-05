@@ -54,6 +54,11 @@ int Pessoa::getId()
 	return this->id;
 }
 
+void Pessoa::setId(int id)
+{
+	this->id = id;
+}
+
 vector<string> Pessoa::imprime()
 {
 	vector<string> v;
