@@ -10,7 +10,15 @@ int Pessoa::count = 0;
 
 Pessoa::Pessoa(){}
 
-Pessoa::~Pessoa(){}
+Pessoa::~Pessoa(){--count;}
+
+Pessoa::Pessoa(int id, string nome, string dataNascimento, string tipo)
+{
+	this->id = id;
+	this->nome = nome;
+	this->dataNascimento = dataNascimento;
+	this->tipo = tipo;
+}
 
 Pessoa::Pessoa(string nome, string dataNascimento, string tipo){
 

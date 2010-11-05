@@ -12,6 +12,12 @@ Funcionario::Funcionario(){}
 
 Funcionario::~Funcionario(){}
 
+Funcionario::Funcionario(int id, string nome, string dataNascimento, string tipo, string cargo, double vencimento):Pessoa(id, nome, dataNascimento, tipo)
+{
+	this->cargo = cargo;
+	this->vencimento = vencimento;
+}
+
 Funcionario::Funcionario(string nome, string dataNascimento, string tipo, string cargo, double vencimento):Pessoa(nome, dataNascimento, tipo)
 {
 	this->cargo = cargo;
