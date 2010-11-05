@@ -103,6 +103,16 @@ string Doente::toString()
 {
 	stringstream ss;
 	ss<<Pessoa::toString()<<this->morada<<"|";
+	if(medicos.empty())
+		ss<<0<<"|";
+	else
+	{
+		ss<<medicos.size()<<"|";
+		for(unsigned int i=0; i<medicos.size(); i++)
+		{
+			ss<<medicos[i]->getId()<<"|";
+		}
+	}
 	return ss.str();
 }
 
