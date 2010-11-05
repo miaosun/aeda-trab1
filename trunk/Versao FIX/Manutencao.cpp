@@ -230,7 +230,7 @@ void Manutencao::menuPessoas()
 			id=intinput();
 			try
 			{
-				p=find(&pessoas, id)
+				p=find(&pessoas, id);
 				editPessoas(p);
 			}
 			catch (NotFound)
@@ -474,6 +474,7 @@ void Manutencao::addPessoa()//visto
 	switch(op)
 	{
 	case 1: //medico
+		tipo = "Medico";
 		cout<<"Nome da Pessoa: ";
 		getline(cin, nome);
 
@@ -501,6 +502,7 @@ void Manutencao::addPessoa()//visto
 
 		break;
 	case 2: //funcionario
+		tipo = "Funcionario";
 		cout<<"Nome da Pessoa: ";
 		getline(cin, nome);
 		cout<<"Data de Nascimento(dia, mes, ano) (separado com espaco, ex: 23 08 2010):\n";
@@ -512,6 +514,7 @@ void Manutencao::addPessoa()//visto
 		pessoas.push_back(f);
 		break;
 	case 3: //doente
+		tipo = "Doente";
 		cout<<"Nome da Pessoa: ";
 		getline(cin, nome);
 		cout<<"Data de Nascimento(dia, mes, ano) (separado com espaco, ex: 23 08 2010):\n";
@@ -588,6 +591,7 @@ void Manutencao::addMarcacao()//visto
 	switch(op)
 	{
 	case 1:
+		tipo = "Consulta";
 		cout<<"Data da Consulta: ";
 		data=inserirData();
 		cout<<"Hora da Consulta: ";
@@ -596,6 +600,7 @@ void Manutencao::addMarcacao()//visto
 		marcacoes.push_back(c);
 		break;
 	case 2:
+		tipo = "Exame";
 		cout<<"Data do Exame: ";
 		getline(cin, data);
 		cout<<"Hora do Exame: ";
