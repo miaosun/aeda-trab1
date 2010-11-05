@@ -204,7 +204,12 @@ void Manutencao::menuPessoas()
 		switch(op)
 		{
 		case 1:
+			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
+			cout<<"teste menupessoas";
+			showMenu("Nova Pessoa", pessoas.back()->imprime());
+			//cout<<"o que se passa?";
+			system("pause");
 			menuPessoas();
 			break;
 		case 2://ver detalhes Pessoas
@@ -237,7 +242,7 @@ void Manutencao::menuPessoas()
 			break;
 		case 4://apagar Pessoa
 			listaPessoas();
-			cout<<endl<<"Introduza o ID da Equipa que pretende apagar: ";
+			cout<<endl<<"Introduza o ID da Pessoa que pretende apagar: ";
 			id=intinput();
 
 			/*
@@ -270,8 +275,7 @@ void Manutencao::menuPessoas()
 			system("pause");
 			menuPessoas();
 			break;
-		case 0://voltar ao menu anterior
-			//saveEqs("equipas.dll", equipas);
+		case 0:
 			break;
 		default:
 			cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
@@ -284,7 +288,10 @@ void Manutencao::menuPessoas()
 		switch(op)
 		{
 		case 1://criar Pessoa
+			cout<<"   --Adicionar Pessoa--"<<endl<<endl;
 			addPessoa();
+			showMenu("Nova Equipa", pessoas.back()->imprime());
+			system("pause");
 			menuPessoas();
 			break;
 		case 2://importar Pessoas
@@ -533,15 +540,6 @@ void Manutencao::addPessoa()
 		showMenu("Nova Pessoa", pessoas.back()->imprime());
 		system("pause");
 	}
-
-
-	//stringstream ss;
-
-	//int dia, mes, ano;
-	//cout<<"Tipo da Pessoa(Medico, Doente ou Funcionario):\n";// (0 para voltar);
-	//getline(cin, tipo);
-	//if(tipo=="0")	//quando sair daqui, no menuPessoas 0 voltar termina sempre o programa,
-		//menuPessoas();  //se sem isto funcina bem, nao sei porque
 
 }
 
@@ -1156,7 +1154,7 @@ void Manutencao::startManutencao()
 	welcome();
 	menuPrincipal();
 }
-/*
+
 void Manutencao::associarFuncionario()
 {
 	Medico m;
@@ -1194,7 +1192,7 @@ void Manutencao::associarFuncionario()
 	}
 	
 
-}*/
+}
 
 
 
