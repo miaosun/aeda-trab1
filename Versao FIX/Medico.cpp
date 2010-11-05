@@ -57,14 +57,14 @@ void Medico::setVencimento(double vencimento)
 	this->vencimento = vencimento;
 }
 
-Pessoa *Medico::getPessoa()
+Pessoa *Medico::getFuncionario()
 {
-	return this->pes;
+	return this->funcionario;
 }
 
-void Medico::setPessoa(Pessoa *pes)
+void Medico::setFuncionario(Pessoa *func)
 {
-	this->pes = pes;
+	this->funcionario = func;
 }
 
 vector<string> Medico::imprime(){
@@ -84,8 +84,8 @@ vector<string> Medico::imprime(){
 
 	ss4<<"   Funcionario Associado(ID, nome): ";
 
-	if(this->pes!=0)
-		ss4<<this->pes->getId()<<", "<<this->pes->getName();
+	if(this->funcionario!=0)
+		ss4<<this->funcionario->getId()<<", "<<this->funcionario->getName();
 	else
 		ss4<<"nao tem";
 
@@ -107,10 +107,10 @@ vector<string> Medico::editPessoa()
 	opcoes.push_back(ss3.str());
 	ss4<<"6 - Editar o Funcionario associado: ";
 
-	if(this->pes==0)
+	if(this->funcionario==0)
 		ss4<<" Nao tem.";
 	else
-		ss4<<this->pes->getId()<<", "<<this->pes->getName();
+		ss4<<this->funcionario->getId()<<", "<<this->funcionario->getName();
 
 	opcoes.push_back(ss4.str());
 
@@ -121,10 +121,10 @@ string Medico::toString()
 {
 	stringstream ss;
 	ss<<Pessoa::toString()<<this->especialidade<<"|"<<this->horario<<"|"<<this->vencimento<<"|";
-	if(pes==0)
+	if(funcionario==0)
 		ss<<"0"<<"|";
 	else
-		ss<<this->pes->getId()<<"|";
+		ss<<this->funcionario->getId()<<"|";
 	return ss.str();
 }
 
