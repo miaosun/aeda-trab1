@@ -93,7 +93,6 @@ string inserirData()
 	string data;
 	stringstream ss, saida;
 	int dia, mes, ano;
-	string data;
 	getline(cin, data);
 	ss<<data;
 	ss>>dia;
@@ -138,7 +137,6 @@ string inserirHorario()
 	string hora;
 	stringstream ss, saida;
 	int hora_ini, hora_fim;
-	string hora;
 	cout<<"Horario(inicio fim (inteiro)) (ex: 9 19): ";
 	getline(cin, hora);
 	ss<<hora;
@@ -162,6 +160,18 @@ string inserirHorario()
 	ss.str("");
 	saida.str("");
 	return hora;
+}
+
+template <class T>
+T * find(vector<T *> * v, int id)
+{
+	for(unsigned int i=0; i<v->size(); i++)
+	{
+		if(id==v->at(i)->getId())
+			return v->at(i);
+	}
+	throw NotFound();
+	return NULL;
 }
 
 #endif /* FUNCOES_H_ */
