@@ -1112,6 +1112,8 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 
 void Manutencao::loadPessoas(string filename)
 {
+	Pessoa *p;
+	Funcionario *f;
 	stringstream s;
 	unsigned int size;
 	string linha;
@@ -1137,6 +1139,14 @@ void Manutencao::loadPessoas(string filename)
 				{
 					double venc = atof(v[6].c_str());
 					Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
+			/*		p=find(&pessoas,atoi(v[6].c_str()));
+					if(p==NULL){system("pause");
+					m->setFuncionario(0);cout<<"teste";}
+					else
+						f = new Funcionario(p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());*/
+					associarFuncionario(m);
+					system("pause");
+					cout<<"teste3";
 					pessoas.push_back(m);
 				}
 				else if(v[3]=="Doente")
@@ -1300,6 +1310,7 @@ void Manutencao::associarFuncionario(Medico *m)
 	}
 
 	f = new Funcionario(p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());
+	p->setId(f->getId()-2);
 
 	m->setFuncionario(f);
 	 

@@ -112,6 +112,10 @@ string Medico::toString()
 {
 	stringstream ss;
 	ss<<Pessoa::toString()<<this->especialidade<<"|"<<this->horario<<"|"<<this->vencimento<<"|";
+	if(func==0)
+		ss<<"nao tem";
+	else
+		ss<<this->func->getId();
 	return ss.str();
 }
 

@@ -27,6 +27,7 @@ public:
 	string getTipo();
 	void setTipo(string tipo);
 	int getId();
+	void setId(int id);
 	virtual vector<string> imprime();//serve para a mostragem dos dados da Pessoa, utilizado no menuPessoas
 	virtual string toString();//serve para exportacao para ficheiro
 	string toList();//serve para a listagem das Pessoas
