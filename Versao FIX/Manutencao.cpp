@@ -245,16 +245,17 @@ void Manutencao::menuPessoas()
 			cout<<endl<<"Introduza o ID da Pessoa que pretende apagar: ";
 			id=intinput();
 
-			/*
-				excepcoes de caso nao encontra a Pessoa.
-			*/
-
-			for(unsigned int i=0; i<pessoas.size(); i++)
-				if(id == pessoas[i]->getId())
-					p = pessoas[i];
-			showMenu("Detalhes da Pessoa", p->imprime());
+			try
+			{
+				p=find(&pessoas, id);
+				showMenu("Detalhes da Pessoa", p->imprime());
+				removePessoa(id);
+			}
+			catch (NotFound)
+			{
+				cout<<endl<<"Pessoa nao encontrada!"<<endl;
+			}
 			system("pause");
-			removePessoa(id);
 			menuPessoas();
 			break;
 		case 5://importar pessoas
@@ -726,7 +727,7 @@ void Manutencao::listaMarcacoes()
 	cout<<endl;
 }
 
-void Manutencao::editPessoas(Pessoa *p)
+void Manutencao::editPessoas(Pessoa *p)//visto
 {
 
 	vector<string> opcoes;
@@ -803,6 +804,7 @@ void Manutencao::editPessoas(Pessoa *p)
 			associarFuncionario();
 			break;
 		case 0:
+			return;
 			break;
 		default:
 			editPessoas(p);
@@ -848,6 +850,7 @@ void Manutencao::editPessoas(Pessoa *p)
 			editPessoas(p);
 			break;
 		case 0:
+			return;
 			break;
 		default:
 			editPessoas(p);
@@ -902,6 +905,7 @@ void Manutencao::editPessoas(Pessoa *p)
 			editPessoas(p);
 			break;
 		case 0:
+			return;
 			break;
 		default:
 			editPessoas(p);
