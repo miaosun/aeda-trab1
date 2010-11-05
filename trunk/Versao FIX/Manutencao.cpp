@@ -761,7 +761,7 @@ void Manutencao::addMarcacao()//visto
 			getline(cin, hora);
 			cout<<"Sala do Exame: ";
 			getline(cin, sala);
-			e = new Exame(data, hora, tipo, sala, m, d);
+			e = new Exame(data, hora, tipo, m, d, sala);
 			marcacoes.push_back(e);
 		}
 		catch (NotFound)
@@ -1316,6 +1316,8 @@ void Manutencao::savePessoas(string filename)
 
 void Manutencao::loadMarcacoes(string filename)
 {
+	Pessoa *m;
+	Pessoa *d;
 	stringstream s;
 	unsigned int size;
 	string linha;
@@ -1337,14 +1339,23 @@ void Manutencao::loadMarcacoes(string filename)
 			{
 				getline(myfile, linha);
 				v=split('|', linha);
+
 				if(v[3]=="Consulta")
 				{
-					Consulta *c = new Consulta(v[1].c_str(),v[2].c_str(),v[3].c_str(),atoi(v[4].c_str()),atoi(v[5].c_str()));
+					int id_med = atoi(v[4].c_str());
+					int id_doe = atoi(v[5].c_str());
+					m = find(&pessoas, id_med);
+					d = find(&pessoas, id_doe);
+					Consulta *c = new Consulta(v[1].c_str(),v[2].c_str(),v[3].c_str(),m,d);
 					marcacoes.push_back(c);
 				}
 				else if(v[3]=="Exame")
 				{
-					Exame *e = new Exame(v[1].c_str(),v[2].c_str(),v[3].c_str(),atoi(v[4].c_str()), atoi(v[5].c_str()), v[6].c_str());
+					int id_med = atoi(v[4].c_str());
+					int id_doe = atoi(v[5].c_str());
+					m = find(&pessoas, id_med);
+					d = find(&pessoas, id_doe);
+					Exame *e = new Exame(v[1].c_str(),v[2].c_str(),v[3].c_str(),m,d, v[6].c_str());
 					marcacoes.push_back(e);
 				}
 			}

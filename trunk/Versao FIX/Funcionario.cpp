@@ -86,4 +86,5 @@ void Funcionario::setHorario(string hora){}
 void Funcionario::setMorada(string morada){}
 string Funcionario::getEspecialidade(){return "";}
 string Funcionario::getHorario(){return "";}
-
+void Funcionario::showMedicos(){}
+void Funcionario::addMedico(Pessoa * medico){}

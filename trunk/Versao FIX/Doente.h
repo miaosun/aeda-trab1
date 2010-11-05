@@ -33,9 +33,10 @@ public:
 	double getVencimento();
 	string getEspecialidade();
 	string getHorario();
+	void showMedicos();
 	void addMedico(Pessoa * medico);
 	vector<Pessoa *> * getMedicos();
-	void showMedicos();
+	
 
 private:
 	string morada;
