@@ -112,7 +112,7 @@ string inserirData()
 	catch (DataInvalida)
 	{
 		cout<<"Data invalida! tenta novamente\n";
-		system("pause");
+		cout<<"Data: ";
 		inserirData();
 		return "";
 	}
