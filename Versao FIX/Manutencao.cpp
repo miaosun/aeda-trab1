@@ -1181,7 +1181,17 @@ void Manutencao::loadPessoas(string filename)
 				}
 				else if(v[3]=="Doente")
 				{
+					int n_medicos = atoi(v[5].c_str());
 					Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
+					Pessoa *med;
+					if(n_medicos != 0)
+					{
+						for(unsigned int i=0; i<n_medicos; i++)
+						{
+							med = find(&pessoas, atoi(v[5+i].c_str()));
+							d->addMedico(med);
+						}
+					}
 					pessoas.push_back(d);
 				}
 				else if(v[3]=="Funcionario")
