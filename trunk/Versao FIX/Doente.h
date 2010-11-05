@@ -34,5 +34,6 @@ public:
 
 private:
 	string morada;
+
 };
 #endif // !defined(EA_6B04B8B3_574E_437d_9E32_00DB174900BC__INCLUDED_)

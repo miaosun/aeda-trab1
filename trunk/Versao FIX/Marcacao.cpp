@@ -101,8 +101,8 @@ vector<string> Marcacao::editMarcacao()
 	opcoes.push_back(ss1.str());
 	ss2<<"2 - Editar Hora: "<<this->hora;
 	opcoes.push_back(ss2.str());
-	ss3<<"3 - Editar Tipo: "<<this->tipo;
-	opcoes.push_back(ss3.str());
+	//ss3<<"3 - Editar Tipo: "<<this->tipo;
+	//opcoes.push_back(ss3.str());
 
 	return opcoes;
 }

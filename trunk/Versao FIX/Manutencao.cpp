@@ -580,7 +580,7 @@ void Manutencao::addPessoa()//visto
 		cout<<"Pretende de associar um Funcionario agora(s/n)? ";
 		getline(cin, s);
 		if(s=="s")
-			associarFuncionario();
+			associarFuncionario(m);
 		else
 			return;
 
@@ -740,13 +740,9 @@ void Manutencao::removeMarcacao(int id)//visto
 	}
 }
 
-void Manutencao::listaPessoas()//visto
+void Manutencao::listaMedicos()
 {
-	system("cls");
-	cout<<"  --Pessoas no sistema--"<<endl<<endl;
 	vector<Pessoa *>::iterator it=pessoas.begin();
-
-	cout<<"\t|ID| Nome |\n\n";
 	cout<<"Medico: "<<endl;
 	while(it!=pessoas.end())
 	{
@@ -756,16 +752,11 @@ void Manutencao::listaPessoas()//visto
 		}
 		it++;
 	}
-	cout<<"\nDoente: "<<endl;
-	it=pessoas.begin();
-	while(it!=pessoas.end())
-	{
-		if((*it)->getTipo() == "Doente")
-		{
-			cout<<"\t"<<(*it)->toList()<<endl;
-		}
-		it++;
-	}
+}
+
+void Manutencao::listaFuncionarios()
+{
+	vector<Pessoa *>::iterator it=pessoas.begin();
 	cout<<"\nFuncionario: "<<endl;
 	it=pessoas.begin();
 	while(it!=pessoas.end())
@@ -776,6 +767,34 @@ void Manutencao::listaPessoas()//visto
 		}
 		it++;
 	}
+}
+
+void Manutencao::listaDoentes()
+{
+	vector<Pessoa *>::iterator it=pessoas.begin();
+	cout<<"\nDoente: "<<endl;
+	it=pessoas.begin();
+	while(it!=pessoas.end())
+	{
+		if((*it)->getTipo() == "Doente")
+		{
+			cout<<"\t"<<(*it)->toList()<<endl;
+		}
+		it++;
+	}
+}
+
+void Manutencao::listaPessoas()//visto
+{
+	system("cls");
+	cout<<"  --Pessoas no sistema--"<<endl<<endl;
+	vector<Pessoa *>::iterator it=pessoas.begin();
+
+	cout<<"\t|ID| Nome |\n\n";
+	
+	listaMedicos();
+	listaFuncionarios();
+	listaDoentes();
 
 	cout<<endl;
 }
@@ -812,7 +831,7 @@ void Manutencao::listaMarcacoes()//visto
 
 void Manutencao::editPessoas(Pessoa *p)//visto
 {
-
+	Medico *m;
 	vector<string> opcoes;
 	string nome, dataNas, tipo, esp, hor, morada, cargo;
 	double venc;
@@ -884,7 +903,10 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 			editPessoas(p);
 			break;
 		case 6:
-			associarFuncionario();
+			cout<<"teste: 123";
+			system("pause");
+			associarFuncionario(m);
+			cout<<"teste:";
 			break;
 		case 0:
 			return;
@@ -1033,14 +1055,14 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 			m->setHora(hora);
 			editMarcacoes(m);
 			break;
-		case 3:
+	/*	case 3:
 		//	system("cls");
 		//	cout<<"   --Editar Medico--"<<endl<<endl;
 			cout<<"Novo Tipo da Marcacao: ";
 			getline(cin, tipo);
 			m->setTipo(tipo);
 			editMarcacoes(m);
-			break;
+			break;*/
 		case 0:
 			break;
 		default:
@@ -1068,15 +1090,15 @@ void Manutencao::editMarcacoes(Marcacao * m)//visto
 			m->setHora(hora);
 			editMarcacoes(m);
 			break;
-		case 3:
+		/*case 3:
 			//system("cls");
 			//cout<<"   --Editar Doente--"<<endl<<endl;
 			cout<<"Novo Tipo da Marcacao: ";
 			getline(cin, tipo);
 			m->setTipo(tipo);
 			editMarcacoes(m);
-			break;
-		case 4:
+			break;*/
+		case 3:
 			//system("cls");
 			//cout<<"   --Editar Doente--"<<endl<<endl;
 			cout<<"Nova Sala de Exame: ";
@@ -1258,43 +1280,32 @@ void Manutencao::startManutencao()
 	menuPrincipal();
 }
 
-void Manutencao::associarFuncionario()
+void Manutencao::associarFuncionario(Medico *m)
 {
-	Medico m;
-	vector<Funcionario *> funs;
-	vector<Funcionario *>::iterator it_f;
+	Pessoa *p;
+	Funcionario *f;
 	int id;
 
 	system("cls");
 	cout<<"  --Funcionarios no sistema--"<<endl<<endl;
-	vector<Pessoa *>::iterator it=pessoas.begin();
-
-	cout<<"\t|ID| Nome |\n\n";
-		cout<<"\nFuncionario: "<<endl;
-	it=pessoas.begin();
-	while(it!=pessoas.end())
-	{
-		if((*it)->getTipo() == "Funcionario")
-		{
-			cout<<"\t"<<(*it)->toList()<<endl;
-			Funcionario *f = new Funcionario((*it)->getName(), (*it)->getDataNascimento(), (*it)->getTipo(), (*it)->getCargo(), (*it)->getVencimento());
-			funs.push_back(f);
-		}
-		it++;
-	}
-	cout<<endl;
+	
+	listaFuncionarios();
 
 	cout<<"Insere o ID do funcionario que pretende de associar: ";
 	id = intinput();
 
-	for(it_f=funs.begin(); it_f!=funs.end(); it_f++)
+	p = find(&pessoas, id);
+
+	while(p->getTipo() != "Funcionario")
 	{
-		if(id==(*it_f)->getId())
-			m.setFuncionario(*it_f);
-			
+		cout<<"Nao tem nenhum funcionario com esse ID, tenta novamente: ";
+		id = intinput();
+		p = find(&pessoas, id);
 	}
 	
-
+	f = new Funcionario(p->getName(), p->getDataNascimento(), p->getTipo(), p->getCargo(), p->getVencimento());
+	m->setFuncionario(f);
+	 
 }
 
 

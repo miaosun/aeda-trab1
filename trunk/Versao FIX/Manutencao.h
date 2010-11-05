@@ -35,6 +35,9 @@ public:
 	void removePessoa(int id);
 	void addMarcacao();
 	void removeMarcacao(int id);
+	void listaMedicos();
+	void listaFuncionarios();
+	void listaDoentes();
 	void listaPessoas();
 	void listaMarcacoes();
 	void editPessoas(Pessoa *p);
@@ -45,7 +48,7 @@ public:
 	void saveMarcacoes(string filename);
 	void saveManutencao();
 	void startManutencao();
-	void associarFuncionario();
+	void associarFuncionario(Medico *m);
 	//string imprime();
 
 
