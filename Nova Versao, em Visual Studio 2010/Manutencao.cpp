@@ -345,10 +345,7 @@ void Manutencao::menuMarcacoes()
 		switch(op)
 		{
 		case 1:
-			cout<<"   --Adicionar Marcacao--"<<endl<<endl;
 			addMarcacao();
-			showMenu("Nova Marcacao", marcacoes.back()->imprime());
-			system("pause");
 			menuMarcacoes();
 			break;
 		case 2://ver detalhes marcacoes
@@ -362,7 +359,7 @@ void Manutencao::menuMarcacoes()
 			for(unsigned int i=0; i<marcacoes.size(); i++)
 			{
 				if(id==marcacoes[i]->getId())
-				showMenu("Detalhes da Marcacao", marcacoes[i]->imprime());
+					showMenu("Detalhes da Marcacao", marcacoes[i]->imprime());
 			}
 
 			system("pause");
@@ -428,10 +425,7 @@ void Manutencao::menuMarcacoes()
 		switch(op)
 		{
 		case 1:
-			cout<<"   --Adicionar Marcacao--"<<endl<<endl;
 			addMarcacao();
-			showMenu("Nova Marcacao", marcacoes.back()->imprime());
-			system("pause");
 			menuMarcacoes();
 			break;
 		case 2://importar Pessoas
@@ -457,7 +451,7 @@ void Manutencao::menuMarcacoes()
 
 }
 
-void Manutencao::addPessoa()
+void Manutencao::addPessoa()//visto
 {
 	string nome, dataNas, tipo, esp, hor, mor, car;
 	vector<string> opcoes;
@@ -573,38 +567,59 @@ void Manutencao::removePessoa(int id){
 	}
 }
 
-void Manutencao::addMarcacao()
+void Manutencao::addMarcacao()//visto
 {
-
+	vector<string> opcoes;
+	int op;
 	stringstream s;
 	vector<string> v;
 	string tipo, data, hora, sala;
-	cout<<"Tipo de Marcacao(Consulta ou Exame): ";
-	getline(cin, tipo);
-	if(tipo=="Consulta")
+	Consulta * c;
+	Exame * e;
+
+	opcoes.push_back("Escolha um dos seguintes tipos de marcacao:");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Consulta");
+	opcoes.push_back("2 - Exame");
+	opcoes.push_back("");
+	opcoes.push_back("0 - Voltar atras");
+	showMenu("Adicionar Marcacao", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+	system("cls");
+
+	switch(op)
 	{
+	case 1:
 		cout<<"Data da Consulta: ";
 		data=inserirData();
 		cout<<"Hora da Consulta: ";
 		getline(cin, hora);
-		Consulta * c = new Consulta(data, hora, tipo);
+		c = new Consulta(data, hora, tipo);
 		marcacoes.push_back(c);
-	}
-	else if(tipo=="Exame")
-	{
+		break;
+	case 2:
 		cout<<"Data do Exame: ";
 		getline(cin, data);
 		cout<<"Hora do Exame: ";
 		getline(cin, hora);
 		cout<<"Sala do Exame: ";
 		getline(cin, sala);
-		Exame * e = new Exame(data, hora, tipo, sala);
+		e = new Exame(data, hora, tipo, sala);
 		marcacoes.push_back(e);
-	}
-	else
-	{
-		cout<<"Tipo nao e valido, tenta novamente!\n\n";
+		break;
+	case 0:
+		return;
+		break;
+	default:
 		addMarcacao();
+		break;
+	}
+
+	if(op==1||op==2)
+	{
+		showMenu("Nova Marcacao", marcacoes.back()->imprime());
+		system("pause");
 	}
 }
 
