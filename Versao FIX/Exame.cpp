@@ -52,7 +52,7 @@ vector<string> Exame::editMarcacao()
 	stringstream ss;
 	opcoes = Marcacao::editMarcacao();
 
-	ss<<"4 - Editar Sala: "<<this->sala;
+	ss<<"3 - Editar Sala: "<<this->sala;
 	opcoes.push_back(ss.str());
 
 	return opcoes;
