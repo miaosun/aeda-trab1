@@ -4,6 +4,11 @@
 //  Created on:      24-Out-2010 20:04:14
 ///////////////////////////////////////////////////////////
 
+
+/**Classe Medico, uma das 3 subclasses da classe Pessoa, tem proprio 4 atribuitos, especialidade:string, horario:string, vencimento:double e funcionario:Pessoa*. */
+
+
+
 #if !defined(EA_FC464729_C72D_4115_B003_E0DAD8DDC9B3__INCLUDED_)
 #define EA_FC464729_C72D_4115_B003_E0DAD8DDC9B3__INCLUDED_
 
