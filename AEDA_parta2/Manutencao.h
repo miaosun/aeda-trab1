@@ -8,10 +8,12 @@
 #if !defined(EA_E50CBA57_B50B_40dd_A248_770E2B968F60__INCLUDED_)
 #define EA_E50CBA57_B50B_40dd_A248_770E2B968F60__INCLUDED_
 
-#include "Pessoa.h"
+//#include "Pessoa.h"
 #include "Marcacao.h"
+#include "Hospitais.h"
 
 #include <vector>
+#include <queue>
 
 class Manutencao
 {
@@ -56,6 +58,7 @@ private:
 	vector<Pessoa *> pessoas;
 	vector<Marcacao *> marcacoes;
 	vector<string> especialidades;
+	priority_queue<Hospitais> hsp;
 
 };
 #endif // !defined(EA_E50CBA57_B50B_40dd_A248_770E2B968F60__INCLUDED_)

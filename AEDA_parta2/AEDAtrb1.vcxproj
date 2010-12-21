@@ -74,12 +74,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BST.h" />
     <ClInclude Include="Consulta.h" />
     <ClInclude Include="Doente.h" />
     <ClInclude Include="Exame.h" />
     <ClInclude Include="Excepcoes.h" />
     <ClInclude Include="Funcionario.h" />
     <ClInclude Include="funcoes.h" />
+    <ClInclude Include="Hospitais.h" />
     <ClInclude Include="Manutencao.h" />
     <ClInclude Include="Marcacao.h" />
     <ClInclude Include="Medico.h" />

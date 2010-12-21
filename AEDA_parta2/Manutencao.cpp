@@ -183,7 +183,7 @@ void Manutencao::menuPrincipal()
     }
 }
 
-void Manutencao::menuPessoas()//visto
+void Manutencao::menuPessoas()
 {
 	int op, id;
 	Pessoa *p;
@@ -323,7 +323,7 @@ void Manutencao::menuPessoas()//visto
 	}
 }
 
-void Manutencao::menuMarcacoes()//visto
+void Manutencao::menuMarcacoes()
 {
 	Marcacao *m;
 	int op;
@@ -532,7 +532,7 @@ void Manutencao::addEspecialidade()
 	especialidades.push_back(esp);
 }
 
-void Manutencao::addPessoa()//visto
+void Manutencao::addPessoa()
 {
 	string nome, dataNas, tipo, esp, hor, mor, car, s;
 	vector<string> opcoes;
@@ -620,7 +620,7 @@ void Manutencao::addPessoa()//visto
 
 }
 
-void Manutencao::removePessoa(int id)//visto
+void Manutencao::removePessoa(int id)
 {
 
 	int indice;
@@ -651,7 +651,7 @@ void Manutencao::removePessoa(int id)//visto
 	}
 }
 
-void Manutencao::addMarcacao()//visto
+void Manutencao::addMarcacao()
 {
 	vector<string> opcoes;
 	int op, id;
@@ -767,7 +767,7 @@ void Manutencao::addMarcacao()//visto
 	}
 }
 
-void Manutencao::removeMarcacao(int id)//visto
+void Manutencao::removeMarcacao(int id)
 {
 	int indice;
 	for(unsigned int i=0; i<marcacoes.size(); i++)
@@ -841,7 +841,7 @@ void Manutencao::listaDoentes()
 	}
 }
 
-void Manutencao::listaPessoas()//visto
+void Manutencao::listaPessoas()
 {
 	system("cls");
 	cout<<"  --Pessoas no sistema--"<<endl<<endl;
@@ -856,7 +856,7 @@ void Manutencao::listaPessoas()//visto
 	cout<<endl;
 }
 
-void Manutencao::listaMarcacoes()//visto
+void Manutencao::listaMarcacoes()
 {
 	system("cls");
 	cout<<"  --Marcacoes no sistema--"<<endl<<endl;
@@ -886,7 +886,7 @@ void Manutencao::listaMarcacoes()//visto
 	cout<<endl;
 }
 
-void Manutencao::editPessoas(Pessoa *p)//visto
+void Manutencao::editPessoas(Pessoa *p)
 {
 	Medico *m;
 	vector<string> opcoes;
@@ -942,7 +942,7 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 
 		}
 	}
-	else if(p->getTipo()=="Doente")//visto
+	else if(p->getTipo()=="Doente")
 	{
 		switch(op)
 		{
@@ -1037,7 +1037,7 @@ void Manutencao::editPessoas(Pessoa *p)//visto
 	}
 }
 
-void Manutencao::editMarcacoes(Marcacao * m)//visto
+void Manutencao::editMarcacoes(Marcacao * m)
 {
 	vector<string> opcoes;
 	string data, hora, tipo, sala;
