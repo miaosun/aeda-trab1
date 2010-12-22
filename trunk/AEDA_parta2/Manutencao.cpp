@@ -154,6 +154,7 @@ void Manutencao::menuPrincipal()
     opcoes.push_back("1 - Gestao de Pessoas");
     opcoes.push_back("2 - Gestao de Marcacoes");
 	opcoes.push_back("3 - Gestao de Especialidades");
+	opcoes.push_back("4 - Hospitais e Centros de Saude");
     opcoes.push_back("");
     opcoes.push_back("0 - Gravar e sair");
 
@@ -174,12 +175,16 @@ void Manutencao::menuPrincipal()
 	case 3:
 		menuEspecialidades();
 		menuPrincipal();
+	case 4:
+		menuHospitais();
+		menuPrincipal();
     case 0:
 		saveManutencao();
         break;
     default:
         cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
-        //menuPrincipal();
+		system("pause");
+        menuPrincipal();
     }
 }
 
@@ -500,6 +505,61 @@ void Manutencao::menuEspecialidades()
 	default:
 		menuEspecialidades();
 	}
+}
+
+void Manutencao::menuHospitais()
+{
+	vector<string> opcoes;
+	int op;
+	opcoes.push_back("Escolha uma das seguintes opcoes:");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Novo Hospital ou Centro de Saude");
+	opcoes.push_back("2 - Ver Hospital ou Centro de Saude");
+	opcoes.push_back("");
+	opcoes.push_back("0 - Voltar atras");
+	showMenu("Hospitais e Centros de Saude", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+	system("cls");
+
+	switch (op)
+	{
+	case 1:
+		addHospital();
+		menuHospitais();
+		
+		break;
+	case 2:
+
+		break;
+	case 0:
+		break;
+	default:
+		menuHospitais();
+	}
+}
+
+void Manutencao::addHospital()
+{
+	Hospitais *hps;
+	string nome, morada, tipo;
+	int op;
+	do{
+		cout<<"Hospital ou Centro de saude pretende de registar?(1 ou 2)\n1.Hospital\n2.Centro de Saude\n";
+		op=intinput();
+		if(op==1)
+			tipo = "Hospital";
+		else if(op==2)
+			tipo = "Centro de Saude";
+	}while(op!=1 || op!=2);
+	
+	cout<<"Nome do "<<tipo<<": ";
+	getline(cin, nome);
+	cout<<"Morada do "<<tipo<<": ";
+	getline(cin, morada);
+
+	hps = new Hospitais(nome, morada, tipo);
+	//hospitais.push(hps);
 }
 
 string Manutencao::escolheEspecialidade()
