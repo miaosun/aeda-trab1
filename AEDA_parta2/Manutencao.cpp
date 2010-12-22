@@ -767,7 +767,7 @@ void Manutencao::addMarcacao()
 	int op, id;
 	stringstream s;
 	vector<string> v;
-	string tipo, data, hora, sala;
+	string tipo, data, hora, sala, especialidade;
 	Consulta * c;
 	Exame * e;
 	Pessoa * p;
@@ -814,7 +814,11 @@ void Manutencao::addMarcacao()
 	case 1:
 		try
 		{
-			d->showMedicos();
+			cout<<"Quer associar medico de qual area? ";
+			listaEspecialidades();
+			especialidade = escolheEspecialidade();
+
+			//d->showMedicos();
 			cout<<endl<<"Qual o medico que vai dar a consulta (ID): ";
 			id=intinput();
 			p = find(d->getMedicos(), id);
