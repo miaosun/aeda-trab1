@@ -7,10 +7,9 @@ class Hospitais
 	string morada;
 	string tipo;
 	int distancia;
-	vector<Pessoa *> pes;
-	vector<string> esp;
 
 public:
+	vector<string> esp_hps;
 	Hospitais(string nome, string morada, int distancia, string tipo);
 	string getName();
 	void setName(string nome);
@@ -21,4 +20,6 @@ public:
 	string getTipo();
 	bool operator < (const Hospitais &hps) const;
 	friend ostream & operator << (ostream& os, Hospitais hps);
+	string toString();
+
 };

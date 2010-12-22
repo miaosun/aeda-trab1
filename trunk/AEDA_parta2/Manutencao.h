@@ -55,6 +55,9 @@ public:
 
 	void menuHospitais();
 	void addHospital();
+	void listaHospitais();
+	void saveHospitais(string filename);
+	void loadHospitais(string filename);
 
 
 private:
