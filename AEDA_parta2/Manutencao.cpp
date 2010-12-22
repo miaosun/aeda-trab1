@@ -527,10 +527,11 @@ void Manutencao::menuHospitais()
 	case 1:
 		addHospital();
 		menuHospitais();
-		
 		break;
 	case 2:
-
+		listaHospitais();
+		system("pause");
+		menuHospitais();
 		break;
 	case 0:
 		break;
@@ -541,7 +542,7 @@ void Manutencao::menuHospitais()
 
 void Manutencao::addHospital()
 {	
-	string nome, morada, tipo;
+	string nome, morada, tipo, esps;
 	int distancia, op;
 
 	cout<<"Hospital ou Centro de saude pretende de registar?(1 ou 2)\n1.Hospital\n2.Centro de Saude\n";
@@ -561,7 +562,6 @@ void Manutencao::addHospital()
 		addHospital();
 	}
 
-	
 	cout<<"Nome do "<<tipo<<": ";
 	getline(cin, nome);
 	cout<<"Morada do "<<tipo<<": ";
@@ -571,6 +571,15 @@ void Manutencao::addHospital()
 
 	Hospitais hps(nome, morada, distancia, tipo);
 
+	cout<<"Especialidades que o "<<tipo<<" oferece: (separa com espaco, termina com enter)\n";
+	vector<string> vec_temp;
+	getline(cin, esps);
+	vec_temp = split(' ', esps);
+	for(unsigned int i=0; i<vec_temp.size(); i++)
+	{
+		hps.esp_hps.push_back(vec_temp[i]);
+	}
+	
 	//estrutura temporaria para guardar hospitais retiradas da fila
 	vector<Hospitais> temp;
 
@@ -588,6 +597,19 @@ void Manutencao::addHospital()
 				hospitais.push(temp[i]);
 		}
 	}
+}
+
+void Manutencao::listaHospitais()
+{
+	stringstream ss;
+	int i=0;
+	priority_queue<Hospitais> temp = hospitais;
+	while(!hospitais.empty())
+	{
+		ss<<i+1<<temp.top();
+		temp.pop();
+	}
+	cout<<ss.str();	
 }
 
 string Manutencao::escolheEspecialidade()
@@ -1334,6 +1356,72 @@ void Manutencao::savePessoas(string filename)
 	}
 }
 
+void Manutencao::saveHospitais(string filename)
+{
+	priority_queue<Hospitais> temp = hospitais;
+
+	ofstream myfile (filename.c_str());
+	if(myfile.is_open())
+	{
+		myfile<<hospitais.size()<<endl;
+
+		while(!temp.empty())
+		{
+			myfile<<temp.top().toString();
+			for(unsigned int i=0; i<temp.top().esp_hps.size(); i++)
+			{
+				myfile<<temp.top().esp_hps[i]<<"|";
+			}
+			myfile<<endl;
+			temp.pop();
+		}
+
+		myfile.close();
+		cout<<endl<<endl<<"Hospitais exportadas com sucesso!"<<endl;
+	}
+	else
+	{
+		cout<<"Nao foi possivel abrir o ficheiro!"<<endl<<endl;
+		system("pause");
+	}
+}
+
+void Manutencao::loadHospitais(string filename)
+{
+	stringstream s;
+	unsigned int size;
+	string linha;
+	vector<string> v;
+	ifstream myfile (filename.c_str());
+	if(myfile.is_open())
+	{
+		getline(myfile, linha);
+		s<<linha;
+		s>>size;
+		if(size>0)
+		{
+			for(unsigned int i=0; i<size; i++)
+			{
+				getline(myfile, linha);
+				v=split('|', linha);
+				Hospitais hsp(v[0].c_str(),v[1].c_str(),atoi(v[2].c_str()),v[3].c_str());
+				for(unsigned int i=4; i<v.size(); i++)
+				{
+					hsp.esp_hps.push_back(v[i]);
+				}
+			}
+
+			cout<<endl<<endl<<"Hospitais importadas com sucesso!"<<endl<<endl;
+		}
+		myfile.close();
+	}
+	else
+	{
+		cout<<"Nao foi possivel abrir o ficheiro "<<filename<<"!"<<endl<<endl;
+	}
+
+}
+
 void Manutencao::loadMarcacoes(string filename)
 {
 	Pessoa *m;
@@ -1389,6 +1477,7 @@ void Manutencao::loadMarcacoes(string filename)
 	}
 }
 
+
 void Manutencao::saveMarcacoes(string filename)
 {
 	vector<Marcacao *>::iterator it;
@@ -1415,12 +1504,14 @@ void Manutencao::saveManutencao()
 {
 	savePessoas("pessoas.dll");
 	saveMarcacoes("marcacoes.dll");
+	saveHospitais("hospitais.dll");
 }
 
 void Manutencao::startManutencao()
 {
 	loadPessoas("pessoas.dll");
 	loadMarcacoes("marcacoes.dll");
+	loadHospitais("hospitais.dll");
 	welcome();
 	menuPrincipal();
 }
