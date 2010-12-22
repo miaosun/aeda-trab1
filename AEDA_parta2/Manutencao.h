@@ -53,12 +53,15 @@ public:
 	void associarFuncionario(Pessoa *p);
 	//string imprime();
 
+	void menuHospitais();
+	void addHospital();
+
 
 private:
 	vector<Pessoa *> pessoas;
 	vector<Marcacao *> marcacoes;
 	vector<string> especialidades;
-	priority_queue<Hospitais> hsp;
+	priority_queue<Hospitais> hospitais;
 
 };
 #endif // !defined(EA_E50CBA57_B50B_40dd_A248_770E2B968F60__INCLUDED_)

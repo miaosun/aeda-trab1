@@ -92,6 +92,7 @@
     <ClCompile Include="Doente.cpp" />
     <ClCompile Include="Exame.cpp" />
     <ClCompile Include="Funcionario.cpp" />
+    <ClCompile Include="Hospitais.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manutencao.cpp" />
     <ClCompile Include="Marcacao.cpp" />
