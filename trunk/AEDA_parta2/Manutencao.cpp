@@ -540,26 +540,54 @@ void Manutencao::menuHospitais()
 }
 
 void Manutencao::addHospital()
-{
-	Hospitais *hps;
+{	
 	string nome, morada, tipo;
-	int op;
-	do{
-		cout<<"Hospital ou Centro de saude pretende de registar?(1 ou 2)\n1.Hospital\n2.Centro de Saude\n";
-		op=intinput();
-		if(op==1)
-			tipo = "Hospital";
-		else if(op==2)
-			tipo = "Centro de Saude";
-	}while(op!=1 || op!=2);
+	int distancia, op;
+
+	cout<<"Hospital ou Centro de saude pretende de registar?(1 ou 2)\n1.Hospital\n2.Centro de Saude\n";
+	op=intinput();
+	switch(op)
+	{
+	case 1:
+		tipo = "Hospital";
+		break;
+	case 2:
+		tipo = "Centro de Saude";
+		break;
+	default:
+		cout<<"A opcao nao e valida, escolhe um das opcoes disponivies!\n";
+		system("pause");
+		cout<<endl;
+		addHospital();
+	}
+
 	
 	cout<<"Nome do "<<tipo<<": ";
 	getline(cin, nome);
 	cout<<"Morada do "<<tipo<<": ";
 	getline(cin, morada);
+	cout<<"Distancia: ";
+	distancia = intinput();
 
-	hps = new Hospitais(nome, morada, tipo);
-	//hospitais.push(hps);
+	Hospitais hps(nome, morada, distancia, tipo);
+
+	//estrutura temporaria para guardar hospitais retiradas da fila
+	vector<Hospitais> temp;
+
+	while(!hospitais.empty())
+	{
+		Hospitais hpt = hospitais.top();
+		hospitais.pop();
+		
+		if(hps < hpt)
+			temp.push_back(hpt);		
+		else
+		{
+			hospitais.push(hps);			
+			for(unsigned int i=0; i<temp.size(); i++)
+				hospitais.push(temp[i]);
+		}
+	}
 }
 
 string Manutencao::escolheEspecialidade()
