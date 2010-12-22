@@ -35,9 +35,10 @@ public:
 	string getHorario();
 	void showMedicos();
 	void addMedico(Pessoa * medico);
-	vector<Pessoa *> * getMedicos();
+	vector<Pessoa *> * getMedicos(string especialidade);
 	Pessoa * getFuncionario(){Pessoa * p; return p;};
 	void setFuncionario(Pessoa * func){};
+	void findMedicos(string especialidade);
 	
 
 private:
