@@ -45,7 +45,7 @@ public:
 	string getCargo();
 	void showMedicos();
 	void addMedico(Pessoa * medico);
-	vector<Pessoa *> * getMedicos();
+	vector<Pessoa *> * getMedicos(string especialidade);
 
 private:
 	string especialidade;

@@ -44,7 +44,7 @@ vector<Pessoa *> * Doente::getMedicos(string especialidade)
 	vector<Pessoa *> meds;
 	for(unsigned int i=0; i<medicos.size(); i++)
 	{
-		if(medicos[i]->getEspecialidade == especialidade)
+		if(medicos[i]->getEspecialidade() == especialidade)
 			meds.push_back(medicos[i]);
 	}
 

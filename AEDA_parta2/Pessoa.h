@@ -47,7 +47,7 @@ public:
 	virtual string getHorario() = 0;
 	virtual void showMedicos() = 0;
 	virtual void addMedico(Pessoa * medico) = 0;
-	virtual vector<Pessoa *> * getMedicos() = 0;
+	virtual vector<Pessoa *> * getMedicos(string especialidade) = 0;
 	virtual Pessoa * getFuncionario() = 0;
 	virtual void setFuncionario(Pessoa * func) = 0;
 private:

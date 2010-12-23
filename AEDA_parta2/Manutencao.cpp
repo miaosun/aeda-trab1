@@ -821,7 +821,7 @@ void Manutencao::addMarcacao()
 			//d->showMedicos();
 			cout<<endl<<"Qual o medico que vai dar a consulta (ID): ";
 			id=intinput();
-			p = find(d->getMedicos(), id);
+			p = find(d->getMedicos(especialidade), id);
 			m=p;
 
 			tipo = "Consulta";
@@ -842,10 +842,14 @@ void Manutencao::addMarcacao()
 	case 2:
 		try
 		{
-			d->showMedicos();
+			cout<<"Quer associar medico de qual area? ";
+			listaEspecialidades();
+			especialidade = escolheEspecialidade();
+
+			//d->showMedicos();
 			cout<<endl<<"Qual o medico que vai fazer o exame (ID): ";
 			id=intinput();
-			p = find(d->getMedicos(), id);
+			p = find(d->getMedicos(especialidade), id);
 			m=p;
 
 			tipo = "Exame";
@@ -1154,7 +1158,7 @@ void Manutencao::editPessoas(Pessoa *p)
 void Manutencao::editMarcacoes(Marcacao * m)
 {
 	vector<string> opcoes;
-	string data, hora, tipo, sala;
+	string data, hora, tipo, sala, especialidade;
 	int op, id;
 	Pessoa * p;
 	opcoes = m->editMarcacao();
@@ -1187,7 +1191,7 @@ void Manutencao::editMarcacoes(Marcacao * m)
 				m->getDoente()->showMedicos();
 				cout<<endl<<"Qual o medico que vai dar a consulta (ID): ";
 				id=intinput();
-				p = find(m->getDoente()->getMedicos(), id);
+				p = find(m->getDoente()->getMedicos(especialidade), id);
 				m->setMedico(p);
 			}
 			catch (NotFound)
@@ -1223,7 +1227,7 @@ void Manutencao::editMarcacoes(Marcacao * m)
 				m->getDoente()->showMedicos();
 				cout<<endl<<"Qual o medico que vai fazer o exame (ID): ";
 				id=intinput();
-				p = find(m->getDoente()->getMedicos(), id);
+				p = find(m->getDoente()->getMedicos(especialidade), id);
 				m->setMedico(p);
 			}
 			catch (NotFound)
