@@ -1307,56 +1307,64 @@ void Manutencao::loadPessoas(string filename)
 		/*
 		 * falta implementar a excepcao
 		 */
-
-		if(size>0)
+		try
 		{
-			for(unsigned int i=0; i<size; i++)
+			if(size>0)
 			{
-				getline(myfile, linha);
-				v=split('|', linha);
-				if(v[3]=="Medico")
+				for(unsigned int i=0; i<size; i++)
 				{
-					double venc = atof(v[6].c_str());
-					Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
-
-					if(atoi(v[7].c_str())==0)
-						m->setFuncionario(0);
-					else
+					getline(myfile, linha);
+					v=split('|', linha);
+					if(v[3]=="Medico")
 					{
-						p=find(&pessoas,atoi(v[7].c_str()));
-						
-						m->setFuncionario(p);
-					}
+						double venc = atof(v[6].c_str());
+						Medico *m = new Medico(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(),v[5].c_str(),venc);
 
-					pessoas.push_back(m);
-		
-				}
-				else if(v[3]=="Doente")
-				{
-					int n_medicos = atoi(v[5].c_str());
-					Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
-					Pessoa *med;
-					if(n_medicos != 0)
-					{
-						for(unsigned int i=0; i<n_medicos; i++)
+						if(atoi(v[7].c_str())==0)
+							m->setFuncionario(0);
+						else
 						{
-							med = find(&pessoas, atoi(v[6+i].c_str()));
-							d->addMedico(med);
+							p=find(&pessoas,atoi(v[7].c_str()));
+						
+							m->setFuncionario(p);
 						}
+
+						pessoas.push_back(m);
+		
 					}
-					pessoas.push_back(d);
+					else if(v[3]=="Doente")
+					{
+						int n_medicos = atoi(v[5].c_str());
+						Doente *d = new Doente(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str());
+						Pessoa *med;
+						if(n_medicos != 0)
+						{
+							for(unsigned int i=0; i<n_medicos; i++)
+							{
+								med = find(&pessoas, atoi(v[6+i].c_str()));
+								d->addMedico(med);
+							}
+						}
+						pessoas.push_back(d);
+					}
+					else if(v[3]=="Funcionario")
+					{
+						double venc = atof(v[5].c_str());
+						Funcionario *f = new Funcionario(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(), venc);
+						pessoas.push_back(f);
+					}
 				}
-				else if(v[3]=="Funcionario")
-				{
-					double venc = atof(v[5].c_str());
-					Funcionario *f = new Funcionario(v[1].c_str(),v[2].c_str(),v[3].c_str(),v[4].c_str(), venc);
-					pessoas.push_back(f);
-				}
+				cout<<endl<<endl<<"Pessoas importadas com sucesso!"<<endl<<endl;
 			}
-			cout<<endl<<endl<<"Pessoas importadas com sucesso!"<<endl<<endl;
+			myfile.close();
 		}
-		myfile.close();
+		catch (NotFound)
+		{
+			cout<<"nao fiz load corretamente, tem possiblidade de perder dados!\n";
+			system("pause");
+		}
 	}
+	
 	else
 	{
 		cout<<"Nao foi possivel abrir o ficheiro "<<filename<<"!"<<endl<<endl;
@@ -1482,34 +1490,41 @@ void Manutencao::loadMarcacoes(string filename)
 		/*
 		 * falta implementar a excepcao
 		 */
-
-		if(size>0)
+		try
 		{
-			for(unsigned int i=0; i<size; i++)
+			if(size>0)
 			{
-				getline(myfile, linha);
-				v=split('|', linha);
+				for(unsigned int i=0; i<size; i++)
+				{
+					getline(myfile, linha);
+					v=split('|', linha);
 
-				if(v[3]=="Consulta")
-				{
-					int id_med = atoi(v[4].c_str());
-					int id_doe = atoi(v[5].c_str());
-					m = find(&pessoas, id_med);
-					d = find(&pessoas, id_doe);
-					Consulta *c = new Consulta(v[1].c_str(),v[2].c_str(),v[3].c_str(),m,d);
-					marcacoes.push_back(c);
+					if(v[3]=="Consulta")
+					{
+						int id_med = atoi(v[4].c_str());
+						int id_doe = atoi(v[5].c_str());
+						m = find(&pessoas, id_med);
+						d = find(&pessoas, id_doe);
+						Consulta *c = new Consulta(v[1].c_str(),v[2].c_str(),v[3].c_str(),m,d);
+						marcacoes.push_back(c);
+					}
+					else if(v[3]=="Exame")
+					{
+						int id_med = atoi(v[4].c_str());
+						int id_doe = atoi(v[5].c_str());
+						m = find(&pessoas, id_med);
+						d = find(&pessoas, id_doe);
+						Exame *e = new Exame(v[1].c_str(),v[2].c_str(),v[3].c_str(),m,d,v[6].c_str());
+						marcacoes.push_back(e);
+					}
 				}
-				else if(v[3]=="Exame")
-				{
-					int id_med = atoi(v[4].c_str());
-					int id_doe = atoi(v[5].c_str());
-					m = find(&pessoas, id_med);
-					d = find(&pessoas, id_doe);
-					Exame *e = new Exame(v[1].c_str(),v[2].c_str(),v[3].c_str(),m,d,v[6].c_str());
-					marcacoes.push_back(e);
-				}
+				cout<<endl<<endl<<"Marcacoes importadas com sucesso!"<<endl<<endl;
 			}
-			cout<<endl<<endl<<"Marcacoes importadas com sucesso!"<<endl<<endl;
+		}
+		catch (NotFound)
+		{
+			cout<<"nao fiz load corretamente, tem possiblidade de perder dados!\n";
+			system("pause");
 		}
 		myfile.close();
 	}
