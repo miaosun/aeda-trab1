@@ -1115,6 +1115,7 @@ void Manutencao::editPessoas(Pessoa *p)
 				especialidade = escolheEspecialidade();
 
 				/////tem que se fazer addEspec para o doente...
+				p->addEspec(especialidade);
 
 				listaMedicos(especialidade);
 
