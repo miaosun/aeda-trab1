@@ -161,7 +161,14 @@ string Doente::toString()
 
 void Doente::addEspec(string d_esp)
 {
-	d_espec.push_back(d_esp);
+	bool encontrou = false;
+	for(unsigned int i=0; i<d_espec.size(); i++)
+	{
+		if(d_espec[i] == d_esp)
+			encontrou = true;		
+	}
+	if(encontrou = false)
+		d_espec.push_back(d_esp);
 }
 
 
