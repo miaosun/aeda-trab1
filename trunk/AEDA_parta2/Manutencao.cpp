@@ -545,10 +545,13 @@ void Manutencao::addHospital()
 	string nome, morada, tipo, esps;
 	int distancia, op;
 
-	cout<<"Hospital ou Centro de saude pretende de registar?(1 ou 2)\n1.Hospital\n2.Centro de Saude\n";
+	cout<<"Hospital ou Centro de saude pretende de registar?(1 ou 2, 0 para sair)\n1.Hospital\n2.Centro de Saude\n";
 	op=intinput();
 	switch(op)
 	{
+	case 0:
+		return;
+		break;
 	case 1:
 		tipo = "Hospital";
 		break;
@@ -814,11 +817,14 @@ void Manutencao::addMarcacao()
 	case 1:
 		try
 		{
-			cout<<"Quer associar medico de qual area? ";
+			cout<<"Quer associar medico de qual area?\n ";
+			system("pause");
 			listaEspecialidades();
 			especialidade = escolheEspecialidade();
+			
+			d->addEspec(especialidade);
 
-			//d->showMedicos();
+			d->showMedicos();
 			cout<<endl<<"Qual o medico que vai dar a consulta (ID): ";
 			id=intinput();
 			p = find(d->getMedicos(especialidade), id);
@@ -842,11 +848,14 @@ void Manutencao::addMarcacao()
 	case 2:
 		try
 		{
-			cout<<"Quer associar medico de qual area? ";
+			cout<<"Quer associar medico de qual area?\n ";
+			system("pause");
 			listaEspecialidades();
 			especialidade = escolheEspecialidade();
 
-			//d->showMedicos();
+			d->addEspec(especialidade);
+
+			d->showMedicos();
 			cout<<endl<<"Qual o medico que vai fazer o exame (ID): ";
 			id=intinput();
 			p = find(d->getMedicos(especialidade), id);
@@ -912,6 +921,22 @@ void Manutencao::removeMarcacao(int id)
 		cout<<"Opcao invalida! Insira uma das opcoes disponiveis"<<endl;
 		system("pause");
 		removeMarcacao(id);
+	}
+}
+
+void Manutencao::listaMedicos(string especialidade)
+{
+	vector<Pessoa *>::iterator it=pessoas.begin();
+	cout<<especialidade<<endl;
+	cout<<"\tMedicos: "<<endl;
+	while(it!=pessoas.end())
+	{
+		if((*it)->getTipo() == "Medico")
+		{
+			if((*it)->getEspecialidade() == especialidade)
+				cout<<"\t\t"<<(*it)->toList()<<endl;
+		}
+		it++;
 	}
 }
 
@@ -1062,6 +1087,7 @@ void Manutencao::editPessoas(Pessoa *p)
 	}
 	else if(p->getTipo()=="Doente")
 	{
+		string especialidade;
 		switch(op)
 		{
 		case 1://nome
@@ -1083,7 +1109,15 @@ void Manutencao::editPessoas(Pessoa *p)
 		case 4://add medico
 			try
 			{
-				listaMedicos();
+				cout<<"Quer associar medico de qual area?\n ";
+				system("pause");
+				listaEspecialidades();
+				especialidade = escolheEspecialidade();
+
+				/////tem que se fazer addEspec para o doente...
+
+				listaMedicos(especialidade);
+
 				cout<<"Qual o medico que quer associar (ID): ";
 				id=intinput();
 
@@ -1095,7 +1129,7 @@ void Manutencao::editPessoas(Pessoa *p)
 					id = intinput();
 					p2 = find(&pessoas, id);
 				}
-				p->addMedico(p2);
+				p->addMedico(p2, especialidade);
 			}
 			catch(NotFound)
 			{

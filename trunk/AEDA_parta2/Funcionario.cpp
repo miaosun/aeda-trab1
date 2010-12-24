@@ -88,4 +88,7 @@ string Funcionario::getEspecialidade(){return "";}
 string Funcionario::getHorario(){return "";}
 void Funcionario::showMedicos(){}
 void Funcionario::addMedico(Pessoa * medico){}
+void Funcionario::addMedico(Pessoa * medico, string especialidade){}
 vector<Pessoa *> *Funcionario::getMedicos(string especialidade){vector<Pessoa *> v; return &v;}
+
+void Funcionario::addEspec(string d_esp){}

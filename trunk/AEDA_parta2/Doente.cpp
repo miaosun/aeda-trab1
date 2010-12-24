@@ -38,17 +38,37 @@ void Doente::addMedico(Pessoa * medico)
 	}
 }
 
+void Doente::addMedico(Pessoa * medico, string especialidade)
+{
+	if(medico->getTipo()!="Medico")
+		throw tipoPessoaInvalida("Medico", medico->getTipo());
+	else
+	{
+		for(unsigned int i=0; i<medicos.size(); i++)
+		{
+			if(medico==medicos.at(i))
+			{
+				cout<<"Medico ja associado!"<<endl;
+				system("pause");
+				return;
+			}
+		}
+		if(medico->getEspecialidade() == especialidade)
+			medicos.push_back(medico);
+	}
+}
+
 vector<Pessoa *> * Doente::getMedicos(string especialidade)
 {
-	//return &this->medicos;
-	vector<Pessoa *> meds;
+	return &this->medicos;
+	/*vector<Pessoa *> meds;
 	for(unsigned int i=0; i<medicos.size(); i++)
 	{
 		if(medicos[i]->getEspecialidade() == especialidade)
 			meds.push_back(medicos[i]);
 	}
 
-	return &meds;
+	return &meds;*/
 }
 
 string Doente::getMorada(){
@@ -109,9 +129,14 @@ void Doente::showMedicos()
 		cout<<"\n\tNao tem medico associado!\n";
 	else
 	{
-		for(unsigned int i=0; i<medicos.size(); i++)
+		for(unsigned int j=0; j<d_espec.size(); j++)
 		{
-			cout<<"\n\t"<<medicos[i]->toList()<<endl;
+			for(unsigned int i=0; i<medicos.size(); i++)
+			{
+				if(medicos[i]->getEspecialidade() == d_espec[j])
+					cout<<"\t"<<d_espec[j];
+					cout<<"\n\t\t"<<medicos[i]->toList()<<endl;
+			}
 		}
 	}
 	cout<<endl;
@@ -134,6 +159,11 @@ string Doente::toString()
 	return ss.str();
 }
 
+void Doente::addEspec(string d_esp)
+{
+	d_espec.push_back(d_esp);
+}
+
 
 //funcoes abstradas para objecto da superclasse consegue acessar os metodos das classes derivadas
 void Doente::setEspecialidade(string especialidade){}
@@ -142,5 +172,5 @@ void Doente::setHorario(string horario){}
 void Doente::setCargo(string cargo){}
 string Doente::getCargo(){return "";}
 double Doente::getVencimento(){return NULL;}
-string Doente::getEspecialidade(){return "";};
-string Doente::getHorario(){return "";};
+string Doente::getEspecialidade(){return "";}
+string Doente::getHorario(){return "";}
