@@ -131,10 +131,10 @@ void Doente::showMedicos()
 	{
 		for(unsigned int j=0; j<d_espec.size(); j++)
 		{
+			cout<<"\t"<<d_espec[j];
 			for(unsigned int i=0; i<medicos.size(); i++)
 			{
-				if(medicos[i]->getEspecialidade() == d_espec[j])
-					cout<<"\t"<<d_espec[j];
+				if(d_espec[j] == medicos[i]->getEspecialidade())				
 					cout<<"\n\t\t"<<medicos[i]->toList()<<endl;
 			}
 		}
@@ -167,7 +167,7 @@ void Doente::addEspec(string d_esp)
 		if(d_espec[i] == d_esp)
 			encontrou = true;		
 	}
-	if(encontrou = false)
+	if(encontrou == false)
 		d_espec.push_back(d_esp);
 }
 
