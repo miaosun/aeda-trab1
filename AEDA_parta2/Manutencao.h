@@ -59,6 +59,7 @@ public:
 	void listaHospitais();
 	void saveHospitais(string filename);
 	void loadHospitais(string filename);
+	void addEsp_Hosp();
 
 
 private:

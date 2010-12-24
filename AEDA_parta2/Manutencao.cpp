@@ -514,7 +514,8 @@ void Manutencao::menuHospitais()
 	opcoes.push_back("Escolha uma das seguintes opcoes:");
 	opcoes.push_back("");
 	opcoes.push_back("1 - Novo Hospital ou Centro de Saude");
-	opcoes.push_back("2 - Ver Hospital ou Centro de Saude");
+	opcoes.push_back("2 - Adicionar Especialidade para Hospital ou Centro de Saude");
+	opcoes.push_back("3 - Ver Hospital ou Centro de Saude");
 	opcoes.push_back("");
 	opcoes.push_back("0 - Voltar atras");
 	showMenu("Hospitais e Centros de Saude", opcoes);
@@ -529,6 +530,9 @@ void Manutencao::menuHospitais()
 		menuHospitais();
 		break;
 	case 2:
+		addEsp_Hosp();
+		break;
+	case 3:
 		listaHospitais();
 		system("pause");
 		menuHospitais();
@@ -542,7 +546,7 @@ void Manutencao::menuHospitais()
 
 void Manutencao::addHospital()
 {	
-	string nome, morada, tipo, esps;
+	string nome, morada, tipo;
 	int distancia, op;
 
 	cout<<"Hospital ou Centro de saude pretende de registar?(1 ou 2, 0 para sair)\n1.Hospital\n2.Centro de Saude\n";
@@ -573,19 +577,9 @@ void Manutencao::addHospital()
 	distancia = intinput();
 
 	Hospitais hps(nome, morada, distancia, tipo);
-
-	cout<<"Especialidades que o "<<tipo<<" oferece: (separa com espaco, termina com enter)\n";
-	vector<string> vec_temp;
-	getline(cin, esps);
-	vec_temp = split(' ', esps);
-	for(unsigned int i=0; i<vec_temp.size(); i++)
-	{
-		hps.esp_hps.push_back(vec_temp[i]);
-	}
 	
 	//estrutura temporaria para guardar hospitais retiradas da fila
 	vector<Hospitais> temp;
-
 	while(!hospitais.empty())
 	{
 		Hospitais hpt = hospitais.top();
@@ -600,6 +594,55 @@ void Manutencao::addHospital()
 				hospitais.push(temp[i]);
 		}
 	}
+	if(hospitais.empty())
+		hospitais.push(hps);
+
+}
+
+
+void Manutencao::addEsp_Hosp()
+{
+	int op, op2;
+	vector<Hospitais> h_temp;
+	listaHospitais();
+
+	op = intinput();
+	for(int i=0; i<op-1; i++)
+	{
+		Hospitais hsp = hospitais.top();
+		hospitais.pop();
+		h_temp.push_back(hsp);
+	}
+
+	string esp;
+	cout<<"Novo Especialidade vai ser disponivel: (uma so por vez)\n";
+	cout<<"1. Escolhe do base do bados do sistema\n";
+	cout<<"2. Adicionar uma nova especialidade\n";
+	cout<<"0. Sair daqui.";
+
+	op=intinput();
+	switch(op)
+	{
+	case 0:
+		return;
+		break;
+	case 1:
+		listaEspecialidades();
+		esp = escolheEspecialidade();
+		h_temp.back().esp_hps.push_back(esp);
+		break;
+	case 2:
+		cout<<"Especialidade: (uma so por vez)\n";
+		getline(cin, esp);
+		h_temp.back().esp_hps.push_back(esp);
+	}
+
+	for(unsigned int i=0; i<h_temp.size(); i++)
+	{
+		hospitais.push(h_temp[i]);
+	}
+
+	system("pause");
 }
 
 void Manutencao::listaHospitais()
@@ -607,11 +650,20 @@ void Manutencao::listaHospitais()
 	stringstream ss;
 	int i=0;
 	priority_queue<Hospitais> temp = hospitais;
+	
+	if(hospitais.empty())
+	{
+		cout<<"Nao existe nenhum hospital ou centro de saude registado!\n";
+		return;
+	}
+	
+	///////////////////tem erro neste while//////////////////////////
 	while(!hospitais.empty())
 	{
-		ss<<i+1<<temp.top();
+		ss<<i+1<<". "<<temp.top();
 		temp.pop();
 	}
+	
 	cout<<ss.str();	
 }
 
@@ -1418,6 +1470,7 @@ void Manutencao::saveHospitais(string filename)
 
 		while(!temp.empty())
 		{
+			cout<<"|";
 			myfile<<temp.top().toString();
 			for(unsigned int i=0; i<temp.top().esp_hps.size(); i++)
 			{
@@ -1455,7 +1508,10 @@ void Manutencao::loadHospitais(string filename)
 			{
 				getline(myfile, linha);
 				v=split('|', linha);
-				Hospitais hsp(v[0].c_str(),v[1].c_str(),atoi(v[2].c_str()),v[3].c_str());
+
+				Hospitais hsp(v[0].c_str(),v[1].c_str(),atoi(v[2].c_str()),v[3].c_str()); //isto aqui tem erro
+				
+				hospitais.push(hsp);
 				for(unsigned int i=4; i<v.size(); i++)
 				{
 					hsp.esp_hps.push_back(v[i]);
