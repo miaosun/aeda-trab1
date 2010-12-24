@@ -38,6 +38,7 @@ public:
 	void addMarcacao();
 	void removeMarcacao(int id);
 	void listaMedicos();
+	void listaMedicos(string especialidade);
 	void listaFuncionarios();
 	void listaDoentes();
 	void listaPessoas();

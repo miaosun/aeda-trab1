@@ -8,7 +8,6 @@
 /**Classe Medico, uma das 3 subclasses da classe Pessoa, tem proprio 4 atribuitos, especialidade:string, horario:string, vencimento:double e funcionario:Pessoa*. */
 
 
-
 #if !defined(EA_FC464729_C72D_4115_B003_E0DAD8DDC9B3__INCLUDED_)
 #define EA_FC464729_C72D_4115_B003_E0DAD8DDC9B3__INCLUDED_
 
@@ -45,7 +44,10 @@ public:
 	string getCargo();
 	void showMedicos();
 	void addMedico(Pessoa * medico);
+	void addMedico(Pessoa * medico, string especialidade);
 	vector<Pessoa *> * getMedicos(string especialidade);
+
+	void addEspec(string d_esp);
 
 private:
 	string especialidade;
