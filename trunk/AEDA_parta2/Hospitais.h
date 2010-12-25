@@ -18,7 +18,7 @@ public:
 	int getDistancia();
 	void setDistancia(int distancia);
 	string getTipo();
-	bool operator < (const Hospitais &hps) const;
+	bool operator < (const Hospitais hps) const;
 	friend ostream & operator << (ostream& os, Hospitais hps);
 	string toString();
 

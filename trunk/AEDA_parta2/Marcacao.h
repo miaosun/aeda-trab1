@@ -37,6 +37,8 @@ public:
 	Pessoa * getDoente();
 	void setDoente(Pessoa * doente);
 
+	bool mais2Anos(string Mdata);
+
 	virtual string toString();
 	virtual vector<string> imprime();
 	virtual vector<string> editMarcacao();

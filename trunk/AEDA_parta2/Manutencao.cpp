@@ -16,9 +16,9 @@
 #include <fstream>
 using namespace std;
 
-
 Manutencao::Manutencao()
 {
+	this->Mdata = "23/08/2020";
 	especialidades.push_back("Dentaria");
 	especialidades.push_back("Ortopedia");
 	especialidades.push_back("Oftaumonologia");
@@ -507,6 +507,150 @@ void Manutencao::menuEspecialidades()
 	}
 }
 
+void Manutencao::menuDoentesAntigos()
+{
+	vector<string> opcoes;
+	int op;
+	opcoes.push_back("Escolha uma das seguintes opcoes:");
+	opcoes.push_back("");
+	opcoes.push_back("1 - Adicionar um Doente antigo");
+	opcoes.push_back("2 - Apagar um Doente antigo");
+	opcoes.push_back("3 - Ver Doentes Antigos");
+	opcoes.push_back("");
+	opcoes.push_back("0 - Voltar atras");
+	showMenu("Doentes Antigos", opcoes);
+	cout<<"    Opcao: ";
+	op=intinput();
+	system("cls");
+
+	switch (op)
+	{
+	case 1:
+		addDoenteAntigo();
+		menuDoentesAntigos();
+		break;
+	case 2:
+		apagaDoenteAntigo();
+		menuDoentesAntigos();
+		break;
+	case 3:
+		listaDoentesAntigos();
+		system("pause");
+		menuDoentesAntigos();
+		break;
+	case 0:
+		break;
+	default:
+		menuHospitais();
+	}
+}
+
+vector<Marcacao *> Manutencao::findDoeMarc(Pessoa * doente)
+{
+	vector<Marcacao *> d_Marc;
+	vector<Marcacao *>::iterator it;
+	for(it=marcacoes.begin(); it!=marcacoes.end(); it++)
+	{
+		if((*it)->getDoente() == doente)
+			d_Marc.push_back(*it);
+	}
+	return d_Marc;
+}
+
+bool Manutencao::tem_mais2Anos(vector<Marcacao *> d_Marc)
+{
+	return false;
+}
+
+void Manutencao::addDoenteAntigo()
+{
+	Pessoa *p;
+	Pessoa *d;
+	string data;
+	int op, id;
+	vector<Marcacao *> d_doeMar;
+	cout<<"Como quer adicionar doente antigo? (0 para voltar)\n";
+	cout<<"1. Insere o ID do doente\n2. Insere a data da ultima marcacao do doente\n";
+
+	op=intinput();
+
+	switch(op)
+	{
+	case 0:
+		return;
+		break;
+	case 1:
+		listaDoentes();
+		cout<<"\nID do doente: ";
+		id=intinput();
+
+		p = find(&pessoas, id);
+
+		while(p->getTipo() != "Doente")
+		{
+			cout<<"Nao tem nenhum doente com esse ID, tenta novamente: ";
+			id = intinput();
+			p = find(&pessoas, id);
+		}
+		d = p;
+
+		
+		d_doeMar = findDoeMarc(d);
+		if(d_doeMar.size()==0)
+			cout<<"O doente ainda nao realizou nenhuma marcacao!\n";
+		else
+		{
+			cout<<"As marcacoes o doente tem: \n";
+			for(unsigned int i=0; i<d_doeMar.size(); i++)
+				cout<<"\t"<<i<<" "<<d_doeMar[i]->getTipo()<<" "<<d_doeMar[i]->getData()<<endl;
+		}
+
+		break;
+	case 2:
+		cout<<"Insere a data da ultima marcacao o doente fez:\n";
+		data=inserirData();
+		break;
+	default:
+		addDoenteAntigo();	
+	}
+}
+
+void Manutencao::apagaDoenteAntigo()
+{
+
+}
+
+void Manutencao::listaDoentesAntigos()
+{
+
+}
+
+bool Manutencao::mais2Anos(string data)
+{
+	string Mano_s = Mdata.substr(Mdata.find_last_of('/'));
+	string Mmes_s = Mdata.substr(Mdata.find_first_of('/'), Mdata.find_last_of('/'));
+	string Mdia_s = Mdata.substr(0, Mdata.find_first_of('/'));
+	string ano_s =  data.substr(data.find_last_of('/'));
+	string mes_s = data.substr(data.find_first_of('/'), data.find_last_of('/'));
+	string dia_s = data.substr(0, data.find_first_of('/'));
+	
+	int Mano = atoi(Mano_s.c_str());
+	int Mmes = atoi(Mmes_s.c_str());
+	int Mdia = atoi(Mdia_s.c_str());
+	int ano = atoi(ano_s.c_str());
+	int mes = atoi(mes_s.c_str());
+	int dia = atoi(dia_s.c_str());
+
+	if(Mano-ano > 2)
+		return true;
+	else if(Mano-ano==2 && Mmes > mes)
+		return true;
+	else if(Mano-ano==2 && Mmes==mes && Mdia > dia)
+		return true;
+	else
+		return false;
+}
+
 void Manutencao::menuHospitais()
 {
 	vector<string> opcoes;
@@ -577,26 +721,31 @@ void Manutencao::addHospital()
 	distancia = intinput();
 
 	Hospitais hps(nome, morada, distancia, tipo);
-	
-	//estrutura temporaria para guardar hospitais retiradas da fila
-	vector<Hospitais> temp;
-	while(!hospitais.empty())
-	{
-		Hospitais hpt = hospitais.top();
-		hospitais.pop();
-		
-		if(hps < hpt)
-			temp.push_back(hpt);		
-		else
-		{
-			hospitais.push(hps);			
-			for(unsigned int i=0; i<temp.size(); i++)
-				hospitais.push(temp[i]);
-		}
-	}
-	if(hospitais.empty())
-		hospitais.push(hps);
 
+	if(hospitais.empty())
+	{
+		hospitais.push(hps);
+		return;
+	}
+	else         //////////////////////nao ta a funcionar
+	{
+		//estrutura temporaria para guardar hospitais retiradas da fila
+		vector<Hospitais> temp;
+		while(!hospitais.empty())
+		{
+			Hospitais hpt = hospitais.top();
+			if(hpt < hps)
+				hospitais.push(hps);
+			else
+			{
+				temp.push_back(hpt);
+				hospitais.pop();
+			}
+		}
+		vector<Hospitais>::iterator it;
+		for(it=temp.end(); it!=temp.begin(); it--)
+			hospitais.push(*it);
+	}
 }
 
 
@@ -656,11 +805,10 @@ void Manutencao::listaHospitais()
 		cout<<"Nao existe nenhum hospital ou centro de saude registado!\n";
 		return;
 	}
-	
-	///////////////////tem erro neste while//////////////////////////
-	while(!hospitais.empty())
+
+	while(!temp.empty())
 	{
-		ss<<i+1<<". "<<temp.top();
+		ss<<i+1<<". "<<temp.top().getName()<<endl;
 		temp.pop();
 	}
 	

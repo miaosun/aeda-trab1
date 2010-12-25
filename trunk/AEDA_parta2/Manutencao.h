@@ -60,7 +60,17 @@ public:
 	void saveHospitais(string filename);
 	void loadHospitais(string filename);
 	void addEsp_Hosp();
+	string Mdata;
 
+	void menuDoentesAntigos();
+	void loadDoentesAntigos();
+	void saveDoentesAntigos();
+	void addDoenteAntigo();
+	void apagaDoenteAntigo();
+	void listaDoentesAntigos();
+	bool mais2Anos(string data);
+	vector<Marcacao *> findDoeMarc(Pessoa * doente);
+	bool tem_mais2Anos(vector<Marcacao *> d_Marc);
 
 private:
 	vector<Pessoa *> pessoas;

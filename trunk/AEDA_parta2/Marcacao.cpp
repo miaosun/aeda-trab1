@@ -135,3 +135,28 @@ vector<string> Marcacao::editMarcacao()
 	return opcoes;
 }
 
+bool Marcacao::mais2Anos(string Mdata)
+{
+	string Mano_s = Mdata.substr(Mdata.find_last_of('/'));
+	string Mmes_s = Mdata.substr(Mdata.find_first_of('/'), Mdata.find_last_of('/'));
+	string Mdia_s = Mdata.substr(0, Mdata.find_first_of('/'));
+	string ano_s = this->data.substr(this->data.find_last_of('/'));
+	string mes_s = this->data.substr(this->data.find_first_of('/'), this->data.find_last_of('/'));
+	string dia_s = this->data.substr(0, this->data.find_first_of('/'));
+	
+	int Mano = atoi(Mano_s.c_str());
+	int Mmes = atoi(Mmes_s.c_str());
+	int Mdia = atoi(Mdia_s.c_str());
+	int ano = atoi(ano_s.c_str());
+	int mes = atoi(mes_s.c_str());
+	int dia = atoi(dia_s.c_str());
+
+	if(Mano-ano > 2)
+		return true;
+	else if(Mano-ano==2 && Mmes > mes)
+		return true;
+	else if(Mano-ano==2 && Mmes==mes && Mdia > dia)
+		return true;
+	else
+		return false;
+}
