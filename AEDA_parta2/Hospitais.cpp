@@ -44,9 +44,9 @@ string Hospitais::getTipo()
 	return this->tipo;
 }
 
-bool Hospitais::operator < (const Hospitais &hps) const
+bool Hospitais::operator < (const Hospitais hps) const
 {
-	return distancia > hps.distancia;
+	return distancia < hps.distancia;
 }
 
 ostream & operator << (ostream & os, Hospitais hps)
